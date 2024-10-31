@@ -22,18 +22,18 @@ const CocktailDetailScreen = ({ route }) => {
 
   if (!cocktail) return <Text>Loading...</Text>;
 
-  // Extract ingredients and convert measurements to ml if in oz
+  // Extract ingredients and convert measurements to cl if in oz
   const ingredients = [];
   for (let i = 1; i <= 15; i++) {
     const ingredient = cocktail[`strIngredient${i}`];
     let measure = cocktail[`strMeasure${i}`];
 
     if (ingredient) {
-      // Convert oz to ml if needed and round up
+      // Convert oz to cl if needed and round up
       if (measure && measure.includes("oz")) {
         const amountInOz = parseFloat(measure.replace("oz", "").trim());
-        const amountInMl = Math.ceil(amountInOz * 29.5735); // Convert and round up
-        measure = `${amountInMl} ml`;
+        const amountInCl = Math.ceil(amountInOz * 2.95735); // Convert and round up
+        measure = `${amountInCl} cl`;
       }
       ingredients.push(`${measure ? measure : ''} ${ingredient}`);
     }
