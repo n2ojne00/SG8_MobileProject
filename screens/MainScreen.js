@@ -1,20 +1,12 @@
 // MainScreen.js
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const MainScreen = ({ navigation }) => {
+const MainScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to the Main Screen</Text>
-      <Button
-        title="Go to Cocktail Search"
-        onPress={() => navigation.navigate('Cocktail')}
-      />
-      <Button
-        title="Go to Meal Search"
-        onPress={() => navigation.navigate('Meal')}
-        style={styles.buttonSpacing}
-      />
+      <Text style={styles.title}>Main Screen</Text>
+      <Text>Welcome to the Main Screen!</Text>
     </View>
   );
 };
@@ -24,16 +16,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
+    backgroundColor: '#f9f9f9',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 24,
-  },
-  buttonSpacing: {
-    marginTop: 16,
   },
 });
 

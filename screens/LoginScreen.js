@@ -1,20 +1,26 @@
 // LoginScreen.js
 import React from 'react';
-import { View, Text, Image, Button, StyleSheet } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
-  const handleEnter = () => {
-    navigation.replace('Main');  // Navigate to the MainScreen
-  };
-
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../kuvat/drink.jpg')}
-        style={styles.logo}
+      <Image source={require('../kuvat/drink.jpg')} style={styles.logo} />
+      <Text style={styles.title}>Welcome to the App</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        placeholderTextColor="#888"
       />
-      <Text style={styles.title}>Welcome to the Cocktail App</Text>
-      <Button title="Enter Site" onPress={handleEnter} />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        placeholderTextColor="#888"
+        secureTextEntry
+      />
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('MainScreen')}>
+        <Text style={styles.buttonText}>Enter Site</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -24,19 +30,46 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#f9f9f9',
     padding: 16,
-    backgroundColor: '#f5f5f5',
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 100,
+    height: 100,
     marginBottom: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
     marginBottom: 24,
+    textAlign: 'center',
+    color: '#333',
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 25,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    backgroundColor: '#fff',
+    elevation: 2,
+  },
+  button: {
+    width: '100%',
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: 'steelblue',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    elevation: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 18,
   },
 });
 
