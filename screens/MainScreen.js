@@ -10,6 +10,11 @@ const MainScreen = ({ navigation }) => {
         title="Go to Cocktail Search"
         onPress={() => navigation.navigate('Cocktail')}
       />
+      <Button
+        title="Go to Meal Search"
+        onPress={() => navigation.navigate('Meal')}
+        style={styles.buttonSpacing}
+      />
     </View>
   );
 };
@@ -26,6 +31,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 24,
+  },
+  buttonSpacing: {
+    marginTop: 16,
   },
 });
 
