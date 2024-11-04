@@ -1,4 +1,3 @@
-// LoginScreen.js
 import React from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
@@ -6,6 +5,7 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image source={require('../kuvat/drink.jpg')} style={styles.logo} />
+      <Text style={styles.title}>Welcome to the App</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -17,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
         placeholderTextColor="#888"
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('MainScreen')}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('MainApp')}>
         <Text style={styles.buttonText}>Enter Site</Text>
       </TouchableOpacity>
     </View>

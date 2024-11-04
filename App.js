@@ -29,12 +29,15 @@ const MealStack = () => (
   </Stack.Navigator>
 );
 
+// MainApp now includes MainScreen as a tab
 const MainApp = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarIcon: ({ color, size }) => {
         let iconName;
-        if (route.name === 'Meals') {
+        if (route.name === 'Main') {
+          iconName = 'home'; // Icon for Main Screen
+        } else if (route.name === 'Meals') {
           iconName = 'food';
         } else if (route.name === 'Cocktails') {
           iconName = 'glass-cocktail';
@@ -49,6 +52,7 @@ const MainApp = () => (
       tabBarInactiveTintColor: 'gray',
     })}
   >
+    <Tab.Screen name="Main" component={MainScreen} options={{ title: 'Main', headerShown: false }} />
     <Tab.Screen name="Meals" component={MealStack} options={{ headerShown: false }} />
     <Tab.Screen name="Cocktails" component={CocktailStack} options={{ headerShown: false }} />
     <Tab.Screen name="ShoppingList" component={ShoppingListScreen} options={{ title: 'Shopping List' }} />
@@ -60,7 +64,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="MainScreen" component={MainScreen} options={{ headerShown: false }} />
+        {/* MainApp is now the main screen after login */}
         <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
