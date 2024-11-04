@@ -1,6 +1,7 @@
 // ShoppingListScreen.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import styles from "../styles/style";
+import { View, Text, TextInput, FlatList, TouchableOpacity, Button } from 'react-native';
 
 const ShoppingListScreen = () => {
   const [item, setItem] = useState('');
@@ -19,9 +20,9 @@ const ShoppingListScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.containerShop}>
       <TextInput
-        style={styles.input}
+        style={styles.inputShop}
         placeholder="Add an item..."
         value={item}
         onChangeText={setItem}
@@ -32,10 +33,10 @@ const ShoppingListScreen = () => {
         data={shoppingList}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
-          <View style={styles.itemContainer}>
-            <Text style={styles.item}>{item}</Text>
+          <View style={styles.itemContainerShop}>
+            <Text style={styles.itemShop}>{item}</Text>
             <TouchableOpacity onPress={() => removeItem(index)}>
-              <Text style={styles.remove}>Remove</Text>
+              <Text style={styles.removeShop}>Remove</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -43,32 +44,5 @@ const ShoppingListScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    paddingHorizontal: 8,
-    borderRadius: 4,
-    marginBottom: 8,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  item: {
-    fontSize: 16,
-  },
-  remove: {
-    color: 'red',
-  },
-});
 
 export default ShoppingListScreen;
