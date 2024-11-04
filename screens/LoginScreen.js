@@ -4,13 +4,13 @@ import { View, Text, Image, Button, StyleSheet } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
   const handleEnter = () => {
-    navigation.replace('Cocktail');  // Navigate to the main screen
+    navigation.replace('Main');  // Navigate to the MainScreen
   };
 
   return (
     <View style={styles.container}>
       <Image
-        source={require('../kuvat/drink.jpg')}  // Use the local image
+        source={require('../kuvat/drink.jpg')}
         style={styles.logo}
       />
       <Text style={styles.title}>Welcome to the Cocktail App</Text>
@@ -25,13 +25,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: 'lightyellow',
+    backgroundColor: '#f5f5f5',
   },
   logo: {
-    width: 400,
-    height: 250,
+    width: 200,
+    height: 200,
     marginBottom: 20,
-    borderRadius: 10,
   },
   title: {
     fontSize: 24,
