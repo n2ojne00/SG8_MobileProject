@@ -22,7 +22,6 @@ const CocktailScreen = () => {
 
   return (
     <View style={{ padding: 20 }}>
-      <Header />
       <TextInput
         placeholder="Enter cocktail name"
         value={cocktailName}
@@ -39,7 +38,6 @@ const CocktailScreen = () => {
           </TouchableOpacity>
         )}
       />
-      <Footer />
     </View>
 
   );

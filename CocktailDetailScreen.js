@@ -49,7 +49,6 @@ const CocktailDetailScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Header />
       <Text style={styles.title}>{cocktail.strDrink}</Text>
       <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.image} />
       <Text style={styles.sectionTitle}>Ingredients:</Text>
@@ -63,7 +62,6 @@ const CocktailDetailScreen = ({ route }) => {
       <View style={styles.buttonContainer}>
         <Button title="Order" onPress={handleOrder} color="#FFA500" />
       </View>
-      <Footer />
     </View>
   );
 };
