@@ -1,8 +1,6 @@
 // CocktailDetailScreen.js
 import React, { useEffect, useState } from 'react';
-import Header from "./screens/Header";
-import Footer from "./screens/Footer";
-import styles from "./styles/style";
+import styles from "../styles/style";
 import { View, Text, Image, FlatList, Button, Alert } from 'react-native';
 import axios from 'axios';
 

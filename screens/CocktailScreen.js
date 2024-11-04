@@ -1,10 +1,8 @@
 // CocktailScreen.js
 import React, { useState } from 'react';
-import Header from "./screens/Header";
-import Footer from "./screens/Footer";
 import { View, Text, TextInput, Button, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { fetchCocktailByName } from './CocktailService';
+import { fetchCocktailByName } from '../CocktailService';
 
 const CocktailScreen = () => {
   const [cocktailName, setCocktailName] = useState('');
