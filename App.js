@@ -10,6 +10,7 @@ import CocktailScreen from './screens/CocktailScreen';
 import CocktailDetailScreen from './screens/CocktailDetailScreen';
 import MealScreen from './screens/MealScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
+import ShoppingListScreen from './screens/ShoppingListScreen'; // Import your new screen
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,6 +40,8 @@ const App = () => {
               iconName = 'food';
             } else if (route.name === 'Cocktails') {
               iconName = 'glass-cocktail';
+            } else if (route.name === 'ShoppingList') { // Add icon for shopping list
+              iconName = 'shopping';
             }
             return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
           },
@@ -48,6 +51,7 @@ const App = () => {
       >
         <Tab.Screen name="Meals" component={MealStack} options={{ headerShown: false }} />
         <Tab.Screen name="Cocktails" component={CocktailStack} options={{ headerShown: false }} />
+        <Tab.Screen name="ShoppingList" component={ShoppingListScreen} options={{ title: 'Shopping List' }} />
       </Tab.Navigator>
     </NavigationContainer>
   );
