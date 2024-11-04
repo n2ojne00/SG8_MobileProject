@@ -6,7 +6,6 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image source={require('../kuvat/drink.jpg')} style={styles.logo} />
-      <Text style={styles.title}>Welcome to the App</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -31,12 +30,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f9f9f9',
-    padding: 16,
+    padding: 25,
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 400,
+    height: 300,
     marginBottom: 20,
+    borderRadius: 10,
+    marginBottom: 24,
   },
   title: {
     fontSize: 24,
