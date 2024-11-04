@@ -1,6 +1,7 @@
 // MealScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import styles from "../styles/style";
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
 
 const MealScreen = ({ navigation }) => {
   const [search, setSearch] = useState('');
@@ -23,9 +24,9 @@ const MealScreen = ({ navigation }) => {
   }, [search]);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.containerMealScr}>
       <TextInput
-        style={styles.input}
+        style={styles.inputMealScr}
         placeholder="Search for a meal..."
         value={search}
         onChangeText={setSearch}
@@ -35,9 +36,9 @@ const MealScreen = ({ navigation }) => {
         keyExtractor={(item) => item.idMeal}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => navigation.navigate('MealDetail', { meal: item })}>
-            <View style={styles.item}>
-              <Image source={{ uri: item.strMealThumb }} style={styles.image} />
-              <Text style={styles.title}>{item.strMeal}</Text>
+            <View style={styles.itemMealScr}>
+              <Image source={{ uri: item.strMealThumb }} style={styles.imageMealScr} />
+              <Text style={styles.titleMealScr}>{item.strMeal}</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -45,33 +46,5 @@ const MealScreen = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    paddingHorizontal: 8,
-    borderRadius: 4,
-    marginBottom: 16,
-  },
-  item: {
-    flexDirection: 'row',
-    marginBottom: 16,
-    alignItems: 'center',
-  },
-  image: {
-    width: 50,
-    height: 50,
-    marginRight: 16,
-  },
-  title: {
-    fontSize: 18,
-  },
-});
 
 export default MealScreen;

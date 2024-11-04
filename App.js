@@ -9,6 +9,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 // Import your screens
 import LoginScreen from './screens/LoginScreen';
+import MainScreen from './screens/MainScreen'; // Import MainScreen
 import CocktailScreen from './screens/CocktailScreen';
 import CocktailDetailScreen from './screens/CocktailDetailScreen';
 import MealScreen from './screens/MealScreen';
@@ -81,7 +82,9 @@ const TabNavigator = () => (
     screenOptions={({ route }) => ({
       tabBarIcon: ({ color, size }) => {
         let iconName;
-        if (route.name === 'Meals') {
+        if (route.name === 'Main') {
+          iconName = 'home';
+        } else if (route.name === 'Meals') {
           iconName = 'food';
         } else if (route.name === 'Cocktails') {
           iconName = 'glass-cocktail';
@@ -94,6 +97,7 @@ const TabNavigator = () => (
       tabBarInactiveTintColor: 'gray',
     })}
   >
+    <Tab.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
     <Tab.Screen name="Meals" component={MealStack} options={{ headerShown: false }} />
     <Tab.Screen name="Cocktails" component={CocktailStack} options={{ headerShown: false }} />
     <Tab.Screen name="ShoppingList" component={ShoppingListStack} options={{ headerShown: false }} />
@@ -103,8 +107,9 @@ const TabNavigator = () => (
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Main" component={TabNavigator} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
       </Stack.Navigator>
     </NavigationContainer>
