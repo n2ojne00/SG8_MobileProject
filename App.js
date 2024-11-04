@@ -13,7 +13,6 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <View>
     <NavigationContainer>
        <Header/>
       <Stack.Navigator initialRouteName="Login">
@@ -26,7 +25,7 @@ const App = () => {
       </Stack.Navigator>
       <Footer/>
     </NavigationContainer>
-    </View>
+  
   );
 };
 
