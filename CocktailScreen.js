@@ -1,5 +1,7 @@
 // CocktailScreen.js
 import React, { useState } from 'react';
+import Header from "./screens/Header";
+import Footer from "./screens/Footer";
 import { View, Text, TextInput, Button, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { fetchCocktailByName } from './CocktailService';
@@ -20,6 +22,7 @@ const CocktailScreen = () => {
 
   return (
     <View style={{ padding: 20 }}>
+      <Header />
       <TextInput
         placeholder="Enter cocktail name"
         value={cocktailName}
@@ -36,7 +39,9 @@ const CocktailScreen = () => {
           </TouchableOpacity>
         )}
       />
+      <Footer />
     </View>
+
   );
 };
 
