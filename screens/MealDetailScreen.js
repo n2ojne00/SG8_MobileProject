@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from "../styles/style";
 import { View, Text, Image, ScrollView, ActivityIndicator } from 'react-native';
+import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 
 const MealDetailScreen = ({ route }) => {
   const { idMeal } = route.params;
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { isDarkMode } = useTheme(); // Access isDarkMode from the theme context
 
   // Fetch meal details by idMeal
   const fetchMealDetail = async () => {
@@ -45,21 +47,25 @@ const MealDetailScreen = ({ route }) => {
     return <Text style={styles.errorMessage}>Meal details not found.</Text>;
   }
 
+  // Update styles based on dark mode
   return (
-    <ScrollView style={styles.containerMealDS} contentContainerStyle={styles.scrollContentMealDS}>
+    <ScrollView
+      style={[styles.containerMealDS, { backgroundColor: isDarkMode ? '#121212' : '#ffffff' }]} // Set background color
+      contentContainerStyle={styles.scrollContentMealDS}
+    >
       <View style={styles.innerContainerMealDS}>
         <Image source={{ uri: meal.strMealThumb }} style={styles.imageMealDS} />
-        <Text style={styles.titleMealDS}>{meal.strMeal}</Text>
-        <Text style={styles.sectionTitleMealDS}>Category: {meal.strCategory}</Text>
-        <Text style={styles.sectionTitleMealDS}>Area: {meal.strArea}</Text>
+        <Text style={[styles.titleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{meal.strMeal}</Text>
+        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Category: {meal.strCategory}</Text>
+        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Area: {meal.strArea}</Text>
         
-        <Text style={styles.sectionTitleMealDS}>Ingredients:</Text>
+        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Ingredients:</Text>
         {getIngredients().map((ingredient, index) => (
-          <Text key={index} style={styles.ingredientMealDS}>{ingredient}</Text>
+          <Text key={index} style={[styles.ingredientMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{ingredient}</Text>
         ))}
 
-        <Text style={styles.sectionTitleMealDS}>Instructions:</Text>
-        <Text style={styles.instructionsMealDS}>{meal.strInstructions}</Text>
+        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Instructions:</Text>
+        <Text style={[styles.instructionsMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{meal.strInstructions}</Text>
       </View>
     </ScrollView>
   );
