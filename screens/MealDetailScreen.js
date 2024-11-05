@@ -3,6 +3,8 @@ import React from 'react';
 import styles from "../styles/style";
 import { View, Text, Image, ScrollView } from 'react-native';
 
+
+
 const MealDetailScreen = ({ route }) => {
   const { meal } = route.params;
 

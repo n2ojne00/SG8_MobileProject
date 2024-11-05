@@ -111,6 +111,11 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
+        <Stack.Screen name='MealScreen' component={MealScreen} options={{ title: 'Meal Search' }} />
+        <Stack.Screen name='CocktailScreen' component={CocktailScreen} options={{ title: 'Cocktail Search' }} />
+        <Stack.Screen name='ShoppingListScreen' component={ShoppingListScreen} options={{ title: 'Shopping List' }} />
+        <Stack.Screen name='CocktailDetail' component={CocktailDetailScreen} options={{ title: 'Cocktail Details' }} />
+        <Stack.Screen name='MealDetail' component={MealDetailScreen} options={{ title: 'Meal Details' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

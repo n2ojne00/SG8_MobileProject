@@ -1,25 +1,37 @@
-// MealScreen.js
 import React, { useState, useEffect } from 'react';
 import styles from "../styles/style";
 import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
 
-const MealScreen = ({ navigation }) => {
+const MealScreen = ({ route, navigation }) => {
   const [search, setSearch] = useState('');
   const [meals, setMeals] = useState([]);
+  const { category } = route.params || {};
 
-  const fetchMeals = async (query) => {
+  const fetchMeals = async (query, category) => {
     try {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
+      const url = query 
+        ? `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}` 
+        : `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+      
+      const response = await fetch(url);
       const data = await response.json();
       setMeals(data.meals || []);
     } catch (error) {
-      console.error(error);
+      console.error('Error fetching meals:', error);
     }
   };
 
   useEffect(() => {
+    if (category) {
+      fetchMeals('', category);
+    }
+  }, [category]);
+
+  useEffect(() => {
     if (search) {
       fetchMeals(search);
+    } else if (category) {
+      fetchMeals('', category); // Re-fetch meals in the category if search is cleared
     }
   }, [search]);
 
