@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import styles from "../styles/style";
 import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
+import { useTheme } from '../contexts/ThemeContext';
+import styles from "../styles/style";
 
 const MealScreen = ({ route, navigation }) => {
   const [search, setSearch] = useState('');
   const [meals, setMeals] = useState([]);
   const { category } = route.params || {};
+  const { isDarkMode } = useTheme();
 
   const fetchMeals = async (query, category) => {
     try {
@@ -36,10 +38,11 @@ const MealScreen = ({ route, navigation }) => {
   }, [search]);
 
   return (
-    <View style={styles.containerMealScr}>
+    <View style={[styles.containerMealScr, { backgroundColor: isDarkMode ? '#121212' : '#ffffff' }]}>
       <TextInput
-        style={styles.inputMealScr}
+        style={[styles.inputMealScr, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
         placeholder="Search for a meal..."
+        placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
         value={search}
         onChangeText={setSearch}
       />
@@ -50,7 +53,7 @@ const MealScreen = ({ route, navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate('MealDetail', { meal: item })}>
             <View style={styles.itemMealScr}>
               <Image source={{ uri: item.strMealThumb }} style={styles.imageMealScr} />
-              <Text style={styles.titleMealScr}>{item.strMeal}</Text>
+              <Text style={[styles.titleMealScr, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item.strMeal}</Text>
             </View>
           </TouchableOpacity>
         )}

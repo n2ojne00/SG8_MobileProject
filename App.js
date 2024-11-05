@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import ShoppingListDetailScreen from './screens/ShoppingListDetailScreen'; // Import the new detail screen
 import ListDetailScreen from './screens/ListDetailScreen'; // Import ListDetailScreen
+import { ThemeProvider } from './contexts/ThemeContext';
 
 // Import your screens
 import LoginScreen from './screens/LoginScreen';
@@ -113,14 +114,16 @@ const TabNavigator = () => (
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
-        <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
-        <Stack.Screen name='ListDetailScreen' component={ListDetailScreen} options={{ title: 'List Details' }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
+          <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
+          <Stack.Screen name='ListDetailScreen' component={ListDetailScreen} options={{ title: 'List Details' }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 };
 
