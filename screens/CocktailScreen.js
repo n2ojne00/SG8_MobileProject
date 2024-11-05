@@ -1,37 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import styles from "../styles/style";
 import { useNavigation } from '@react-navigation/native';
-import { fetchCocktailByName, fetchCocktailByCategory } from '../CocktailService';
+import styles from '../styles/style';
 
-const categories = ["Select Category", "Shots", "Beer", "Punch", "Hot Drinks", "Cold Drinks"];
+// Define the available categories
+const categories = ["Select Category", "Cocktail", "Ordinary Drink", "Shot", "Beer", "Punch / Party Drink", "Coffee / Tea", "Soft Drink / Soda"];
 
 const CocktailScreen = () => {
-  const [cocktailName, setCocktailName] = useState('');
+  const [search, setSearch] = useState('');
   const [cocktails, setCocktails] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Select Category");
   const navigation = useNavigation();
 
-  // Mapping categories to cocktail API categories
-  const categoryMapping = {
-    Shots: 'Shot',
-    Beer: 'Beer',
-    Punch: 'Punch / Party Drink',
-    "Hot Drinks": 'Coffee / Tea', // Assuming "Coffee / Tea" category fits hot drinks
-    "Cold Drinks": 'Soft Drink / Soda', // Assuming "Soft Drink / Soda" fits cold drinks
-  };
-
-  // Fetch cocktails by name or category
-  const fetchCocktails = async (name, category) => {
+  // Fetch cocktails by search query or category
+  const fetchCocktails = async (query, category) => {
     try {
-      let result = [];
-      if (name) {
-        result = await fetchCocktailByName(name);
+      let url;
+      if (query) {
+        url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`;
       } else if (category) {
-        result = await fetchCocktailByCategory(category);
+        url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
+      } else {
+        setCocktails([]);
+        return;
       }
-      setCocktails(result ? result.map(item => ({ id: item.idDrink, name: item.strDrink })) : []);
+
+      const response = await fetch(url);
+      const data = await response.json();
+      setCocktails(data.drinks || []);
     } catch (error) {
       console.error('Error fetching cocktails:', error);
     }
@@ -40,43 +37,44 @@ const CocktailScreen = () => {
   // Handle category selection from dropdown
   const handleCategorySelect = async (category) => {
     setSelectedCategory(category);
-    setCocktailName(''); // Clear search input when a category is selected
-    if (category && category !== "Select Category") {
-      const apiCategory = categoryMapping[category];
-      fetchCocktails('', apiCategory);
+    setSearch(''); // Clear the search input when selecting a category
+    if (category !== "Select Category") {
+      fetchCocktails('', category);
+    } else {
+      setCocktails([]); // Clear list if no category is selected
     }
   };
 
-  // Automatically fetch cocktails by name or category
+  // Fetch cocktails by name when the search input changes
   useEffect(() => {
-    if (cocktailName) {
-      fetchCocktails(cocktailName);
-    } else if (selectedCategory && selectedCategory !== "Select Category") {
-      fetchCocktails('', categoryMapping[selectedCategory]);
+    if (search) {
+      fetchCocktails(search);
+    } else if (selectedCategory !== "Select Category") {
+      fetchCocktails('', selectedCategory);
     }
-  }, [cocktailName, selectedCategory]);
+  }, [search]);
 
-  // Navigate to cocktail details
+  // Navigate to the cocktail detail screen
   const goToDetail = (id) => {
     navigation.navigate('CocktailDetail', { id });
   };
 
   return (
-    <View style={styles.containerDrinkScr}>
+    <View style={styles.container}>
       <TextInput
-        placeholder="Enter cocktail name"
-        value={cocktailName}
+        style={styles.input}
+        placeholder="Search for a cocktail..."
+        value={search}
         onChangeText={(text) => {
-          setCocktailName(text);
+          setSearch(text);
           setSelectedCategory("Select Category"); // Reset selected category when searching by name
         }}
-        style={styles.inputDrinkScr}
       />
 
       {/* Category Dropdown Picker */}
       <Picker
         selectedValue={selectedCategory}
-        style={styles.pickerDrinkScr}
+        style={styles.picker}
         onValueChange={(itemValue) => handleCategorySelect(itemValue)}
       >
         {categories.map((category) => (
@@ -86,13 +84,16 @@ const CocktailScreen = () => {
 
       <FlatList
         data={cocktails}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.idDrink}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => goToDetail(item.id)}>
-            <Text style={styles.itemDrinkScr}>{item.name}</Text>
+          <TouchableOpacity onPress={() => goToDetail(item.idDrink)}>
+            <View style={styles.itemContainer}>
+              <Image source={{ uri: item.strDrinkThumb }} style={styles.image} />
+              <Text style={styles.title}>{item.strDrink}</Text>
+            </View>
           </TouchableOpacity>
         )}
-        ListEmptyComponent={<Text style={styles.emptyMessageDrinkScr}>No cocktails found.</Text>}
+        ListEmptyComponent={<Text style={styles.emptyMessage}>No cocktails found.</Text>}
       />
     </View>
   );
