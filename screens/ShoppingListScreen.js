@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, Button, StyleSheet } from 'react-native';
+import * as Location from 'expo-location';
+import MapView, { Marker } from 'react-native-maps';
 
 const ShoppingListScreen = ({ navigation }) => {
   const [item, setItem] = useState('');
   const [shoppingList, setShoppingList] = useState([]);
-  const [savedLists, setSavedLists] = useState([]); // State to hold saved shopping lists
+  const [savedLists, setSavedLists] = useState([]);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
 
   const addItem = () => {
     if (item) {
@@ -21,7 +38,7 @@ const ShoppingListScreen = ({ navigation }) => {
   const saveList = () => {
     if (shoppingList.length > 0) {
       setSavedLists([...savedLists, shoppingList]);
-      setShoppingList([]); // Clear the current shopping list
+      setShoppingList([]);
     }
   };
 
@@ -73,6 +90,33 @@ const ShoppingListScreen = ({ navigation }) => {
             </TouchableOpacity>
           )}
         />
+      </View>
+
+      <View style={styles.mapContainer}>
+        <Text style={styles.sectionTitle}>Your Location</Text>
+        {errorMsg ? (
+          <Text style={styles.errorText}>{errorMsg}</Text>
+        ) : location ? (
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+              latitudeDelta: 0.01,
+              longitudeDelta: 0.01,
+            }}
+          >
+            <Marker
+              coordinate={{
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+              }}
+              title="You are here"
+            />
+          </MapView>
+        ) : (
+          <Text>Loading...</Text>
+        )}
       </View>
     </View>
   );
@@ -148,6 +192,19 @@ const styles = StyleSheet.create({
   savedListText: {
     fontSize: 16,
     color: '#007bff',
+  },
+  mapContainer: {
+    marginTop: 20,
+    height: 300,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  map: {
+    width: '100%',
+    height: '100%',
+  },
+  errorText: {
+    color: '#dc3545',
   },
 });
 
