@@ -62,7 +62,7 @@ const CocktailScreen = () => {
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input}
+        style={styles.inputDrinkScr}
         placeholder="Search for a cocktail..."
         value={search}
         onChangeText={(text) => {
