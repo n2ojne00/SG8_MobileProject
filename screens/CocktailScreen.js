@@ -3,15 +3,17 @@ import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/style';
+import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 
 // Define the available categories
-const categories = ["Select Category", "Cocktail", "Ordinary Drink", "Shot", "Beer", "Punch / Party Drink", "Coffee / Tea",];
+const categories = ["Select Category", "Cocktail", "Ordinary Drink", "Shot", "Beer", "Punch / Party Drink", "Coffee / Tea"];
 
 const CocktailScreen = () => {
   const [search, setSearch] = useState('');
   const [cocktails, setCocktails] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Select Category");
   const navigation = useNavigation();
+  const { isDarkMode } = useTheme(); // Access isDarkMode from the theme context
 
   // Fetch cocktails by search query or category
   const fetchCocktails = async (query, category) => {
@@ -60,10 +62,11 @@ const CocktailScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#121212' : '#ffffff' }]}>
       <TextInput
-        style={styles.inputDrinkScr}
+        style={[styles.inputDrinkScr, { color: isDarkMode ? '#ffffff' : '#000000', backgroundColor: isDarkMode ? '#333333' : '#ffffff' }]}
         placeholder="Search for a cocktail..."
+        placeholderTextColor={isDarkMode ? '#aaaaaa' : '#555555'}
         value={search}
         onChangeText={(text) => {
           setSearch(text);
@@ -89,11 +92,15 @@ const CocktailScreen = () => {
           <TouchableOpacity onPress={() => goToDetail(item.idDrink)}>
             <View style={styles.itemContainer}>
               <Image source={{ uri: item.strDrinkThumb }} style={styles.image} />
-              <Text style={styles.title}>{item.strDrink}</Text>
+              <Text style={[styles.title, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item.strDrink}</Text>
             </View>
           </TouchableOpacity>
         )}
-        ListEmptyComponent={<Text style={styles.emptyMessage}>No cocktails found.</Text>}
+        ListEmptyComponent={
+          <Text style={[styles.emptyMessage, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+            No cocktails found.
+          </Text>
+        }
       />
     </View>
   );

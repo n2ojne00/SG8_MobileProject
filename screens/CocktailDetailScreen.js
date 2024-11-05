@@ -1,12 +1,13 @@
-// CocktailDetailScreen.js
 import React, { useEffect, useState } from 'react';
-import styles from "../styles/style";
 import { View, Text, Image, FlatList, Button, Alert } from 'react-native';
 import axios from 'axios';
+import styles from "../styles/style";
+import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 
 const CocktailDetailScreen = ({ route }) => {
   const { id } = route.params;
   const [cocktail, setCocktail] = useState(null);
+  const { isDarkMode } = useTheme(); // Access isDarkMode from the theme context
 
   useEffect(() => {
     const fetchCocktailDetails = async () => {
@@ -21,7 +22,7 @@ const CocktailDetailScreen = ({ route }) => {
     fetchCocktailDetails();
   }, [id]);
 
-  if (!cocktail) return <Text>Loading...</Text>;
+  if (!cocktail) return <Text style={[styles.loading, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Loading...</Text>;
 
   // Extract ingredients and convert measurements to cl if in oz
   const ingredients = [];
@@ -46,17 +47,19 @@ const CocktailDetailScreen = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{cocktail.strDrink}</Text>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#121212' : '#ffffff' }]}>
+      <Text style={[styles.title, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strDrink}</Text>
       <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.image} />
-      <Text style={styles.sectionTitle}>Ingredients:</Text>
+      <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Ingredients:</Text>
       <FlatList
         data={ingredients}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Text style={styles.ingredient}>{item}</Text>}
+        renderItem={({ item }) => (
+          <Text style={[styles.ingredient, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item}</Text>
+        )}
       />
-      <Text style={styles.sectionTitle}>Instructions:</Text>
-      <Text style={styles.instructions}>{cocktail.strInstructions}</Text>
+      <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Instructions:</Text>
+      <Text style={[styles.instructions, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strInstructions}</Text>
       <View style={styles.buttonContainer}>
         <Button title="Order" onPress={handleOrder} color="#FFA500" />
       </View>
