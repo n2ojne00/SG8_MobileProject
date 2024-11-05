@@ -1,4 +1,3 @@
-// Import necessary libraries
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -6,15 +5,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import ShoppingListDetailScreen from './screens/ShoppingListDetailScreen'; // Import the new detail screen
+import ListDetailScreen from './screens/ListDetailScreen'; // Import ListDetailScreen
 
 // Import your screens
 import LoginScreen from './screens/LoginScreen';
-import MainScreen from './screens/MainScreen'; // Import MainScreen
+import MainScreen from './screens/MainScreen';
 import CocktailScreen from './screens/CocktailScreen';
 import CocktailDetailScreen from './screens/CocktailDetailScreen';
 import MealScreen from './screens/MealScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
 import ShoppingListScreen from './screens/ShoppingListScreen';
+import PrintListScreen from './screens/PrintListScreen'; // Import the PrintListScreen
 import SettingsScreen from './screens/SettingsScreen';
 
 // Create stack and tab navigators
@@ -74,6 +76,11 @@ const ShoppingListStack = () => (
         headerLeft: () => <SettingsIcon navigation={navigation} />
       })}
     />
+    <Stack.Screen 
+      name="ShoppingListDetailScreen" 
+      component={ShoppingListDetailScreen} 
+      options={{ title: 'Shopping List Details' }} // Add the detail screen option
+    />
   </Stack.Navigator>
 );
 
@@ -111,11 +118,7 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
-        <Stack.Screen name='MealScreen' component={MealScreen} options={{ title: 'Meal Search' }} />
-        <Stack.Screen name='CocktailScreen' component={CocktailScreen} options={{ title: 'Cocktail Search' }} />
-        <Stack.Screen name='ShoppingListScreen' component={ShoppingListScreen} options={{ title: 'Shopping List' }} />
-        <Stack.Screen name='CocktailDetail' component={CocktailDetailScreen} options={{ title: 'Cocktail Details' }} />
-        <Stack.Screen name='MealDetail' component={MealDetailScreen} options={{ title: 'Meal Details' }} />
+        <Stack.Screen name='ListDetailScreen' component={ListDetailScreen} options={{ title: 'List Details' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
