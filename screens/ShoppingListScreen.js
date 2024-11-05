@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, Button, StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
+import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 
 const ShoppingListScreen = ({ navigation }) => {
   const [item, setItem] = useState('');
@@ -9,6 +10,7 @@ const ShoppingListScreen = ({ navigation }) => {
   const [savedLists, setSavedLists] = useState([]);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const { isDarkMode } = useTheme(); // Access isDarkMode from the theme context
 
   useEffect(() => {
     (async () => {
@@ -47,37 +49,44 @@ const ShoppingListScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#121212' : '#f8f9fa' }]}>
       <TextInput
-        style={styles.input}
+        style={[
+          styles.input,
+          { backgroundColor: isDarkMode ? '#1e1e1e' : '#fff', color: isDarkMode ? '#ffffff' : '#000000' },
+        ]}
         placeholder="Add an item..."
+        placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
         value={item}
         onChangeText={setItem}
       />
       <Button title="Add to List" onPress={addItem} />
 
-      <View style={styles.currentListContainer}>
-        <Text style={styles.sectionTitle}>Current Shopping List</Text>
+      <View style={[styles.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
+        <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Current Shopping List</Text>
         <FlatList
           data={shoppingList}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={styles.itemContainer}>
-              <Text style={styles.itemText}>{item}</Text>
+              <Text style={[styles.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
               <TouchableOpacity onPress={() => removeItem(index)}>
-                <Text style={styles.removeText}>Remove</Text>
+                <Text style={[styles.removeText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>Remove</Text>
               </TouchableOpacity>
             </View>
           )}
         />
       </View>
 
-      <TouchableOpacity style={styles.saveButton} onPress={saveList}>
+      <TouchableOpacity
+        style={[styles.saveButton, { backgroundColor: isDarkMode ? '#007bff' : '#007bff' }]}
+        onPress={saveList}
+      >
         <Text style={styles.saveButtonText}>Save List</Text>
       </TouchableOpacity>
 
-      <View style={styles.savedListsContainer}>
-        <Text style={styles.sectionTitle}>Saved Shopping Lists</Text>
+      <View style={[styles.savedListsContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
+        <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Saved Shopping Lists</Text>
         <FlatList
           data={savedLists}
           keyExtractor={(item, index) => index.toString()}
@@ -86,16 +95,18 @@ const ShoppingListScreen = ({ navigation }) => {
               style={styles.savedListItem}
               onPress={() => navigateToListDetail(item)}
             >
-              <Text style={styles.savedListText}>List {index + 1}</Text>
+              <Text style={[styles.savedListText, { color: isDarkMode ? '#80bdff' : '#007bff' }]}>
+                List {index + 1}
+              </Text>
             </TouchableOpacity>
           )}
         />
       </View>
 
       <View style={styles.mapContainer}>
-        <Text style={styles.sectionTitle}>Your Location</Text>
+        <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Your Location</Text>
         {errorMsg ? (
-          <Text style={styles.errorText}>{errorMsg}</Text>
+          <Text style={[styles.errorText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>{errorMsg}</Text>
         ) : location ? (
           <MapView
             style={styles.map}
@@ -115,7 +126,7 @@ const ShoppingListScreen = ({ navigation }) => {
             />
           </MapView>
         ) : (
-          <Text>Loading...</Text>
+          <Text style={[{ color: isDarkMode ? '#ffffff' : '#000000' }]}>Loading...</Text>
         )}
       </View>
     </View>
@@ -126,7 +137,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f8f9fa',
   },
   input: {
     height: 50,
@@ -135,12 +145,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 15,
     marginBottom: 10,
-    backgroundColor: '#fff',
   },
   currentListContainer: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: '#e9ecef',
     borderRadius: 8,
     elevation: 1,
   },
@@ -148,7 +156,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#343a40',
   },
   itemContainer: {
     flexDirection: 'row',
@@ -159,16 +166,13 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 16,
-    color: '#495057',
   },
   removeText: {
-    color: '#dc3545',
     fontWeight: 'bold',
   },
   saveButton: {
     marginTop: 15,
     padding: 15,
-    backgroundColor: '#007bff',
     borderRadius: 8,
     alignItems: 'center',
   },
@@ -180,7 +184,6 @@ const styles = StyleSheet.create({
   savedListsContainer: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: '#e9ecef',
     borderRadius: 8,
     elevation: 1,
   },
@@ -191,7 +194,6 @@ const styles = StyleSheet.create({
   },
   savedListText: {
     fontSize: 16,
-    color: '#007bff',
   },
   mapContainer: {
     marginTop: 20,
@@ -203,9 +205,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  errorText: {
-    color: '#dc3545',
-  },
+  errorText: {},
 });
 
 export default ShoppingListScreen;
