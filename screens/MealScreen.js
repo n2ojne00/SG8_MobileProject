@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import styles from "../styles/style";
 import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+
+const categories = ["Select Category", "Chicken", "Beef", "Pork", "Fish", "Vegan", "Pasta", "Dessert", "Starters"];
 
 const MealScreen = ({ route, navigation }) => {
   const [search, setSearch] = useState('');
   const [meals, setMeals] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("Select Category"); // Default to "Select Category"
   const { category } = route.params || {};
+
+  const categoryMapping = {
+    Chicken: 'Chicken',
+    Beef: 'Beef',
+    Pork: 'Pork',
+    Fish: 'Seafood',
+    Vegan: 'Vegan',
+    Pasta: 'Pasta',
+    Dessert: 'Dessert',
+    Starters: 'Starter', 
+  };
 
   const fetchMeals = async (query, category) => {
     try {
@@ -21,6 +36,13 @@ const MealScreen = ({ route, navigation }) => {
     }
   };
 
+  const handleCategorySelect = async (category) => {
+    const selectedAPIcategory = categoryMapping[category];
+    setSelectedCategory(category);
+    setSearch(''); // Clear search when a category is selected
+    if (selectedAPIcategory) fetchMeals('', selectedAPIcategory);
+  };
+
   useEffect(() => {
     if (category) {
       fetchMeals('', category);
@@ -30,10 +52,10 @@ const MealScreen = ({ route, navigation }) => {
   useEffect(() => {
     if (search) {
       fetchMeals(search);
-    } else if (category) {
-      fetchMeals('', category); // Re-fetch meals in the category if search is cleared
+    } else if (selectedCategory && selectedCategory !== "Select Category") {
+      fetchMeals('', categoryMapping[selectedCategory]);
     }
-  }, [search]);
+  }, [search, selectedCategory]);
 
   return (
     <View style={styles.containerMealScr}>
@@ -41,8 +63,23 @@ const MealScreen = ({ route, navigation }) => {
         style={styles.inputMealScr}
         placeholder="Search for a meal..."
         value={search}
-        onChangeText={setSearch}
+        onChangeText={(text) => {
+          setSearch(text);
+          setSelectedCategory("Select Category"); // Reset category when typing a search term
+        }}
       />
+
+      {/* Category Dropdown Picker */}
+      <Picker
+        selectedValue={selectedCategory}
+        style={styles.picker}
+        onValueChange={(itemValue) => handleCategorySelect(itemValue)}
+      >
+        {categories.map((category) => (
+          <Picker.Item label={category} value={category} key={category} />
+        ))}
+      </Picker>
+
       <FlatList
         data={meals}
         keyExtractor={(item) => item.idMeal}
@@ -54,6 +91,7 @@ const MealScreen = ({ route, navigation }) => {
             </View>
           </TouchableOpacity>
         )}
+        ListEmptyComponent={<Text style={styles.emptyMessage}>No meals found.</Text>}
       />
     </View>
   );
