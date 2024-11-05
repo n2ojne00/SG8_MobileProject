@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/style';
 
 // Define the available categories
-const categories = ["Select Category", "Cocktail", "Ordinary Drink", "Shot", "Beer", "Punch / Party Drink", "Coffee / Tea", "Soft Drink / Soda"];
+const categories = ["Select Category", "Cocktail", "Ordinary Drink", "Shot", "Beer", "Punch / Party Drink", "Coffee / Tea",];
 
 const CocktailScreen = () => {
   const [search, setSearch] = useState('');
