@@ -8,7 +8,7 @@ const categories = ["Select Category", "Chicken", "Beef", "Pork", "Fish", "Vegan
 const MealScreen = ({ route, navigation }) => {
   const [search, setSearch] = useState('');
   const [meals, setMeals] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("Select Category"); // Default to "Select Category"
+  const [selectedCategory, setSelectedCategory] = useState("Select Category");
   const { category } = route.params || {};
 
   const categoryMapping = {
@@ -39,7 +39,7 @@ const MealScreen = ({ route, navigation }) => {
   const handleCategorySelect = async (category) => {
     const selectedAPIcategory = categoryMapping[category];
     setSelectedCategory(category);
-    setSearch(''); // Clear search when a category is selected
+    setSearch('');
     if (selectedAPIcategory) fetchMeals('', selectedAPIcategory);
   };
 
@@ -65,11 +65,10 @@ const MealScreen = ({ route, navigation }) => {
         value={search}
         onChangeText={(text) => {
           setSearch(text);
-          setSelectedCategory("Select Category"); // Reset category when typing a search term
+          setSelectedCategory("Select Category");
         }}
       />
 
-      {/* Category Dropdown Picker */}
       <Picker
         selectedValue={selectedCategory}
         style={styles.picker}
@@ -84,10 +83,10 @@ const MealScreen = ({ route, navigation }) => {
         data={meals}
         keyExtractor={(item) => item.idMeal}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate('MealDetail', { meal: item })}>
-            <View style={styles.itemMealScr}>
-              <Image source={{ uri: item.strMealThumb }} style={styles.imageMealScr} />
-              <Text style={styles.titleMealScr}>{item.strMeal}</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('MealDetail', { idMeal: item.idMeal })}>
+            <View style={styles.item}>
+              <Image source={{ uri: item.strMealThumb }} style={styles.image} />
+              <Text style={styles.title}>{item.strMeal}</Text>
             </View>
           </TouchableOpacity>
         )}

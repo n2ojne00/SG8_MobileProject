@@ -1,12 +1,28 @@
-// MealDetailScreen.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "../styles/style";
-import { View, Text, Image, ScrollView } from 'react-native';
-
-
+import { View, Text, Image, ScrollView, ActivityIndicator } from 'react-native';
 
 const MealDetailScreen = ({ route }) => {
-  const { meal } = route.params;
+  const { idMeal } = route.params;
+  const [meal, setMeal] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch meal details by idMeal
+  const fetchMealDetail = async () => {
+    try {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`);
+      const data = await response.json();
+      setMeal(data.meals ? data.meals[0] : null);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching meal details:', error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMealDetail();
+  }, [idMeal]);
 
   // Extract ingredients and measures
   const getIngredients = () => {
@@ -20,6 +36,14 @@ const MealDetailScreen = ({ route }) => {
     }
     return ingredients;
   };
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
+  if (!meal) {
+    return <Text style={styles.errorMessage}>Meal details not found.</Text>;
+  }
 
   return (
     <ScrollView style={styles.containerMealDS} contentContainerStyle={styles.scrollContentMealDS}>
@@ -40,6 +64,5 @@ const MealDetailScreen = ({ route }) => {
     </ScrollView>
   );
 };
-
 
 export default MealDetailScreen;
