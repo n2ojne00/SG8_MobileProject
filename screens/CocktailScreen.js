@@ -1,83 +1,102 @@
-// CocktailScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
-import { fetchCocktailByName } from '../CocktailService';
+import styles from '../styles/style';
+
+// Define the available categories
+const categories = ["Select Category", "Cocktail", "Ordinary Drink", "Shot", "Beer", "Punch / Party Drink", "Coffee / Tea",];
 
 const CocktailScreen = () => {
-  const [cocktailName, setCocktailName] = useState('');
+  const [search, setSearch] = useState('');
   const [cocktails, setCocktails] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("Select Category");
   const navigation = useNavigation();
 
-  // Function to handle searching cocktails by name
-  const handleSearch = async () => {
-    if (cocktailName) {
-      const result = await fetchCocktailByName(cocktailName);
-      if (result) {
-        setCocktails(result.map(item => ({ id: item.idDrink, name: item.strDrink })));
+  // Fetch cocktails by search query or category
+  const fetchCocktails = async (query, category) => {
+    try {
+      let url;
+      if (query) {
+        url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`;
+      } else if (category) {
+        url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
       } else {
-        setCocktails([]); // Clear the list if no results found
+        setCocktails([]);
+        return;
       }
-    } else {
-      setCocktails([]); // Clear the list if input is empty
+
+      const response = await fetch(url);
+      const data = await response.json();
+      setCocktails(data.drinks || []);
+    } catch (error) {
+      console.error('Error fetching cocktails:', error);
     }
   };
 
-  // Function to navigate to the cocktail detail screen
+  // Handle category selection from dropdown
+  const handleCategorySelect = async (category) => {
+    setSelectedCategory(category);
+    setSearch(''); // Clear the search input when selecting a category
+    if (category !== "Select Category") {
+      fetchCocktails('', category);
+    } else {
+      setCocktails([]); // Clear list if no category is selected
+    }
+  };
+
+  // Fetch cocktails by name when the search input changes
+  useEffect(() => {
+    if (search) {
+      fetchCocktails(search);
+    } else if (selectedCategory !== "Select Category") {
+      fetchCocktails('', selectedCategory);
+    }
+  }, [search]);
+
+  // Navigate to the cocktail detail screen
   const goToDetail = (id) => {
     navigation.navigate('CocktailDetail', { id });
   };
 
-  // Automatically fetch cocktails when cocktailName changes
-  useEffect(() => {
-    handleSearch();
-  }, [cocktailName]);
-
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Enter cocktail name"
-        value={cocktailName}
-        onChangeText={setCocktailName} // Update state on text change
-        style={styles.input}
+        style={styles.inputDrinkScr}
+        placeholder="Search for a cocktail..."
+        value={search}
+        onChangeText={(text) => {
+          setSearch(text);
+          setSelectedCategory("Select Category"); // Reset selected category when searching by name
+        }}
       />
+
+      {/* Category Dropdown Picker */}
+      <Picker
+        selectedValue={selectedCategory}
+        style={styles.picker}
+        onValueChange={(itemValue) => handleCategorySelect(itemValue)}
+      >
+        {categories.map((category) => (
+          <Picker.Item label={category} value={category} key={category} />
+        ))}
+      </Picker>
+
       <FlatList
         data={cocktails}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.idDrink}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => goToDetail(item.id)}>
-            <Text style={styles.item}>{item.name}</Text>
+          <TouchableOpacity onPress={() => goToDetail(item.idDrink)}>
+            <View style={styles.itemContainer}>
+              <Image source={{ uri: item.strDrinkThumb }} style={styles.image} />
+              <Text style={styles.title}>{item.strDrink}</Text>
+            </View>
           </TouchableOpacity>
         )}
-        ListEmptyComponent={<Text style={styles.emptyMessage}>No cocktails found.</Text>} // Message for no results
+        ListEmptyComponent={<Text style={styles.emptyMessage}>No cocktails found.</Text>}
       />
     </View>
   );
 };
-
-// Styles for the component
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    flex: 1,
-    backgroundColor: '#f9f9f9',
-  },
-  input: {
-    borderColor: 'gray',
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 10,
-  },
-  item: {
-    fontSize: 18,
-    padding: 10,
-  },
-  emptyMessage: {
-    textAlign: 'center',
-    marginTop: 20,
-    fontSize: 16,
-    color: 'gray',
-  },
-});
 
 export default CocktailScreen;

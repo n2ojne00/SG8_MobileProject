@@ -2,12 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import styles from "../styles/style";
+import { Picker } from '@react-native-picker/picker';
+
+const categories = ["Select Category", "Chicken", "Beef", "Pork", "Fish", "Vegan", "Pasta", "Dessert", "Starters"];
 
 const MealScreen = ({ route, navigation }) => {
   const [search, setSearch] = useState('');
   const [meals, setMeals] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("Select Category");
   const { category } = route.params || {};
   const { isDarkMode } = useTheme();
+
+  const categoryMapping = {
+    Chicken: 'Chicken',
+    Beef: 'Beef',
+    Pork: 'Pork',
+    Fish: 'Seafood',
+    Vegan: 'Vegan',
+    Pasta: 'Pasta',
+    Dessert: 'Dessert',
+    Starters: 'Starter', 
+  };
 
   const fetchMeals = async (query, category) => {
     try {
@@ -23,6 +38,13 @@ const MealScreen = ({ route, navigation }) => {
     }
   };
 
+  const handleCategorySelect = async (category) => {
+    const selectedAPIcategory = categoryMapping[category];
+    setSelectedCategory(category);
+    setSearch('');
+    if (selectedAPIcategory) fetchMeals('', selectedAPIcategory);
+  };
+
   useEffect(() => {
     if (category) {
       fetchMeals('', category);
@@ -32,10 +54,10 @@ const MealScreen = ({ route, navigation }) => {
   useEffect(() => {
     if (search) {
       fetchMeals(search);
-    } else if (category) {
-      fetchMeals('', category); // Re-fetch meals in the category if search is cleared
+    } else if (selectedCategory && selectedCategory !== "Select Category") {
+      fetchMeals('', categoryMapping[selectedCategory]);
     }
-  }, [search]);
+  }, [search, selectedCategory]);
 
   return (
     <View style={[styles.containerMealScr, { backgroundColor: isDarkMode ? '#121212' : '#ffffff' }]}>
@@ -44,19 +66,34 @@ const MealScreen = ({ route, navigation }) => {
         placeholder="Search for a meal..."
         placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
         value={search}
-        onChangeText={setSearch}
+        onChangeText={(text) => {
+          setSearch(text);
+          setSelectedCategory("Select Category");
+        }}
       />
+
+      <Picker
+        selectedValue={selectedCategory}
+        style={styles.picker}
+        onValueChange={(itemValue) => handleCategorySelect(itemValue)}
+      >
+        {categories.map((category) => (
+          <Picker.Item label={category} value={category} key={category} />
+        ))}
+      </Picker>
+
       <FlatList
         data={meals}
         keyExtractor={(item) => item.idMeal}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate('MealDetail', { meal: item })}>
-            <View style={styles.itemMealScr}>
-              <Image source={{ uri: item.strMealThumb }} style={styles.imageMealScr} />
-              <Text style={[styles.titleMealScr, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item.strMeal}</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('MealDetail', { idMeal: item.idMeal })}>
+            <View style={styles.item}>
+            <Image source={{ uri: item.strMealThumb }} style={styles.image} />
+              <Text style={[styles.title, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item.strMeal}</Text>
             </View>
           </TouchableOpacity>
         )}
+        ListEmptyComponent={<Text style={styles.emptyMessage}>No meals found.</Text>}
       />
     </View>
   );

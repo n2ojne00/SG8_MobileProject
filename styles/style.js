@@ -94,6 +94,34 @@ container: {
   titleMealScr: {
     fontSize: 18,
   },
+  containerDrinkScr: {
+    padding: 20,
+    flex: 1,
+    backgroundColor: '#f9f9f9',
+  },
+  inputDrinkScr: {
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10,
+  },
+  pickerDrinkScr: {
+    height: 50,
+    width: '100%',
+    backgroundColor: '#e0e0e0',
+    marginVertical: 10,
+    borderRadius: 5,
+  },
+  itemDrinkScr: {
+    fontSize: 18,
+    padding: 10,
+  },
+  emptyMessageDrinkScr: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
+    color: 'gray',
+  },
   containerShop: {
     flex: 1,
     padding: 16,
@@ -179,5 +207,35 @@ container: {
   buttonContainerMain: {
     marginTop: 20,
     width: '80%',
+  },
+  filterContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10,
+  },
+  filterButton: {
+    padding: 10,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 5,
+  },
+  selectedButton: {
+    backgroundColor: '#4caf50',
+  },
+  filterText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  emptyMessage: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
+    color: 'gray',
+  },
+  picker: {
+    height: 50,
+    width: '100%',
+    backgroundColor: '#e0e0e0',
+    marginVertical: 10,
+    borderRadius: 5,
   },
 });
