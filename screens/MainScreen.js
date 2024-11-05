@@ -1,6 +1,5 @@
-// MainScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 
 const MainScreen = ({ navigation }) => {
   const [mealCategories, setMealCategories] = useState([]);
@@ -15,7 +14,7 @@ const MainScreen = ({ navigation }) => {
     try {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php');
       const data = await response.json();
-      const randomCategories = getRandomCategories(data.categories, 2);
+      const randomCategories = getRandomCategories(data.categories, 20);
       setMealCategories(randomCategories);
     } catch (error) {
       console.error('Error fetching meal categories:', error);
@@ -26,7 +25,7 @@ const MainScreen = ({ navigation }) => {
     try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
       const data = await response.json();
-      const randomCocktailCategories = getRandomCategories(data.drinks, 2);
+      const randomCocktailCategories = getRandomCategories(data.drinks, 20);
       setCocktailCategories(randomCocktailCategories);
     } catch (error) {
       console.error('Error fetching cocktail categories:', error);
@@ -58,7 +57,7 @@ const MainScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Main Screen</Text>
 
       <Text style={styles.sectionTitle}>Random Meal Categories</Text>
@@ -104,13 +103,13 @@ const MainScreen = ({ navigation }) => {
           <Text style={styles.randomButtonText}>Random Cocktail</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     padding: 20,
     backgroundColor: '#f0f4f8',
   },
