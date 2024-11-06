@@ -50,8 +50,58 @@ const ShoppingListScreen = ({ navigation }) => {
     navigation.navigate('PrintListScreen', { list });
   };
 
+  const renderItem = ({ item, index }) => (
+    <View style={styles.itemContainer}>
+      <Text style={[styles.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
+      <TouchableOpacity onPress={() => removeItem(index)}>
+        <Text style={[styles.removeText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>Remove</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  const renderSavedListItem = ({ item, index }) => (
+    <TouchableOpacity
+      style={styles.savedListItem}
+      onPress={() => navigateToListDetail(item)}
+    >
+      <Text style={[styles.savedListText, { color: isDarkMode ? '#80bdff' : '#007bff' }]}>
+        {item.name || `List ${index + 1}`}
+      </Text>
+    </TouchableOpacity>
+  );
+
+  const renderMap = () => (
+    <View style={styles.mapContainer}>
+      <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Your Location</Text>
+      {errorMsg ? (
+        <Text style={[styles.errorText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>{errorMsg}</Text>
+      ) : location ? (
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          }}
+        >
+          <Marker
+            coordinate={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            }}
+            title="You are here"
+          />
+        </MapView>
+      ) : (
+        <Text style={[{ color: isDarkMode ? '#ffffff' : '#000000' }]}>Loading...</Text>
+      )}
+    </View>
+  );
+
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#f8f9fa' }]}>
+    <View style={styles.container}>
+      {/* List Name and Item Input Fields */}
       <TextInput
         style={[
           styles.input,
@@ -74,22 +124,7 @@ const ShoppingListScreen = ({ navigation }) => {
       />
       <Button title="Add to List" onPress={addItem} />
 
-      <View style={[styles.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
-        <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Current Shopping List</Text>
-        <FlatList
-          data={shoppingList}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <View style={styles.itemContainer}>
-              <Text style={[styles.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
-              <TouchableOpacity onPress={() => removeItem(index)}>
-                <Text style={[styles.removeText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>Remove</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-      </View>
-
+      {/* Save List Button (Outside FlatList) */}
       <TouchableOpacity
         style={[styles.saveButton, { backgroundColor: isDarkMode ? '#007bff' : '#007bff' }]}
         onPress={saveList}
@@ -97,50 +132,45 @@ const ShoppingListScreen = ({ navigation }) => {
         <Text style={styles.saveButtonText}>Save List</Text>
       </TouchableOpacity>
 
-      <View style={[styles.savedListsContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
-        <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Saved Shopping Lists</Text>
-        <FlatList
-          data={savedLists}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity
-              style={styles.savedListItem}
-              onPress={() => navigateToListDetail(item)}
-            >
-              <Text style={[styles.savedListText, { color: isDarkMode ? '#80bdff' : '#007bff' }]}>
-                {item.name || `List ${index + 1}`}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-
-      <View style={styles.mapContainer}>
-        <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Your Location</Text>
-        {errorMsg ? (
-          <Text style={[styles.errorText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>{errorMsg}</Text>
-        ) : location ? (
-          <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude,
-              latitudeDelta: 0.01,
-              longitudeDelta: 0.01,
-            }}
-          >
-            <Marker
-              coordinate={{
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-              }}
-              title="You are here"
-            />
-          </MapView>
-        ) : (
-          <Text style={[{ color: isDarkMode ? '#ffffff' : '#000000' }]}>Loading...</Text>
-        )}
-      </View>
+      {/* FlatList for the shopping list */}
+      <FlatList
+        data={[
+          { key: 'Current List', type: 'shoppingList' },
+          { key: 'Saved Lists', type: 'savedLists' },
+          { key: 'Map', type: 'map' },
+        ]}
+        renderItem={({ item }) => {
+          switch (item.type) {
+            case 'shoppingList':
+              return (
+                <View style={[styles.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
+                  <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Current Shopping List</Text>
+                  <FlatList
+                    data={shoppingList}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={renderItem}
+                  />
+                </View>
+              );
+            case 'savedLists':
+              return (
+                <View style={[styles.savedListsContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
+                  <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Saved Shopping Lists</Text>
+                  <FlatList
+                    data={savedLists}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={renderSavedListItem}
+                  />
+                </View>
+              );
+            case 'map':
+              return renderMap();
+            default:
+              return null;
+          }
+        }}
+        keyExtractor={(item) => item.key}
+      />
     </View>
   );
 };
@@ -182,17 +212,6 @@ const styles = StyleSheet.create({
   removeText: {
     fontWeight: 'bold',
   },
-  saveButton: {
-    marginTop: 15,
-    padding: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  saveButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
   savedListsContainer: {
     marginTop: 20,
     padding: 10,
@@ -200,24 +219,35 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   savedListItem: {
-    paddingVertical: 10,
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
+    marginVertical: 5,
   },
   savedListText: {
     fontSize: 16,
+    textDecorationLine: 'underline',
   },
   mapContainer: {
     marginTop: 20,
     height: 300,
-    borderRadius: 8,
-    overflow: 'hidden',
   },
   map: {
-    width: '100%',
-    height: '100%',
+    ...StyleSheet.absoluteFillObject,
   },
-  errorText: {},
+  errorText: {
+    textAlign: 'center',
+    color: '#ff6b6b',
+    fontSize: 16,
+  },
+  saveButton: {
+    marginTop: 20,
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  saveButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });
 
-export default ShoppingListScreen;
+export default ShoppingListScreen
