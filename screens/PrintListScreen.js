@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
 
 const PrintListScreen = ({ route, navigation }) => {
-  const { shoppingList } = route.params;
+  const { list } = route.params;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Shopping List</Text>
+      <Text style={styles.title}>{list.name || 'Shopping List'}</Text> {/* Display list name */}
       <FlatList
-        data={shoppingList}
+        data={list.items}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <Text style={styles.item}>{item}</Text>

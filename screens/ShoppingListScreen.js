@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, Button, StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
-import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
+import { useTheme } from '../contexts/ThemeContext';
 
 const ShoppingListScreen = ({ navigation }) => {
   const [item, setItem] = useState('');
@@ -10,7 +10,8 @@ const ShoppingListScreen = ({ navigation }) => {
   const [savedLists, setSavedLists] = useState([]);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const { isDarkMode } = useTheme(); // Access isDarkMode from the theme context
+  const [listName, setListName] = useState(''); // New state for list name
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     (async () => {
@@ -38,9 +39,10 @@ const ShoppingListScreen = ({ navigation }) => {
   };
 
   const saveList = () => {
-    if (shoppingList.length > 0) {
-      setSavedLists([...savedLists, shoppingList]);
+    if (shoppingList.length > 0 && listName) { // Check for list name
+      setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
       setShoppingList([]);
+      setListName(''); // Clear the list name after saving
     }
   };
 
@@ -50,6 +52,16 @@ const ShoppingListScreen = ({ navigation }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#f8f9fa' }]}>
+      <TextInput
+        style={[
+          styles.input,
+          { backgroundColor: isDarkMode ? '#1e1e1e' : '#fff', color: isDarkMode ? '#ffffff' : '#000000' },
+        ]}
+        placeholder="List Name"
+        placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
+        value={listName}
+        onChangeText={setListName}
+      />
       <TextInput
         style={[
           styles.input,
@@ -96,7 +108,7 @@ const ShoppingListScreen = ({ navigation }) => {
               onPress={() => navigateToListDetail(item)}
             >
               <Text style={[styles.savedListText, { color: isDarkMode ? '#80bdff' : '#007bff' }]}>
-                List {index + 1}
+                {item.name || `List ${index + 1}`}
               </Text>
             </TouchableOpacity>
           )}
