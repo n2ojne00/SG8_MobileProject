@@ -6,7 +6,7 @@ const SettingsScreen = () => {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#121212' : '#f5f5f5' }]}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#f5f5f5' }]}>
       <View style={styles.settingItem}>
         <Text style={[styles.settingText, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Dark Mode</Text>
         <Switch

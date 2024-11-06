@@ -62,7 +62,7 @@ const CocktailScreen = () => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#121212' : '#ffffff' }]}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
       <TextInput
         style={[styles.inputDrinkScr, { color: isDarkMode ? '#ffffff' : '#000000', backgroundColor: isDarkMode ? '#333333' : '#ffffff' }]}
         placeholder="Search for a cocktail..."

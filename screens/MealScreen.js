@@ -60,7 +60,7 @@ const MealScreen = ({ route, navigation }) => {
   }, [search, selectedCategory]);
 
   return (
-    <View style={[styles.containerMealScr, { backgroundColor: isDarkMode ? '#121212' : '#ffffff' }]}>
+    <View style={[styles.containerMealScr, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
       <TextInput
         style={[styles.inputMealScr, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
         placeholder="Search for a meal..."

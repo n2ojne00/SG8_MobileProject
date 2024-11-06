@@ -49,7 +49,7 @@ const ShoppingListScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#121212' : '#f8f9fa' }]}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#f8f9fa' }]}>
       <TextInput
         style={[
           styles.input,

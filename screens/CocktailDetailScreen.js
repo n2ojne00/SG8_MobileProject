@@ -47,7 +47,7 @@ const CocktailDetailScreen = ({ route }) => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#121212' : '#ffffff' }]}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
       <Text style={[styles.title, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strDrink}</Text>
       <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.image} />
       <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Ingredients:</Text>
