@@ -6,9 +6,9 @@ const PrintListScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{list.name || 'Shopping List'}</Text> {/* Display list name */}
+      <Text style={styles.title}>{list?.name || 'Shopping List'}</Text>
       <FlatList
-        data={list.items}
+        data={list?.items || []}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <Text style={styles.item}>{item}</Text>

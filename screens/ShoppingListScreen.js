@@ -10,7 +10,7 @@ const ShoppingListScreen = ({ navigation }) => {
   const [savedLists, setSavedLists] = useState([]);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [listName, setListName] = useState(''); // New state for list name
+  const [listName, setListName] = useState('');
   const { isDarkMode } = useTheme();
 
   useEffect(() => {
@@ -39,15 +39,15 @@ const ShoppingListScreen = ({ navigation }) => {
   };
 
   const saveList = () => {
-    if (shoppingList.length > 0 && listName) { // Check for list name
+    if (shoppingList.length > 0 && listName) {
       setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
       setShoppingList([]);
-      setListName(''); // Clear the list name after saving
+      setListName('');
     }
   };
 
   const navigateToListDetail = (list) => {
-    navigation.navigate('ListDetailScreen', { list });
+    navigation.navigate('PrintListScreen', { list });
   };
 
   return (

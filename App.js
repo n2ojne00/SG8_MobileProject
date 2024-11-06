@@ -121,6 +121,7 @@ const App = () => {
           <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
           <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
           <Stack.Screen name='ListDetailScreen' component={ListDetailScreen} options={{ title: 'List Details' }} />
+          <Stack.Screen name='PrintListScreen' component={PrintListScreen} options={{ title: 'Print List' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
