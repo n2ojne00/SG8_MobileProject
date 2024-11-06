@@ -5,7 +5,7 @@ import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.containerLogin}>
-      <Image source={require('../kuvat/drink.jpg')} style={styles.logoLogin} />
+      <Image source={require('../images/drink.jpg')} style={styles.logoLogin} />
       <Text style={styles.title}>Welcome to the App</Text>
       <TextInput
         style={styles.inputLogin}
