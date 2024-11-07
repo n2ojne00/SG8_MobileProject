@@ -130,7 +130,8 @@ const App = () => {
           <Stack.Screen name='CreateRecipeScreen' component={CreateRecipeScreen} options={{ title: 'Create Recipe' }} />
           <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} options={{ title: 'Create Recipe' }} />
           <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} options={{ title: 'Recipe Details' }} />
-          <Stack.Screen name="MealDetail" component={MealDetailScreen} options={{ title: 'Meal Details' }} />
+         <Stack.Screen name='MealDetailScreen' component={MealDetailScreen} options={{ title: 'Meal Details' }} />
+         <Stack.Screen name='CocktailDetailScreen' component={CocktailDetailScreen} options={{ title: 'Cocktail Details' }} />
 
         </Stack.Navigator>
       </NavigationContainer>
