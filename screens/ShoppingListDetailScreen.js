@@ -14,7 +14,7 @@ const ShoppingListDetailScreen = ({ route }) => {
         renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
       />
     </View>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({

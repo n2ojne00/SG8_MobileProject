@@ -5,8 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import ShoppingListDetailScreen from './screens/ShoppingListDetailScreen'; // Import the new detail screen
-import ListDetailScreen from './screens/ListDetailScreen'; // Import ListDetailScreen
+
+import ListDetailScreen from './screens/ListDetailScreen'; 
 import { ThemeProvider } from './contexts/ThemeContext';
 
 // Import your screens
@@ -19,6 +19,11 @@ import MealDetailScreen from './screens/MealDetailScreen';
 import ShoppingListScreen from './screens/ShoppingListScreen';
 import PrintListScreen from './screens/PrintListScreen'; // Import the PrintListScreen
 import SettingsScreen from './screens/SettingsScreen';
+import CreateRecipeScreen from './screens/CreateRecipeScreen';
+import ShoppingListDetailScreen from './screens/ShoppingListDetailScreen';
+import RecipeDetailScreen from './screens/RecipeDetailScreen';
+
+
 
 // Create stack and tab navigators
 const Stack = createStackNavigator();
@@ -122,6 +127,11 @@ const App = () => {
           <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
           <Stack.Screen name='ListDetailScreen' component={ListDetailScreen} options={{ title: 'List Details' }} />
           <Stack.Screen name='PrintListScreen' component={PrintListScreen} options={{ title: 'Print List' }} />
+          <Stack.Screen name='CreateRecipeScreen' component={CreateRecipeScreen} options={{ title: 'Create Recipe' }} />
+          <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} options={{ title: 'Create Recipe' }} />
+          <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} options={{ title: 'Recipe Details' }} />
+          <Stack.Screen name="MealDetail" component={MealDetailScreen} options={{ title: 'Meal Details' }} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

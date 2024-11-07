@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 
 const MainScreen = ({ navigation }) => {
   const [foodOfTheDay, setFoodOfTheDay] = useState(null);
-  const [carouselItems, setCarouselItems] = useState([
-    { text: "Appetizers", screen: "MealScreen", id: "1" },
-    { text: "Main Dishes", screen: "MealScreen", id: "2" },
-    { text: "Desserts", screen: "MealScreen", id: "3" },
-  ]);
+  const [recipes, setRecipes] = useState([]); // State to store recipes
 
-  // Placeholder fetch function for Food of the Day
   const fetchFoodOfTheDay = async () => {
     try {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
@@ -26,29 +20,13 @@ const MainScreen = ({ navigation }) => {
     fetchFoodOfTheDay();
   }, []);
 
-  const renderCarouselItem = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate(item.screen)}>
-      <View style={styles.carouselItem}>
-        <Text style={styles.carouselText}>{item.text}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+  const handleCreateRecipe = (recipe) => {
+    setRecipes((prevRecipes) => [...prevRecipes, recipe]);
+  };
 
   return (
     <View style={styles.container}>
-      {/* Logo */}
       <Image source={require('../images/succlyLogo.png')} style={styles.logo} />
-
-      {/* Carousel */}
-      <Text style={styles.carouselTitle}>What would you like to eat today?</Text>
-      <FlatList
-        data={carouselItems}
-        renderItem={renderCarouselItem}
-        keyExtractor={(item) => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.carouselContainer}
-      />
 
       {/* Food of the Day */}
       {foodOfTheDay && (
@@ -61,6 +39,21 @@ const MainScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       )}
+
+      {/* Button to Create Recipe */}
+      <Button title="Create Your Own Recipe" onPress={() => navigation.navigate('CreateRecipe', { onSave: handleCreateRecipe })} />
+
+      {/* List of Saved Recipes */}
+      <Text style={styles.recipesTitle}>Your Recipes</Text>
+      <FlatList
+        data={recipes}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => navigation.navigate('RecipeDetail', { recipe: item })}>
+            <Text style={styles.recipeName}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   );
 };
@@ -77,6 +70,8 @@ const styles = StyleSheet.create({
   foodImage: { width: 200, height: 200, borderRadius: 8 },
   foodName: { fontSize: 18, marginVertical: 8, textAlign: 'center' },
   detailsLink: { color: '#1E90FF', fontWeight: '600' },
+  recipesTitle: { fontSize: 20, fontWeight: 'bold', marginVertical: 10 },
+  recipeName: { fontSize: 16, paddingVertical: 5 },
 });
 
 export default MainScreen;
