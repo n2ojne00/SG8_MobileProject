@@ -76,21 +76,23 @@ const MainScreen = ({ navigation }) => {
       </TouchableOpacity>
 
       {/* Recipes List */}
-      <ScrollView style={styles.recipesContainer}>
-        <Text style={styles.recipesTitle}>Your Recipes</Text>
-        <FlatList
-          data={recipes}
-          renderItem={({ item }) => (
-            <TouchableOpacity 
-              style={styles.recipeItem} 
-              onPress={() => navigation.navigate('RecipeDetail', { recipe: item })}
-            >
-              <Text style={styles.recipeName}>{item.name}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </ScrollView>
+      
+      <View style={styles.recipesContainer}>
+  <Text style={styles.recipesTitle}>Your Recipes</Text>
+  <FlatList
+    data={recipes}
+    renderItem={({ item }) => (
+      <TouchableOpacity 
+        style={styles.recipeItem} 
+        onPress={() => navigation.navigate('RecipeDetail', { recipe: item })}
+      >
+        <Text style={styles.recipeName}>{item.name}</Text>
+      </TouchableOpacity>
+    )}
+    keyExtractor={(item, index) => index.toString()}
+  />
+</View>
+   
     </View>
   );
 };
