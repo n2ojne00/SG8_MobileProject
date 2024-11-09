@@ -8,6 +8,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import ListDetailScreen from './screens/ListDetailScreen'; 
 import { ThemeProvider } from './contexts/ThemeContext';
+import { RecipeProvider } from './contexts/RecipeContext';
 
 // Import your screens
 import LoginScreen from './screens/LoginScreen';
@@ -17,19 +18,16 @@ import CocktailDetailScreen from './screens/CocktailDetailScreen';
 import MealScreen from './screens/MealScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
 import ShoppingListScreen from './screens/ShoppingListScreen';
-import PrintListScreen from './screens/PrintListScreen'; // Import the PrintListScreen
+import PrintListScreen from './screens/PrintListScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import CreateRecipeScreen from './screens/CreateRecipeScreen';
 import ShoppingListDetailScreen from './screens/ShoppingListDetailScreen';
 import RecipeDetailScreen from './screens/RecipeDetailScreen';
+import RecipeListScreen from './screens/RecipeListScreen';
 
-
-
-// Create stack and tab navigators
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// Helper function for the settings icon
 const SettingsIcon = ({ navigation }) => (
   <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
     <Ionicons name="settings-outline" size={24} color="black" style={{ marginLeft: 15 }} />
@@ -37,14 +35,14 @@ const SettingsIcon = ({ navigation }) => (
 );
 
 const CocktailStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={({ navigation }) => ({
+      headerLeft: () => <SettingsIcon navigation={navigation} />
+    })}
+  >
     <Stack.Screen 
       name="CocktailScreen" 
       component={CocktailScreen} 
-      options={({ navigation }) => ({
-        title: 'Cocktail Search',
-        headerLeft: () => <SettingsIcon navigation={navigation} />
-      })} 
+      options={{ title: 'Cocktail Search' }} 
     />
     <Stack.Screen 
       name="CocktailDetail" 
@@ -55,14 +53,14 @@ const CocktailStack = () => (
 );
 
 const MealStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={({ navigation }) => ({
+      headerLeft: () => <SettingsIcon navigation={navigation} />
+    })}
+  >
     <Stack.Screen 
       name="MealScreen" 
       component={MealScreen} 
-      options={({ navigation }) => ({
-        title: 'Meal Search',
-        headerLeft: () => <SettingsIcon navigation={navigation} />
-      })} 
+      options={{ title: 'Meal Search' }} 
     />
     <Stack.Screen 
       name="MealDetail" 
@@ -73,19 +71,19 @@ const MealStack = () => (
 );
 
 const ShoppingListStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={({ navigation }) => ({
+      headerLeft: () => <SettingsIcon navigation={navigation} />
+    })}
+  >
     <Stack.Screen 
       name="ShoppingListScreen" 
       component={ShoppingListScreen} 
-      options={({ navigation }) => ({
-        title: 'Shopping List',
-        headerLeft: () => <SettingsIcon navigation={navigation} />
-      })}
+      options={{ title: 'Shopping List' }}
     />
     <Stack.Screen 
       name="ShoppingListDetailScreen" 
       component={ShoppingListDetailScreen} 
-      options={{ title: 'Shopping List Details' }} // Add the detail screen option
+      options={{ title: 'Shopping List Details' }} 
     />
   </Stack.Navigator>
 );
@@ -96,13 +94,13 @@ const TabNavigator = () => (
       tabBarIcon: ({ color, size }) => {
         let iconName;
         if (route.name === 'Main') {
-          iconName = 'home';
+          iconName = 'home-outline';
         } else if (route.name === 'Meals') {
-          iconName = 'food';
+          iconName = 'food-fork-drink';
         } else if (route.name === 'Cocktails') {
           iconName = 'glass-cocktail';
         } else if (route.name === 'ShoppingList') {
-          iconName = 'shopping';
+          iconName = 'cart-outline';
         }
         return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
       },
@@ -119,23 +117,24 @@ const TabNavigator = () => (
 
 const App = () => {
   return (
+    <RecipeProvider>
     <ThemeProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
           <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
           <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
-          <Stack.Screen name='ListDetailScreen' component={ListDetailScreen} options={{ title: 'List Details' }} />
-          <Stack.Screen name='PrintListScreen' component={PrintListScreen} options={{ title: 'Print List' }} />
-          <Stack.Screen name='CreateRecipeScreen' component={CreateRecipeScreen} options={{ title: 'Create Recipe' }} />
+          <Stack.Screen name="ListDetailScreen" component={ListDetailScreen} options={{ title: 'List Details' }} />
+          <Stack.Screen name="PrintListScreen" component={PrintListScreen} options={{ title: 'Print List' }} />
           <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} options={{ title: 'Create Recipe' }} />
           <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} options={{ title: 'Recipe Details' }} />
-         <Stack.Screen name='MealDetailScreen' component={MealDetailScreen} options={{ title: 'Meal Details' }} />
-         <Stack.Screen name='CocktailDetailScreen' component={CocktailDetailScreen} options={{ title: 'Cocktail Details' }} />
-
+          <Stack.Screen name="RecipeList" component={RecipeListScreen} options={{ title: 'Recipe List' }} />
+          <Stack.Screen name="MealDetailScreen" component={MealDetailScreen} options={{ title: 'Meal Details' }} />
+          <Stack.Screen name="CocktailDetail" component={CocktailDetailScreen} options={{ title: 'Cocktail Details' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
+    </RecipeProvider>
   );
 };
 

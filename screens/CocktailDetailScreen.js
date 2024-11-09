@@ -60,9 +60,7 @@ const CocktailDetailScreen = ({ route }) => {
       />
       <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Instructions:</Text>
       <Text style={[styles.instructions, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strInstructions}</Text>
-      <View style={styles.buttonContainer}>
-        <Button title="Order" onPress={handleOrder} color="#FFA500" />
-      </View>
+     
     </View>
   );
 };
