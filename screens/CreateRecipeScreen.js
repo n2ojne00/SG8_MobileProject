@@ -30,14 +30,14 @@ const CreateRecipeScreen = () => {
                 onChangeText={setName}
             />
             <TextInput
-                style={styles.input}
+                style={styles.ingredientsinput}
                 placeholder="Ingredients"
                 value={ingredients}
                 onChangeText={setIngredients}
                 multiline
             />
             <TextInput
-                style={styles.input}
+                style={styles.guideinput}
                 placeholder="Guide"
                 value={guide}
                 onChangeText={setGuide}
@@ -51,7 +51,8 @@ const CreateRecipeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
+        padding: 10,
+        backgroundColor: '#fff',
     },
     input: {
         height: 40,
@@ -59,6 +60,24 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 12,
         paddingHorizontal: 8,
+    },
+    guideinput: {
+        height: 200,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        marginBottom: 12,
+        paddingHorizontal: 8,
+        textAlignVertical: 'top',  
+        paddingTop: 8,
+    },
+    ingredientsinput: {
+        height: 100,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        marginBottom: 12,
+        paddingHorizontal: 8,
+        textAlignVertical: 'top',  
+        paddingTop: 8,
     },
 });
 

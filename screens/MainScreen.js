@@ -1,6 +1,6 @@
 // screens/MainScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const MainScreen = ({ navigation }) => {
@@ -21,11 +21,7 @@ const MainScreen = ({ navigation }) => {
     try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
       const data = await response.json();
-      
-      // Log data to inspect its structure
-      console.log("Drink data:", data);
-  
-      // Check if data.drinks exists and has items
+
       if (data.drinks && data.drinks.length > 0) {
         setDrinkOfTheDay(data.drinks[0]);
       } else {
@@ -35,7 +31,6 @@ const MainScreen = ({ navigation }) => {
       console.error('Error fetching Drink of the Day:', error);
     }
   };
-  
 
   useEffect(() => {
     fetchFoodOfTheDay();
@@ -48,7 +43,6 @@ const MainScreen = ({ navigation }) => {
 
       {/* Food and Drink of the Day Section */}
       <View style={styles.foodDrinkContainer}>
-        {/* Food of the Day */}
         {foodOfTheDay && (
           <View style={styles.foodContainer}>
             <Text style={styles.foodTitle}>Food of the Day</Text>
@@ -60,28 +54,26 @@ const MainScreen = ({ navigation }) => {
           </View>
         )}
 
-        {/* Drink of the Day */}
         {drinkOfTheDay ? (
-  <View style={styles.drinkContainer}>
-    <Text style={styles.drinkTitle}>Drink of the Day</Text>
-    {drinkOfTheDay.strDrinkThumb ? (
-      <Image source={{ uri: drinkOfTheDay.strDrinkThumb }} style={styles.drinkImage} />
-    ) : (
-      <Text>No image available</Text>
-    )}
-    <Text style={styles.drinkName}>{drinkOfTheDay.strDrink || 'Unknown Drink'}</Text>
-    <TouchableOpacity onPress={() => navigation.navigate('CocktailDetail', { idDrink: drinkOfTheDay.idDrink })}>
-      <Text style={styles.detailsLink}>View Recipe</Text>
-    </TouchableOpacity>
-  </View>
-) : (
-  <Text>Loading Drink of the Day...</Text>
-)}
-
+          <View style={styles.drinkContainer}>
+            <Text style={styles.drinkTitle}>Drink of the Day</Text>
+            {drinkOfTheDay.strDrinkThumb ? (
+              <Image source={{ uri: drinkOfTheDay.strDrinkThumb }} style={styles.drinkImage} />
+            ) : (
+              <Text>No image available</Text>
+            )}
+            <Text style={styles.drinkName}>{drinkOfTheDay.strDrink || 'Unknown Drink'}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('CocktailDetail', { idDrink: drinkOfTheDay.idDrink })}>
+              <Text style={styles.detailsLink}>View Recipe</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <Text>Loading Drink of the Day...</Text>
+        )}
       </View>
       
       {/* Buttons Container */}
-      <View style={styles.buttonsContainer}>
+      <View style={styles.buttonContainer}>
         <TouchableOpacity 
           style={styles.createRecipeButton} 
           onPress={() => navigation.navigate('CreateRecipe')}
@@ -98,7 +90,6 @@ const MainScreen = ({ navigation }) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -186,10 +177,20 @@ const styles = StyleSheet.create({
     color: '#1E90FF',
     fontWeight: '600',
   },
-  buttonsContainer: {
+  buttonContainer: {
     alignItems: 'center',
+    alignSelf:'flex-start',
+    width: '50%',
+    backgroundColor: '#ffffff',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 6,
     marginTop: 20,
-    width: '100%',
   },
   createRecipeButton: {
     backgroundColor: '#1E90FF',
@@ -197,11 +198,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 30,
     marginVertical: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 6,
   },
   createRecipeButtonText: {
     color: '#fff',
@@ -214,11 +210,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 30,
     marginVertical: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 6,
   },
   viewRecipeButtonText: {
     color: '#fff',

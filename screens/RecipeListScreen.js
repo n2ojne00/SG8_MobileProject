@@ -20,9 +20,11 @@ const RecipeListScreen = () => {
                 data={recipes}
                 renderItem={renderRecipe}
                 keyExtractor={(item, index) => index.toString()}
-                ListEmptyComponent={<Text>No recipes saved yet.</Text>}
+                ListEmptyComponent={<Text style={styles.emptyText}>No recipes saved yet.</Text>}
             />
-            <Button title="Create New Recipe" onPress={() => navigation.navigate('CreateRecipe')} />
+            <TouchableOpacity style={styles.createButton} onPress={() => navigation.navigate('CreateRecipe')}>
+                <Text style={styles.buttonText}>Create New Recipe</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -31,16 +33,50 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
+        backgroundColor: '#ffffff',
     },
     recipeContainer: {
         padding: 16,
-        backgroundColor: '#f9f9f9',
-        borderBottomWidth: 1,
-        borderBottomColor: '#ddd',
+        backgroundColor: '#ffffff',
+        borderRadius: 8,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+        marginVertical: 8,
+        marginHorizontal: 4,
     },
     recipeName: {
         fontSize: 18,
-        fontWeight: 'bold',
+        fontWeight: '600',
+        color: '#333',
+    },
+    emptyText: {
+        fontSize: 16,
+        color: '#888',
+        textAlign: 'center',
+        marginVertical: 20,
+    },
+    createButton: {
+        backgroundColor: '#007bff',
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        borderRadius: 25,
+        alignItems: 'center',
+        marginTop: 20,
+        alignSelf: 'center',
+        width: '80%',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    buttonText: {
+        color: '#ffffff',
+        fontSize: 16,
+        fontWeight: '600',
     },
 });
 
