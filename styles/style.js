@@ -9,6 +9,7 @@ container: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
+
   },
   image: {
     width: '100%',
@@ -154,7 +155,7 @@ container: {
     padding: 25,
   },
   logoLogin: {
-    width: 400,
+    width: 450,
     height: 300,
     marginBottom: 20,
     borderRadius: 10,
@@ -179,7 +180,7 @@ container: {
     elevation: 2,
   },
   buttonLogin: {
-    width: '100%',
+    width: '50%',
     height: 50,
     borderRadius: 25,
     backgroundColor: 'steelblue',
@@ -199,6 +200,16 @@ container: {
     alignItems: 'center',
     backgroundColor: '#f9f9f9',
     padding: 16,
+  },
+  welcomeText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#444',  // Darker color for readability
+    textAlign: 'center',
+    marginVertical: 20,
+    fontFamily: 'sans-serif-light',  // Customize with any font loaded in your project
+    letterSpacing: 0.5,
+    lineHeight: 28,
   },
   titleMain: {
     fontSize: 24,
