@@ -72,7 +72,7 @@ export default StyleSheet.create({
     padding: 10,
   },
 
-  //MEAL RECIPE SCREEN
+  //MEAL RECIPE SCREEN (DetailScreen)
 
   scrollContentMealDS: {
     padding: 25,
@@ -104,34 +104,40 @@ export default StyleSheet.create({
     lineHeight: 24,
     marginTop: 8,
   },
-  
 
-//OLD STYLES.. WORKING ON IT
-  title: {
+  //DRINK RECIPE SCREEN (DetailScreen)
+  titleDrinkDS: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
 
   },
-  image: {
+  imageDrinkDS: {
     width: '100%',
     height: 200,
     borderRadius: 10,
     marginBottom: 20,
   },
-  sectionTitle: {
+  drinkHLSection: {
     fontSize: 20,
     fontWeight: 'bold',
     marginVertical: 10,
   },
-  ingredient: {
+  drinkIngredient: {
     fontSize: 16,
     paddingLeft: 10,
   },
-  instructions: {
+  drinkInstructions: {
     fontSize: 16,
     marginTop: 10,
   },
+  
+
+
+  
+
+//OLD STYLES.. WORKING ON IT
+
   buttonContainer: {
     marginTop: 20,
     alignItems: 'center',

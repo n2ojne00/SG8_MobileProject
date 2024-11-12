@@ -22,6 +22,7 @@ const CocktailDetailScreen = ({ route }) => {
     fetchCocktailDetails();
   }, [id]);
 
+  
   if (!cocktail) return <Text style={[styles.loading, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Loading...</Text>;
 
   // Extract ingredients and convert measurements to cl if in oz
@@ -48,18 +49,18 @@ const CocktailDetailScreen = ({ route }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
-      <Text style={[styles.title, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strDrink}</Text>
-      <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.image} />
-      <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Ingredients:</Text>
+      <Text style={[styles.titleDrinkDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strDrink}</Text>
+      <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.imageDrinkDS} />
+      <Text style={[styles.drinkHLSection, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Ingredients:</Text>
       <FlatList
         data={ingredients}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <Text style={[styles.ingredient, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item}</Text>
+          <Text style={[styles.drinkIngredient, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item}</Text>
         )}
       />
-      <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Instructions:</Text>
-      <Text style={[styles.instructions, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strInstructions}</Text>
+      <Text style={[styles.drinkHLSection, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Instructions:</Text>
+      <Text style={[styles.drinkInstructions, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strInstructions}</Text>
      
     </View>
   );

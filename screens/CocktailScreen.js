@@ -113,7 +113,7 @@ const CocktailScreen = () => {
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => goToDetail(item.idDrink)}>
               <View style={styles.mealSelect}>
-                <Image source={{ uri: item.strDrinkThumb }} style={styles.image} />
+                <Image source={{ uri: item.strDrinkThumb }} style={styles.mealImage} />
                 <Text
                   style={[
                     styles.mealTitle,
