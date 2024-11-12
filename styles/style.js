@@ -36,7 +36,8 @@ export default StyleSheet.create({
     borderRadius: 15,
     elevation: 10,
     width: 120,
-    marginBottom: 10,
+    marginBottom: 30,
+    
 
   },
   //selected category

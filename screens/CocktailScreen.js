@@ -79,7 +79,7 @@ const CocktailScreen = () => {
         />
       </View>
 
-      <ScrollView>
+      
         {/* Horizontal FlatList for categories */}
         <FlatList
           data={categories}
@@ -131,7 +131,7 @@ const CocktailScreen = () => {
             </Text>
           }
         />
-      </ScrollView>
+      
 
     </View>
   );

@@ -79,7 +79,7 @@ const MealScreen = ({ route, navigation }) => {
       />
       </View>
 
-<ScrollView>
+
   {/* Horizontal FlatList for categories */}
   <FlatList
     data={categories}
@@ -131,7 +131,7 @@ const MealScreen = ({ route, navigation }) => {
       <Text style={styles.emptyMessage}>No meals found.</Text>
     }
   />
-</ScrollView>
+
 
     </View>
   );
