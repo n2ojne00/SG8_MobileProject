@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import styles from "../styles/style";
 import { Picker } from '@react-native-picker/picker';
+
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 const categories = ["Select Category", "Chicken", "Beef", "Pork", "Fish", "Vegan", "Pasta", "Dessert", "Starters"];
 
@@ -60,9 +63,12 @@ const MealScreen = ({ route, navigation }) => {
   }, [search, selectedCategory]);
 
   return (
-    <View style={[styles.containerMealScr, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
+    
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
+    <View style={styles.searchRow}>
+    <FontAwesome name="search" size={20} color="#6A994E" style={styles.icon} />
       <TextInput
-        style={[styles.inputMealScr, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
+        style={[styles.textInput, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
         placeholder="Search for a meal..."
         placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
         value={search}
@@ -71,30 +77,62 @@ const MealScreen = ({ route, navigation }) => {
           setSelectedCategory("Select Category");
         }}
       />
+      </View>
 
-      <Picker
-        selectedValue={selectedCategory}
-        style={styles.picker}
-        onValueChange={(itemValue) => handleCategorySelect(itemValue)}
+<ScrollView>
+  {/* Horizontal FlatList for categories */}
+  <FlatList
+    data={categories}
+    keyExtractor={(item) => item}
+    horizontal
+    showsHorizontalScrollIndicator={false}
+    renderItem={({ item }) => (
+      <TouchableOpacity
+        onPress={() => handleCategorySelect(item)}
+        style={[
+          styles.categoryButton,
+          selectedCategory === item && styles.selectedCategory,
+        ]}
       >
-        {categories.map((category) => (
-          <Picker.Item label={category} value={category} key={category} />
-        ))}
-      </Picker>
+        <Text
+          style={[
+            styles.categoryText,
+            selectedCategory === item && styles.selectedCategoryText,
+          ]}
+        >
+          {item}
+        </Text>
+      </TouchableOpacity>
+    )}
+  />
 
-      <FlatList
-        data={meals}
-        keyExtractor={(item) => item.idMeal}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate('MealDetail', { idMeal: item.idMeal })}>
-            <View style={styles.item}>
-            <Image source={{ uri: item.strMealThumb }} style={styles.image} />
-              <Text style={[styles.title, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item.strMeal}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        ListEmptyComponent={<Text style={styles.emptyMessage}>No meals found.</Text>}
-      />
+  {/* FlatList for meals */}
+  <FlatList
+    data={meals}
+    keyExtractor={(item) => item.idMeal}
+    renderItem={({ item }) => (
+      <TouchableOpacity
+        onPress={() => navigation.navigate('MealDetail', { idMeal: item.idMeal })}
+      >
+        <View style={styles.mealSelect}>
+          <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
+          <Text
+            style={[
+              styles.mealTitle,
+              { color: isDarkMode ? '#ffffff' : '#000000' },
+            ]}
+          >
+            {item.strMeal}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    )}
+    ListEmptyComponent={
+      <Text style={styles.emptyMessage}>No meals found.</Text>
+    }
+  />
+</ScrollView>
+
     </View>
   );
 };

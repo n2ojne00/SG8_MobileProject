@@ -50,7 +50,7 @@ const MealDetailScreen = ({ route }) => {
   // Update styles based on dark mode
   return (
     <ScrollView
-      style={[styles.containerMealDS, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]} // Set background color
+      style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]} // Set background color
       contentContainerStyle={styles.scrollContentMealDS}
     >
       <View style={styles.innerContainerMealDS}>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/style';
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 // Define the available categories
 const categories = ["Select Category", "Cocktail", "Ordinary Drink", "Shot", "Beer", "Punch / Party Drink", "Coffee / Tea"];
@@ -63,45 +64,75 @@ const CocktailScreen = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
-      <TextInput
-        style={[styles.inputDrinkScr, { color: isDarkMode ? '#ffffff' : '#000000', backgroundColor: isDarkMode ? '#333333' : '#ffffff' }]}
-        placeholder="Search for a cocktail..."
-        placeholderTextColor={isDarkMode ? '#aaaaaa' : '#555555'}
-        value={search}
-        onChangeText={(text) => {
-          setSearch(text);
-          setSelectedCategory("Select Category"); // Reset selected category when searching by name
-        }}
-      />
 
-      {/* Category Dropdown Picker */}
-      <Picker
-        selectedValue={selectedCategory}
-        style={styles.picker}
-        onValueChange={(itemValue) => handleCategorySelect(itemValue)}
-      >
-        {categories.map((category) => (
-          <Picker.Item label={category} value={category} key={category} />
-        ))}
-      </Picker>
+      <View style={styles.searchRow}>
+        <FontAwesome name="search" size={20} color="#6A994E" style={styles.icon} />
+        <TextInput
+          style={[styles.textInput, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
+          placeholder="Search for a cocktail..."
+          placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
+          value={search}
+          onChangeText={(text) => {
+            setSearch(text);
+            setSelectedCategory("Select Category");
+          }}
+        />
+      </View>
 
-      <FlatList
-        data={cocktails}
-        keyExtractor={(item) => item.idDrink}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => goToDetail(item.idDrink)}>
-            <View style={styles.itemContainer}>
-              <Image source={{ uri: item.strDrinkThumb }} style={styles.image} />
-              <Text style={[styles.title, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item.strDrink}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        ListEmptyComponent={
-          <Text style={[styles.emptyMessage, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-            No cocktails found.
-          </Text>
-        }
-      />
+      <ScrollView>
+        {/* Horizontal FlatList for categories */}
+        <FlatList
+          data={categories}
+          keyExtractor={(item) => item}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => handleCategorySelect(item)}
+              style={[
+                styles.categoryButton,
+                selectedCategory === item && styles.selectedCategory,
+              ]}
+            >
+              <Text
+                style={[
+                  styles.categoryText,
+                  selectedCategory === item && styles.selectedCategoryText,
+                ]}
+              >
+                {item}
+              </Text>
+            </TouchableOpacity>
+          )}
+        />
+
+        {/* FlatList for cocktails */}
+        <FlatList
+          data={cocktails}
+          keyExtractor={(item) => item.idDrink}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => goToDetail(item.idDrink)}>
+              <View style={styles.mealSelect}>
+                <Image source={{ uri: item.strDrinkThumb }} style={styles.image} />
+                <Text
+                  style={[
+                    styles.mealTitle,
+                    { color: isDarkMode ? '#ffffff' : '#000000' },
+                  ]}
+                >
+                  {item.strDrink}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
+          ListEmptyComponent={
+            <Text style={[styles.emptyMessage, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              No cocktails found.
+            </Text>
+          }
+        />
+      </ScrollView>
+
     </View>
   );
 };

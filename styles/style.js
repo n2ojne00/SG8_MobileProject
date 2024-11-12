@@ -1,10 +1,112 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-container: {
-    padding: 20,
+  container: {
+    padding: 10,
     flex: 1,
   },
+
+  //SEARCH INPUT
+  searchRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fafff0f6',
+    borderWidth: 3,
+    borderColor: '#6A994E',
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  textInput: {
+    flex: 1,
+    height: 50,
+  },
+  icon: {
+    marginRight: 10,
+  },
+
+  //CATEGORY
+  categoryButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 80,
+    backgroundColor: '#386641',
+    marginHorizontal: 5,
+    borderRadius: 15,
+    elevation: 10,
+    width: 120,
+    marginBottom: 10,
+
+  },
+  //selected category
+  categoryText: {
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  selectedCategory: {
+    backgroundColor: '#7ce190',
+  },
+  selectedCategoryText: {
+    color: 'orange',
+  },
+
+  //MEALS AND DRINKS
+  mealSelect: {
+    alignItems: 'center',
+    borderWidth: 1,
+    marginBottom: 10,
+    backgroundColor: '#386641'
+  },
+  mealImage: {
+    width: '90%',
+    height: 200,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  mealTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    backgroundColor: 'white',
+    padding: 10,
+  },
+
+  //MEAL RECIPE SCREEN
+
+  scrollContentMealDS: {
+    padding: 25,
+  },
+
+  imageMealDS: {
+    width: '100%',
+    height: 200,
+    marginBottom: 10,
+  },
+  titleMealDS: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  sectionTitleMealDS: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginVertical: 8,
+  },
+  ingredientMealDS: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginLeft: 8,
+  },
+  instructionsMealDS: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginTop: 8,
+  },
+  
+
+//OLD STYLES.. WORKING ON IT
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -34,67 +136,9 @@ container: {
     marginTop: 20,
     alignItems: 'center',
   },
-  containerMealDS: {
-    flex: 1,
-  },
-  scrollContentMealDS: {
-    flexGrow: 1,
-    padding: 25,
-  },
-  innerContainerMealDS: {
-    flex: 1,
-  },
-  imageMealDS: {
-    width: '100%',
-    height: 200,
-    marginBottom: 16,
-  },
-  titleMealDS: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 8,
-  },
-  sectionTitleMealDS: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginVertical: 8,
-  },
-  ingredientMealDS: {
-    fontSize: 16,
-    lineHeight: 24,
-    marginLeft: 8,
-  },
-  instructionsMealDS: {
-    fontSize: 16,
-    lineHeight: 24,
-    marginTop: 8,
-  },
-  containerMealScr: {
-    flex: 1,
-    padding: 16,
-  },
-  inputMealScr: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    paddingHorizontal: 8,
-    borderRadius: 4,
-    marginBottom: 16,
-  },
-  itemMealScr: {
-    flexDirection: 'row',
-    marginBottom: 16,
-    alignItems: 'center',
-  },
-  imageMealScr: {
-    width: 50,
-    height: 50,
-    marginRight: 16,
-  },
-  titleMealScr: {
-    fontSize: 18,
-  },
+
+ 
+
   containerDrinkScr: {
     padding: 20,
     flex: 1,
@@ -117,12 +161,7 @@ container: {
     fontSize: 18,
     padding: 10,
   },
-  emptyMessageDrinkScr: {
-    textAlign: 'center',
-    marginTop: 20,
-    fontSize: 16,
-    color: 'gray',
-  },
+
   containerShop: {
     flex: 1,
     padding: 16,
@@ -249,4 +288,8 @@ container: {
     marginVertical: 10,
     borderRadius: 5,
   },
+
+
+
+
 });
