@@ -10,8 +10,9 @@ import ListDetailScreen from './screens/ListDetailScreen';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { RecipeProvider } from './contexts/RecipeContext';
 
-// Import your screens
 import LoginScreen from './screens/LoginScreen';
+import LocalLoginScreen from './screens/LocalLoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
 import CocktailScreen from './screens/CocktailScreen';
 import CocktailDetailScreen from './screens/CocktailDetailScreen';
@@ -122,6 +123,8 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="LocalLogin" component={LocalLoginScreen} options={{ title: 'Local Login' }} />
+          <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Register' }} />
           <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
           <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
           <Stack.Screen name="ListDetailScreen" component={ListDetailScreen} options={{ title: 'List Details' }} />
