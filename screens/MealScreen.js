@@ -2,9 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import styles from "../styles/style";
-import { Picker } from '@react-native-picker/picker';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import chickenImage from '../images/categories/chicken.jpg'
+import beefImage from '../images/categories/steak.jpg'
+import porkImage from '../images/categories/pork.jpg'
+import fishImage from '../images/categories/salmon.jpg'
+import veganImage from '../images/categories/vegan.jpg'
+import pastaImage from '../images/categories/pasta.jpg'
+import dessertImage from '../images/categories/dessert.jpg'
+import startersImage from '../images/categories/snacks.jpg'
 
 
 const categories = ["Select Category", "Chicken", "Beef", "Pork", "Fish", "Vegan", "Pasta", "Dessert", "Starters"];
@@ -16,6 +24,7 @@ const MealScreen = ({ route, navigation }) => {
   const { category } = route.params || {};
   const { isDarkMode } = useTheme();
 
+
   const categoryMapping = {
     Chicken: 'Chicken',
     Beef: 'Beef',
@@ -24,15 +33,27 @@ const MealScreen = ({ route, navigation }) => {
     Vegan: 'Vegan',
     Pasta: 'Pasta',
     Dessert: 'Dessert',
-    Starters: 'Starter', 
+    Starters: 'Starter',
   };
+
+  const categoryImages = {
+    Chicken: chickenImage,
+    Beef: beefImage,
+    Pork: porkImage,
+    Fish: fishImage,
+    Vegan: veganImage,
+    Pasta: pastaImage,
+    Dessert: dessertImage,
+    Starters: startersImage,
+  };
+
 
   const fetchMeals = async (query, category) => {
     try {
-      const url = query 
-        ? `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}` 
+      const url = query
+        ? `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
         : `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
-      
+
       const response = await fetch(url);
       const data = await response.json();
       setMeals(data.meals || []);
@@ -63,74 +84,91 @@ const MealScreen = ({ route, navigation }) => {
   }, [search, selectedCategory]);
 
   return (
-    
+
     <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
-    <View style={styles.searchRow}>
-    <FontAwesome name="search" size={20} color="#6A994E" style={styles.icon} />
-      <TextInput
-        style={[styles.textInput, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
-        placeholder="Search for a meal..."
-        placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
-        value={search}
-        onChangeText={(text) => {
-          setSearch(text);
-          setSelectedCategory("Select Category");
-        }}
-      />
+      <View style={styles.searchRow}>
+        <FontAwesome name="search" size={20} color="#6A994E" style={styles.icon} />
+        <TextInput
+          style={[styles.textInput, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
+          placeholder="Search for a meal..."
+          placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
+          value={search}
+          onChangeText={(text) => {
+            setSearch(text);
+            setSelectedCategory("Select Category");
+          }}
+        />
       </View>
 
 
-  {/* Horizontal FlatList for categories */}
-  <FlatList
-    data={categories}
-    keyExtractor={(item) => item}
-    horizontal
-    showsHorizontalScrollIndicator={false}
-    renderItem={({ item }) => (
-      <TouchableOpacity
-        onPress={() => handleCategorySelect(item)}
-        style={[
-          styles.categoryButton,
-          selectedCategory === item && styles.selectedCategory,
-        ]}
-      >
-        <Text
-          style={[
-            styles.categoryText,
-            selectedCategory === item && styles.selectedCategoryText,
-          ]}
-        >
-          {item}
-        </Text>
-      </TouchableOpacity>
-    )}
-  />
-
-  {/* FlatList for meals */}
-  <FlatList
-    data={meals}
-    keyExtractor={(item) => item.idMeal}
-    renderItem={({ item }) => (
-      <TouchableOpacity
-        onPress={() => navigation.navigate('MealDetail', { idMeal: item.idMeal })}
-      >
-        <View style={styles.mealSelect}>
-          <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
-          <Text
+      {/* Horizontal FlatList for categories */}
+      <FlatList
+        style={styles.categoryList}
+        data={categories}
+        keyExtractor={(item) => item}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => handleCategorySelect(item)}
             style={[
-              styles.mealTitle,
-              { color: isDarkMode ? '#ffffff' : '#000000' },
+              styles.categoryButton,
+              selectedCategory === item && styles.selectedCategory,
             ]}
           >
-            {item.strMeal}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    )}
-    ListEmptyComponent={
-      <Text style={styles.emptyMessage}>No meals found.</Text>
-    }
-  />
+            <View style={styles.categoryContainer}>
+              {/* Display image as background */}
+              {categoryImages[item] && (
+                <Image
+                  source={categoryImages[item]}
+                  style={styles.categoryImage}
+                />
+              )}
+              {/* Overlay text */}
+              <View style={styles.overlay}>
+                <Text
+                  style={[
+                    styles.categoryText,
+                    selectedCategory === item && styles.selectedCategoryText,
+                  ]}
+                >
+                  {item}
+                </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
+
+
+
+      {/* FlatList for meals */}
+      <FlatList
+        style={styles.foodList}
+        data={meals}
+        keyExtractor={(item) => item.idMeal}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+
+            onPress={() => navigation.navigate('MealDetail', { idMeal: item.idMeal })}
+          >
+            <View style={styles.mealSelect}>
+              <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
+              <Text
+                style={[
+                  styles.mealTitle,
+                  { color: isDarkMode ? '#ffffff' : '#000000' },
+                ]}
+              >
+                {item.strMeal}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        ListEmptyComponent={
+          <Text style={styles.emptyMessage}>No meals found.</Text>
+        }
+      />
 
 
     </View>

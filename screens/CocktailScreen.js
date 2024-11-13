@@ -5,9 +5,32 @@ import styles from '../styles/style';
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
+import cocktailImage from '../images/categories/cocktail.jpg';
+import ordinaryDrinkImage from '../images/categories/cold.jpg';
+import shotImage from '../images/categories/shots.jpg';
+import beerImage from '../images/categories/Beer.jpg';
+import punchImage from '../images/categories/punch.jpg';
+import coffeeTeaImage from '../images/categories/hotdrink.jpg';
+
+
 
 // Define the available categories
-const categories = ["Select Category", "Cocktail", "Ordinary Drink", "Shot", "Beer", "Punch / Party Drink", "Coffee / Tea"];
+const categories = [
+  "Cocktail", 
+  "Ordinary Drink", 
+  "Shot", "Beer", 
+  "Punch / Party Drink", 
+  "Coffee / Tea"];
+
+  const categoryImages = {
+    "Cocktail": cocktailImage,
+    "Ordinary Drink": ordinaryDrinkImage,
+    "Shot": shotImage,
+    "Beer": beerImage,
+    "Punch / Party Drink": punchImage,
+    "Coffee / Tea": coffeeTeaImage,
+  };
+  
 
 const CocktailScreen = () => {
   const [search, setSearch] = useState('');
@@ -80,34 +103,50 @@ const CocktailScreen = () => {
       </View>
 
       
-        {/* Horizontal FlatList for categories */}
-        <FlatList
-          data={categories}
-          keyExtractor={(item) => item}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => handleCategorySelect(item)}
-              style={[
-                styles.categoryButton,
-                selectedCategory === item && styles.selectedCategory,
-              ]}
-            >
-              <Text
-                style={[
-                  styles.categoryText,
-                  selectedCategory === item && styles.selectedCategoryText,
-                ]}
-              >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
+  
+       {/* Horizontal FlatList for categories */}
+<FlatList
+  style={styles.categoryList}
+  data={categories}
+  keyExtractor={(item) => item}
+  horizontal
+  showsHorizontalScrollIndicator={false}
+  renderItem={({ item }) => (
+    <TouchableOpacity
+      onPress={() => handleCategorySelect(item)}
+      style={[
+        styles.categoryButton,
+        selectedCategory === item && styles.selectedCategory,
+      ]}
+    >
+      <View style={styles.categoryContainer}>
+        {/* Display image as background */}
+        {categoryImages[item] && (
+          <Image
+            source={categoryImages[item]}
+            style={styles.categoryImage}
+          />
+        )}
+        {/* Overlay text */}
+        <View style={styles.overlay}>
+          <Text
+            style={[
+              styles.categoryText,
+              selectedCategory === item && styles.selectedCategoryText,
+            ]}
+          >
+            {item}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  )}
+/>
+
 
         {/* FlatList for cocktails */}
         <FlatList
+        style={styles.foodList}
           data={cocktails}
           keyExtractor={(item) => item.idDrink}
           renderItem={({ item }) => (

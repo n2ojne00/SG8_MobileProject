@@ -26,35 +26,72 @@ export default StyleSheet.create({
     marginRight: 10,
   },
 
-  //CATEGORY
-  categoryButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 80,
-    backgroundColor: '#386641',
-    marginHorizontal: 5,
-    borderRadius: 15,
-    elevation: 10,
-    width: 120,
-    marginBottom: 30,
-    
+  
+// CATEGORY
+categoryButton: {
+  backgroundColor: '#386641', 
+  marginHorizontal: 5,
+  borderRadius: 15,
+  elevation: 10,
+  borderWidth: 1,
+  width: 140,
+  overflow: 'hidden',
+},
 
-  },
-  //selected category
-  categoryText: {
-    fontSize: 20,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  selectedCategory: {
-    backgroundColor: '#7ce190',
-  },
-  selectedCategoryText: {
-    color: 'orange',
-  },
+categoryContainer: {
+  width: '100%',
+  height: 130,
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'relative',
+},
+
+categoryImage: {
+  width: '100%',
+  height: '100%',
+  position: 'absolute',
+  resizeMode: 'cover',
+},
+
+categoryText: {
+  fontSize: 20,
+  color: 'white',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  zIndex: 1, 
+  backgroundColor: '#386641a5', 
+  padding: 5,
+  borderRadius: 5,
+},
+
+// SELECTED CATEGORY
+selectedCategory: {
+  borderColor: 'orange', // Add border to indicate selection
+  borderWidth: 2,
+},
+
+selectedCategoryText: {
+  color: 'orange', // Color when selected
+},
+
+// FLATLIST
+foodList: {
+  paddingTop: 10,
+  borderWidth: 2,
+  height: '60%',
+},
+
+categoryList: {
+  paddingBottom: 5,
+  marginBottom: 10,
+  borderBottomWidth: 2,
+  height: '13%',
+},
+
 
   //MEALS AND DRINKS
   mealSelect: {
+    marginTop: 10,
     alignItems: 'center',
     borderWidth: 1,
     marginBottom: 10,
