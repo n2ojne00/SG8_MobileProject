@@ -4,13 +4,26 @@ import styles from "../styles/style";
 import { useTheme } from '../contexts/ThemeContext';
 import CountryFlag from 'react-native-country-flag';
 
+// Updated image paths for categories
+import chickenImg from '../images/logos/logoChicken.png';
+import beefImg from '../images/logos/logoBeef.png';
+import porkImg from '../images/logos/logoPork.png';
+import fishImg from '../images/logos/logoFish.png';
+import veganImg from '../images/logos/logoVegan.png';
+import pastaImg from '../images/logos/logoPasta.png';
+import dessertImg from '../images/logos/logoDess.png';
+import starterImg from '../images/logos/logoStarter.png';
+import sheepImg from '../images/logos/logoSheep.png';
+import MisceImg from '../images/logos/logoMisc.png';
+
+
 const MealDetailScreen = ({ route }) => {
   const { idMeal } = route.params;
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const { isDarkMode } = useTheme();
 
-  // Mapping area names to country codes
+  // Function to map area names to country codes
   const getCountryCodeFromArea = (area) => {
     const areaCountryCodeMap = {
       American: 'US',
@@ -41,7 +54,6 @@ const MealDetailScreen = ({ route }) => {
       Turkish: 'TR',
       Ukrainian: 'UA',
       Vietnamese: 'VN',
-      // Add more mappings as necessary...
     };
     return areaCountryCodeMap[area] || null;
   };
@@ -62,6 +74,30 @@ const MealDetailScreen = ({ route }) => {
   useEffect(() => {
     fetchMealDetail();
   }, [idMeal]);
+
+  // Map category to image
+  const getCategoryImage = (category) => {
+    const categoryImages = {
+      Chicken: chickenImg,
+      Beef: beefImg,
+      Pork: porkImg,
+      Seafood: fishImg, 
+      Vegan: veganImg,
+      Vegetarian: veganImg,
+      Pasta: pastaImg,
+      Dessert: dessertImg,
+      Starter: starterImg,
+      Side: starterImg,
+      Appetizer: starterImg,
+      Breakfast: starterImg,
+      Goat: sheepImg,
+      Lamb: sheepImg,
+      Miscellaneous : MisceImg,
+      
+    };
+    console.log('Category being processed:', category);
+    return categoryImages[category] || null; // Default to null if no image found
+  };
 
   // Extract ingredients and measures
   const getIngredients = () => {
@@ -84,7 +120,9 @@ const MealDetailScreen = ({ route }) => {
     return <Text style={styles.errorMessage}>Meal details not found.</Text>;
   }
 
-  const countryCode = getCountryCodeFromArea(meal.strArea);
+  const countryCode = getCountryCodeFromArea(meal.strArea); // Using the function here
+
+  const categoryImage = getCategoryImage(meal.strCategory);
 
   return (
     <ScrollView
@@ -101,16 +139,21 @@ const MealDetailScreen = ({ route }) => {
 
         <View style={[styles.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
           <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-            Category: {meal.strCategory}
-          </Text>
-          {countryCode ? (
-            <CountryFlag isoCode={countryCode} size={22} />
-          ) : (
-            <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-              {meal.strArea}
-            </Text>
+          Category: {categoryImage && (
+            <Image source={categoryImage} style={{ width: 35, height: 35,}} />
           )}
+
+          </Text>
+          <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+            Area: {countryCode && (
+          <View style={{ marginVertical: 10 }}>
+            <CountryFlag isoCode={countryCode} size={35} />
+          </View>
+        )}
+        </Text>         
         </View>
+
+       
 
         <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
           Ingredients:

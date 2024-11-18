@@ -139,10 +139,10 @@ export default StyleSheet.create({
   },
 
   foodDetCatTitle: {
-    borderBottomWidth: 2,
-    borderColor: '#ffc6ac',
-    padding: 10,
-    fontSize: 16,
+    height: 50,
+    width: '25%',
+    alignContent: 'center',
+    fontSize: 14,
     fontWeight: 'bold',
     marginVertical: 8,
   },

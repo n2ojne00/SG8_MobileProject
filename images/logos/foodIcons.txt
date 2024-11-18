@@ -8,3 +8,5 @@ Vegan: https://www.flaticon.com/free-icon/vegan_5129836
 Pasta: https://www.flaticon.com/free-icon/pasta_1349897?related_id=1349845&origin=search
 Dessert: https://www.flaticon.com/free-icon/dessert_1205153
 Starter: https://www.flaticon.com/free-icon/canape_706871
+Lamb/Goat: https://www.flaticon.com/free-icon/sheep_3319395
+Miscellaneous: https://www.flaticon.com/free-icon/food-bowl_14436779
