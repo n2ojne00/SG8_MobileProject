@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 5,
     flex: 1,
   },
 
@@ -26,69 +26,69 @@ export default StyleSheet.create({
     marginRight: 10,
   },
 
-  
-// CATEGORY
-categoryButton: {
-  backgroundColor: '#386641', 
-  marginHorizontal: 5,
-  borderRadius: 15,
-  elevation: 10,
-  borderWidth: 1,
-  width: 140,
-  overflow: 'hidden',
-},
 
-categoryContainer: {
-  width: '100%',
-  height: 130,
-  alignItems: 'center',
-  justifyContent: 'center',
-  position: 'relative',
-},
+  // CATEGORY
+  categoryButton: {
+    backgroundColor: '#386641',
+    marginHorizontal: 5,
+    borderRadius: 15,
+    elevation: 10,
+    borderWidth: 1,
+    width: 140,
+    overflow: 'hidden',
+  },
 
-categoryImage: {
-  width: '100%',
-  height: '100%',
-  position: 'absolute',
-  resizeMode: 'cover',
-},
-overlay: {
-  backgroundColor: '#386641a5',
-  width: '99%',
-  borderRadius: 5,
-},
+  categoryContainer: {
+    width: '100%',
+    height: 130,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
 
-categoryText: {
-  fontSize: 20,
-  color: 'white',
-  fontWeight: 'bold',
-  textAlign: 'center',
-  zIndex: 1, 
-  padding: 7,
-  borderRadius: 5,
-},
+  categoryImage: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    resizeMode: 'cover',
+  },
+  overlay: {
+    backgroundColor: '#386641a5',
+    width: '99%',
+    borderRadius: 5,
+  },
 
-// SELECTED CATEGORY
-selectedCategory: {
-  borderColor: '#f67b43', // Add border to indicate selection
-  borderWidth: 3,
-},
+  categoryText: {
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    zIndex: 1,
+    padding: 7,
+    borderRadius: 5,
+  },
 
-selectedCategoryText: {
-  color: '#FFC6AC', // Color when selected
-},
+  // SELECTED CATEGORY
+  selectedCategory: {
+    borderColor: '#f67b43', // Add border to indicate selection
+    borderWidth: 3,
+  },
 
-// FLATLIST
-foodList: {
-  height: '60%',
-},
+  selectedCategoryText: {
+    color: '#FFC6AC', // Color when selected
+  },
 
-categoryList: {
-  paddingBottom: 10,
-  marginBottom: 10,
-  borderBottomWidth: 2,
-  height: '14%',
-},
+  // FLATLIST
+  foodList: {
+    height: '60%',
+  },
+
+  categoryList: {
+    paddingBottom: 10,
+    marginBottom: 10,
+    borderBottomWidth: 2,
+    height: '14%',
+  },
 
   //MEALS AND DRINKS
   mealSelect: {
@@ -113,36 +113,67 @@ categoryList: {
   },
 
   //MEAL RECIPE SCREEN (DetailScreen)
+  
+  //innerContainerMealDS: {},
 
   scrollContentMealDS: {
-    padding: 25,
+    padding: 10,
   },
 
   imageMealDS: {
-    width: '100%',
-    height: 200,
-    marginBottom: 10,
+    height: 250,
+    elevation: 2,
   },
   titleMealDS: {
+    borderBottomWidth: 2,
+    borderColor: '#6A994E',
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 8,
+    paddingVertical: 10,
+
   },
-  sectionTitleMealDS: {
-    fontSize: 18,
+
+  foodDetCat: {
+    marginHorizontal: 15,
+  },
+
+  foodDetCatTitle: {
+    borderBottomWidth: 2,
+    borderColor: '#ffc6ac',
+    padding: 10,
+    fontSize: 16,
     fontWeight: 'bold',
     marginVertical: 8,
   },
+
+
+  sectionTitleMealDS: {
+    borderBottomWidth: 2,
+    borderColor: '#6A994E',
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingVertical: 10,
+   margin: 15,
+  },
+
   ingredientMealDS: {
+    textAlign: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#ffc6ac',
+    backgroundColor: '#ffc6ac20',
     fontSize: 16,
-    lineHeight: 24,
-    marginLeft: 8,
+    lineHeight: 26,
+    paddingVertical: 5,
+    marginHorizontal: 20,
+
   },
   instructionsMealDS: {
     fontSize: 16,
-    lineHeight: 24,
-    marginTop: 8,
+    lineHeight: 30,
+    marginHorizontal: 15,
+    paddingVertical: 5,
+    
   },
 
   //DRINK RECIPE SCREEN (DetailScreen)
@@ -171,19 +202,19 @@ categoryList: {
     fontSize: 16,
     marginTop: 10,
   },
-  
 
 
-  
 
-//OLD STYLES.. WORKING ON IT
+
+
+  //OLD STYLES.. WORKING ON IT
 
   buttonContainer: {
     marginTop: 20,
     alignItems: 'center',
   },
 
- 
+
 
   containerDrinkScr: {
     padding: 20,

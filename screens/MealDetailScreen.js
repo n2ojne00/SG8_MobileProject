@@ -1,15 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import styles from "../styles/style";
 import { View, Text, Image, ScrollView, ActivityIndicator } from 'react-native';
-import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
+import styles from "../styles/style";
+import { useTheme } from '../contexts/ThemeContext';
+import CountryFlag from 'react-native-country-flag';
 
 const MealDetailScreen = ({ route }) => {
   const { idMeal } = route.params;
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { isDarkMode } = useTheme(); // Access isDarkMode from the theme context
+  const { isDarkMode } = useTheme();
 
-  // Fetch meal details by idMeal
+  // Mapping area names to country codes
+  const getCountryCodeFromArea = (area) => {
+    const areaCountryCodeMap = {
+      American: 'US',
+      British: 'GB',
+      Canadian: 'CA',
+      Chinese: 'CN',
+      Croatian: 'HR',
+      Dutch: 'NL',
+      Egyptian: 'EG',
+      Filipino: 'PH',
+      French: 'FR',
+      Greek: 'GR',
+      Indian: 'IN',
+      Irish: 'IE',
+      Italian: 'IT',
+      Jamaican: 'JM',
+      Japanese: 'JP',
+      Kenyan: 'KE',
+      Malaysian: 'MY',
+      Mexican: 'MX',
+      Moroccan: 'MA',
+      Polish: 'PL',
+      Portuguese: 'PT',
+      Russian: 'RU',
+      Spanish: 'ES',
+      Thai: 'TH',
+      Tunisian: 'TN',
+      Turkish: 'TR',
+      Ukrainian: 'UA',
+      Vietnamese: 'VN',
+      // Add more mappings as necessary...
+    };
+    return areaCountryCodeMap[area] || null;
+  };
+
+  // Fetch meal details
   const fetchMealDetail = async () => {
     try {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`);
@@ -29,7 +66,7 @@ const MealDetailScreen = ({ route }) => {
   // Extract ingredients and measures
   const getIngredients = () => {
     const ingredients = [];
-    for (let i = 1; i <= 20; i++) { // The API provides up to 20 ingredients
+    for (let i = 1; i <= 20; i++) {
       const ingredient = meal[`strIngredient${i}`];
       const measure = meal[`strMeasure${i}`];
       if (ingredient) {
@@ -47,25 +84,49 @@ const MealDetailScreen = ({ route }) => {
     return <Text style={styles.errorMessage}>Meal details not found.</Text>;
   }
 
-  // Update styles based on dark mode
+  const countryCode = getCountryCodeFromArea(meal.strArea);
+
   return (
     <ScrollView
-      style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]} // Set background color
+      style={{ backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }}
       contentContainerStyle={styles.scrollContentMealDS}
+      showsVerticalScrollIndicator={false}
     >
       <View style={styles.innerContainerMealDS}>
         <Image source={{ uri: meal.strMealThumb }} style={styles.imageMealDS} />
-        <Text style={[styles.titleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{meal.strMeal}</Text>
-        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Category: {meal.strCategory}</Text>
-        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Area: {meal.strArea}</Text>
-        
-        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Ingredients:</Text>
+
+        <Text style={[styles.titleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+          {meal.strMeal}
+        </Text>
+
+        <View style={[styles.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
+          <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+            Category: {meal.strCategory}
+          </Text>
+          {countryCode ? (
+            <CountryFlag isoCode={countryCode} size={22} />
+          ) : (
+            <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              {meal.strArea}
+            </Text>
+          )}
+        </View>
+
+        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+          Ingredients:
+        </Text>
         {getIngredients().map((ingredient, index) => (
-          <Text key={index} style={[styles.ingredientMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{ingredient}</Text>
+          <Text key={index} style={[styles.ingredientMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+            {ingredient}
+          </Text>
         ))}
 
-        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Instructions:</Text>
-        <Text style={[styles.instructionsMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{meal.strInstructions}</Text>
+        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+          Instructions:
+        </Text>
+        <Text style={[styles.instructionsMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+          {meal.strInstructions}
+        </Text>
       </View>
     </ScrollView>
   );
