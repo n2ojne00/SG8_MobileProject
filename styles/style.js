@@ -52,6 +52,11 @@ categoryImage: {
   position: 'absolute',
   resizeMode: 'cover',
 },
+overlay: {
+  backgroundColor: '#386641a5',
+  width: '99%',
+  borderRadius: 5,
+},
 
 categoryText: {
   fontSize: 20,
@@ -59,55 +64,52 @@ categoryText: {
   fontWeight: 'bold',
   textAlign: 'center',
   zIndex: 1, 
-  backgroundColor: '#386641a5', 
-  padding: 5,
+  padding: 7,
   borderRadius: 5,
 },
 
 // SELECTED CATEGORY
 selectedCategory: {
-  borderColor: 'orange', // Add border to indicate selection
-  borderWidth: 2,
+  borderColor: '#f67b43', // Add border to indicate selection
+  borderWidth: 3,
 },
 
 selectedCategoryText: {
-  color: 'orange', // Color when selected
+  color: '#FFC6AC', // Color when selected
 },
 
 // FLATLIST
 foodList: {
-  paddingTop: 10,
-  borderWidth: 2,
   height: '60%',
 },
 
 categoryList: {
-  paddingBottom: 5,
+  paddingBottom: 10,
   marginBottom: 10,
   borderBottomWidth: 2,
-  height: '13%',
+  height: '14%',
 },
-
 
   //MEALS AND DRINKS
   mealSelect: {
-    marginTop: 10,
     alignItems: 'center',
-    borderWidth: 1,
-    marginBottom: 10,
-    backgroundColor: '#386641'
+    marginBottom: 20,
   },
   mealImage: {
-    width: '90%',
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 10,
+    width: '99%',
+    height: 170,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   mealTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    backgroundColor: 'white',
     padding: 10,
+    color: 'white',
+    backgroundColor: '#386641', //386641a5
+    width: '99%',
+    borderBottomRightRadius: 15,
+    borderBottomLeftRadius: 15,
   },
 
   //MEAL RECIPE SCREEN (DetailScreen)

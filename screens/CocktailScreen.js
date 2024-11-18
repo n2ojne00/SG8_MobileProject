@@ -156,7 +156,7 @@ const CocktailScreen = () => {
                 <Text
                   style={[
                     styles.mealTitle,
-                    { color: isDarkMode ? '#ffffff' : '#000000' },
+                    { color: isDarkMode ? '#000000' : '#ffffff' },
                   ]}
                 >
                   {item.strDrink}

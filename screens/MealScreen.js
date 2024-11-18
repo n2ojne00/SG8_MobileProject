@@ -15,7 +15,7 @@ import dessertImage from '../images/categories/dessert.jpg'
 import startersImage from '../images/categories/snacks.jpg'
 
 
-const categories = ["Select Category", "Chicken", "Beef", "Pork", "Fish", "Vegan", "Pasta", "Dessert", "Starters"];
+const categories = ["Chicken", "Beef", "Pork", "Fish", "Vegan", "Pasta", "Dessert", "Starters"];
 
 const MealScreen = ({ route, navigation }) => {
   const [search, setSearch] = useState('');
@@ -85,11 +85,16 @@ const MealScreen = ({ route, navigation }) => {
 
   return (
 
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
+    <View style={[styles.container,
+    { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
       <View style={styles.searchRow}>
         <FontAwesome name="search" size={20} color="#6A994E" style={styles.icon} />
         <TextInput
-          style={[styles.textInput, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
+          style={[styles.textInput,
+          {
+            backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5',
+            color: isDarkMode ? '#ffffff' : '#000000'
+          }]}
           placeholder="Search for a meal..."
           placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
           value={search}
@@ -146,6 +151,7 @@ const MealScreen = ({ route, navigation }) => {
       <FlatList
         style={styles.foodList}
         data={meals}
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.idMeal}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -157,7 +163,7 @@ const MealScreen = ({ route, navigation }) => {
               <Text
                 style={[
                   styles.mealTitle,
-                  { color: isDarkMode ? '#ffffff' : '#000000' },
+                  { color: isDarkMode ? '#000000' : '#ffffff' },
                 ]}
               >
                 {item.strMeal}
