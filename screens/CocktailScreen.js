@@ -81,8 +81,8 @@ const CocktailScreen = () => {
   }, [search]);
 
   // Navigate to the cocktail detail screen
-  const goToDetail = (id) => {
-    navigation.navigate('CocktailDetail', { id });
+  const goToDetail = (idDrink) => {
+    navigation.navigate('CocktailDetail', { idDrink });
   };
 
   return (
