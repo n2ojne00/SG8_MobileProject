@@ -39,8 +39,20 @@ const SettingsIcon = ({ navigation }) => (
 );
 
 const CocktailStack = () => (
-  <Stack.Navigator screenOptions={({ navigation }) => ({
-      headerLeft: () => <SettingsIcon navigation={navigation} />
+  <Stack.Navigator
+    screenOptions={({ navigation }) => ({
+      headerLeft: () => (
+        navigation.canGoBack() ? (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="arrow-back-outline" size={24} color="black" style={{ marginLeft: 15 }} />
+          </TouchableOpacity>
+        ) : null
+      ),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+          <Ionicons name="settings-outline" size={24} color="black" style={{ marginRight: 15 }} />
+        </TouchableOpacity>
+      ),
     })}
   >
     <Stack.Screen 
@@ -57,8 +69,20 @@ const CocktailStack = () => (
 );
 
 const MealStack = () => (
-  <Stack.Navigator screenOptions={({ navigation }) => ({
-      headerLeft: () => <SettingsIcon navigation={navigation} />
+  <Stack.Navigator
+    screenOptions={({ navigation }) => ({
+      headerLeft: () => (
+        navigation.canGoBack() ? (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="arrow-back-outline" size={24} color="black" style={{ marginLeft: 15 }} />
+          </TouchableOpacity>
+        ) : null
+      ),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+          <Ionicons name="settings-outline" size={24} color="black" style={{ marginRight: 15 }} />
+        </TouchableOpacity>
+      ),
     })}
   >
     <Stack.Screen 
@@ -75,8 +99,20 @@ const MealStack = () => (
 );
 
 const ShoppingListStack = () => (
-  <Stack.Navigator screenOptions={({ navigation }) => ({
-      headerLeft: () => <SettingsIcon navigation={navigation} />
+  <Stack.Navigator
+    screenOptions={({ navigation }) => ({
+      headerLeft: () => (
+        navigation.canGoBack() ? (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="arrow-back-outline" size={24} color="black" style={{ marginLeft: 15 }} />
+          </TouchableOpacity>
+        ) : null
+      ),
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+          <Ionicons name="settings-outline" size={24} color="black" style={{ marginRight: 15 }} />
+        </TouchableOpacity>
+      ),
     })}
   >
     <Stack.Screen 
