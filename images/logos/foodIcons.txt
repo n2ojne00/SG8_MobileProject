@@ -10,3 +10,6 @@ Dessert: https://www.flaticon.com/free-icon/dessert_1205153
 Starter: https://www.flaticon.com/free-icon/canape_706871
 Lamb/Goat: https://www.flaticon.com/free-icon/sheep_3319395
 Miscellaneous: https://www.flaticon.com/free-icon/food-bowl_14436779
+
+Alcohol: https://www.flaticon.com/free-icon/alcohol_1775321
+Non-Alcohol: https://www.flaticon.com/free-icon/alcohol-free_5290825

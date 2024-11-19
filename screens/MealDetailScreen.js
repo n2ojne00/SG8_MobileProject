@@ -95,7 +95,7 @@ const MealDetailScreen = ({ route }) => {
       Miscellaneous : MisceImg,
       
     };
-    console.log('Category being processed:', category);
+    //console.log('Category being processed:', category);
     return categoryImages[category] || null; // Default to null if no image found
   };
 

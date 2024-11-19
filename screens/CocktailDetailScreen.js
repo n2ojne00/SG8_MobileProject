@@ -43,6 +43,20 @@ const CocktailDetailScreen = ({ route }) => {
     }
   }
 
+  const getAlcoholImage = (alcoholType) => {
+    // Normalize the string by removing spaces and converting to lowercase
+    const normalizedAlcoholType = alcoholType.toLowerCase().replace(/\s+/g, '_'); // Replace spaces with underscores
+
+    const alcoholImages = {
+      alcoholic: require('../images/logos/alcohol.png'), // Replace with the actual image path
+      non_alcoholic: require('../images/logos/zeroAlcohol.png') // Replace with the actual image path
+    };
+
+    return alcoholImages[normalizedAlcoholType] || null; // Default to null if no image found
+  };
+
+
+
   // Order Button Handler
   const handleOrder = () => {
     Alert.alert("Order Confirmed", `You've ordered a ${cocktail.strDrink}!`);
@@ -61,6 +75,28 @@ const CocktailDetailScreen = ({ route }) => {
         <Text style={[styles.titleDS,
         { color: isDarkMode ? '#ffffff' : '#000000' }]}
         >{cocktail.strDrink}</Text>
+
+        <View style={[styles.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
+
+          {/* Alcoholic / Non-Alcoholic Image and Text */}
+          <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+            {cocktail.strAlcoholic && (
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                <Image
+                  source={getAlcoholImage(cocktail.strAlcoholic)}
+                  style={{ width: 35, height: 35, marginRight: 10 }}
+                />
+
+                <Text style={{ marginLeft: 5, fontWeight: 'bold', fontSize: 18, }}>
+                  {cocktail.strAlcoholic === 'Alcoholic' ? 'Alcoholic' : 'Non-Alcoholic'}
+                </Text>
+              </View>
+            )}
+          </Text>
+        </View>
+
+
 
         <Text style={[styles.sectionTitleDS,
         { color: isDarkMode ? '#ffffff' : '#000000' }]}

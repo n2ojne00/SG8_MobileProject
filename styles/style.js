@@ -169,12 +169,15 @@ export default StyleSheet.create({
 
   foodDetCatTitle: {
     height: 50,
-    width: '25%',
+    flex: 1, // Allow this text container to take remaining space
     alignContent: 'center',
     fontSize: 14,
     fontWeight: 'bold',
     marginVertical: 8,
+    flexDirection: 'row',
+    alignItems: 'center', // Align content vertically
   },
+  
 
   
   //DRINK RECIPE SCREEN (DetailScreen)
