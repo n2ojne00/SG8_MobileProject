@@ -5,14 +5,14 @@ import styles from "../styles/style";
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 
 const CocktailDetailScreen = ({ route }) => {
-  const { id } = route.params;
+  const { idDrink } = route.params;
   const [cocktail, setCocktail] = useState(null);
   const { isDarkMode } = useTheme(); // Access isDarkMode from the theme context
 
   useEffect(() => {
     const fetchCocktailDetails = async () => {
       try {
-        const response = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const response = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`);
         setCocktail(response.data.drinks[0]);
       } catch (error) {
         console.error("Error fetching cocktail details:", error);
@@ -20,7 +20,7 @@ const CocktailDetailScreen = ({ route }) => {
     };
 
     fetchCocktailDetails();
-  }, [id]);
+  }, [idDrink]);
 
   
   if (!cocktail) return <Text style={[styles.loading, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Loading...</Text>;
