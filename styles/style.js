@@ -112,19 +112,19 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 15,
   },
 
-  //MEAL RECIPE SCREEN (DetailScreen)
+  //RECIPE SCREENS (DetailScreen)
   
   //innerContainerMealDS: {},
 
   scrollContentMealDS: {
     padding: 10,
   },
-
-  imageMealDS: {
+  imageDS: {
     height: 250,
     elevation: 2,
+    borderRadius: 10,
   },
-  titleMealDS: {
+  titleDS: {
     borderBottomWidth: 2,
     borderColor: '#6A994E',
     fontSize: 24,
@@ -134,6 +134,35 @@ export default StyleSheet.create({
 
   },
 
+  sectionTitleDS: {
+    borderBottomWidth: 2,
+    borderColor: '#6A994E',
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingVertical: 10,
+   margin: 15,
+  },
+
+  ingredientDS: {
+    textAlign: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#ffc6ac',
+    backgroundColor: '#ffc6ac20',
+    fontSize: 16,
+    lineHeight: 26,
+    paddingVertical: 5,
+    marginHorizontal: 20,
+
+  },
+  instructionsDS: {
+    fontSize: 16,
+    lineHeight: 30,
+    marginHorizontal: 15,
+    paddingVertical: 5,
+    
+  },
+
+  //MEAL CATEGORY INFO
   foodDetCat: {
     marginHorizontal: 15,
   },
@@ -147,35 +176,7 @@ export default StyleSheet.create({
     marginVertical: 8,
   },
 
-
-  sectionTitleMealDS: {
-    borderBottomWidth: 2,
-    borderColor: '#6A994E',
-    fontSize: 18,
-    fontWeight: 'bold',
-    paddingVertical: 10,
-   margin: 15,
-  },
-
-  ingredientMealDS: {
-    textAlign: 'center',
-    borderBottomWidth: 1,
-    borderColor: '#ffc6ac',
-    backgroundColor: '#ffc6ac20',
-    fontSize: 16,
-    lineHeight: 26,
-    paddingVertical: 5,
-    marginHorizontal: 20,
-
-  },
-  instructionsMealDS: {
-    fontSize: 16,
-    lineHeight: 30,
-    marginHorizontal: 15,
-    paddingVertical: 5,
-    
-  },
-
+  
   //DRINK RECIPE SCREEN (DetailScreen)
   titleDrinkDS: {
     fontSize: 24,

@@ -131,9 +131,9 @@ const MealDetailScreen = ({ route }) => {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.innerContainerMealDS}>
-        <Image source={{ uri: meal.strMealThumb }} style={styles.imageMealDS} />
+        <Image source={{ uri: meal.strMealThumb }} style={styles.imageDS} />
 
-        <Text style={[styles.titleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+        <Text style={[styles.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
           {meal.strMeal}
         </Text>
 
@@ -155,19 +155,19 @@ const MealDetailScreen = ({ route }) => {
 
        
 
-        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+        <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
           Ingredients:
         </Text>
         {getIngredients().map((ingredient, index) => (
-          <Text key={index} style={[styles.ingredientMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+          <Text key={index} style={[styles.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
             {ingredient}
           </Text>
         ))}
 
-        <Text style={[styles.sectionTitleMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+        <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
           Instructions:
         </Text>
-        <Text style={[styles.instructionsMealDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+        <Text style={[styles.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
           {meal.strInstructions}
         </Text>
       </View>

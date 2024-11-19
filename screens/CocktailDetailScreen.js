@@ -3,6 +3,7 @@ import { View, Text, Image, FlatList, Button, Alert } from 'react-native';
 import axios from 'axios';
 import styles from "../styles/style";
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
+import { ScrollView } from 'react-native';
 
 const CocktailDetailScreen = ({ route }) => {
   const { idDrink } = route.params;
@@ -22,7 +23,7 @@ const CocktailDetailScreen = ({ route }) => {
     fetchCocktailDetails();
   }, [idDrink]);
 
-  
+
   if (!cocktail) return <Text style={[styles.loading, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Loading...</Text>;
 
   // Extract ingredients and convert measurements to cl if in oz
@@ -47,22 +48,40 @@ const CocktailDetailScreen = ({ route }) => {
     Alert.alert("Order Confirmed", `You've ordered a ${cocktail.strDrink}!`);
   };
 
+
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
-      <Text style={[styles.titleDrinkDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strDrink}</Text>
-      <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.imageDrinkDS} />
-      <Text style={[styles.drinkHLSection, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Ingredients:</Text>
-      <FlatList
-        data={ingredients}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <Text style={[styles.drinkIngredient, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{item}</Text>
-        )}
-      />
-      <Text style={[styles.drinkHLSection, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Instructions:</Text>
-      <Text style={[styles.drinkInstructions, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strInstructions}</Text>
-     
-    </View>
+    <ScrollView
+      style={{ backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }}
+      contentContainerStyle={styles.scrollContentMealDS}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
+
+        <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.imageDS} />
+        <Text style={[styles.titleDS,
+        { color: isDarkMode ? '#ffffff' : '#000000' }]}
+        >{cocktail.strDrink}</Text>
+
+        <Text style={[styles.sectionTitleDS,
+        { color: isDarkMode ? '#ffffff' : '#000000' }]}
+        >Ingredients:</Text>
+        <FlatList
+          data={ingredients}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <Text style={[styles.ingredientDS,
+            { color: isDarkMode ? '#ffffff' : '#000000' }]}
+            >{item}</Text>
+          )}
+        />
+        <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}
+        >Instructions:</Text>
+        <Text style={[styles.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}
+        >{cocktail.strInstructions}</Text>
+
+      </View>
+
+    </ScrollView>
   );
 };
 
