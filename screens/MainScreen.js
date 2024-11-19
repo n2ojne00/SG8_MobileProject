@@ -57,22 +57,20 @@ const MainScreen = ({ navigation }) => {
       <View style={styles.foodDrinkContainer}>
         {foodOfTheDay && (
           <View style={styles.foodContainer}>
-            <Text style={styles.foodTitle}>Food of the Day</Text>
-            <Image source={{ uri: foodOfTheDay.strMealThumb }} style={styles.foodImage} />
-            <Text style={styles.foodName}>{foodOfTheDay.strMeal}</Text>
             <TouchableOpacity onPress={() => navigation.navigate('MealDetailScreen', { idMeal: foodOfTheDay.idMeal })}>
-              <Text style={styles.detailsLink}>View Recipe</Text>
+              <Text style={styles.foodTitle}>Food of the Day</Text>
+              <Image source={{ uri: foodOfTheDay.strMealThumb }} style={styles.foodImage} />
+              <Text style={styles.foodName}>{foodOfTheDay.strMeal}</Text>
             </TouchableOpacity>
           </View>
         )}
 
         {drinkOfTheDay ? (
           <View style={styles.drinkContainer}>
-            <Text style={styles.drinkTitle}>Drink of the Day</Text>
-            <Image source={{ uri: drinkOfTheDay.strDrinkThumb }} style={styles.drinkImage} />
-            <Text style={styles.drinkName}>{drinkOfTheDay.strDrink}</Text>
             <TouchableOpacity onPress={() => navigation.navigate('CocktailDetail', { idDrink: drinkOfTheDay.idDrink })}>
-              <Text style={styles.detailsLink}>View Recipe</Text>
+              <Text style={styles.drinkTitle}>Drink of the Day</Text>
+              <Image source={{ uri: drinkOfTheDay.strDrinkThumb }} style={styles.drinkImage} />
+              <Text style={styles.drinkName}>{drinkOfTheDay.strDrink}</Text>
             </TouchableOpacity>
           </View>
         ) : (
