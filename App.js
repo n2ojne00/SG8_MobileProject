@@ -5,11 +5,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import ListDetailScreen from './screens/ListDetailScreen'; 
+import ListDetailScreen from './screens/ListDetailScreen';
+
 import { ThemeProvider } from './contexts/ThemeContext';
 import { RecipeProvider } from './contexts/RecipeContext';
 
+// Import Screens
 import LoginScreen from './screens/LoginScreen';
 import LocalLoginScreen from './screens/LocalLoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
