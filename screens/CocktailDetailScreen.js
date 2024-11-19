@@ -65,15 +65,16 @@ const CocktailDetailScreen = ({ route }) => {
         <Text style={[styles.sectionTitleDS,
         { color: isDarkMode ? '#ffffff' : '#000000' }]}
         >Ingredients:</Text>
-        <FlatList
-          data={ingredients}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <Text style={[styles.ingredientDS,
-            { color: isDarkMode ? '#ffffff' : '#000000' }]}
-            >{item}</Text>
-          )}
-        />
+        <View>
+          {ingredients.map((item, index) => (
+            <Text
+              key={index}
+              style={[styles.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}
+            >
+              {item}
+            </Text>
+          ))}
+        </View>
         <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}
         >Instructions:</Text>
         <Text style={[styles.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}
