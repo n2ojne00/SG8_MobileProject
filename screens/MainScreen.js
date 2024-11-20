@@ -1,7 +1,8 @@
 // screens/MainScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 import styles from '../styles/style';
+import Entypo from '@expo/vector-icons/Entypo';
 
 
 
@@ -63,92 +64,100 @@ const MainScreen = ({ navigation }) => {
   ];
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
+    <ImageBackground
+      source={require('../images/winter.jpg')}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.container}>
+        <ScrollView>
 
-        <Image source={require('../images/succlyLogo.png')} style={styles.logo} />
+          <Image source={require('../images/succlyLogo.png')} style={styles.logo} />
 
-        {/* Food and Drink of the Day Section */}
-        <View style={styles.foodDrinkContainer}>
-          {foodOfTheDay && (
-            <View style={styles.ofTheDayContainer}>
-              <Text style={styles.ofTheDayTitle}>Food of the Day</Text>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('MealDetailScreen', { idMeal: foodOfTheDay.idMeal })}
-                style={styles.otdNavigation}>
-                <Image source={{ uri: foodOfTheDay.strMealThumb }} style={styles.ofTheDayImage} />
-                <Text style={styles.otdRecipe}>{foodOfTheDay.strMeal}</Text>
-              </TouchableOpacity>
-            </View>
-          )}
+          {/* Food and Drink of the Day Section */}
+          <View style={styles.foodDrinkContainer}>
+            {foodOfTheDay && (
+              <View style={styles.ofTheDayContainer}>
+                <Entypo name="pin" size={24} color="#f96521" />
+                <Text style={styles.ofTheDayTitle}>Food of the Day</Text>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('MealDetailScreen', { idMeal: foodOfTheDay.idMeal })}
+                  style={styles.otdNavigation}>
+                  <Image source={{ uri: foodOfTheDay.strMealThumb }} style={styles.ofTheDayImage} />
+                  <Text style={styles.otdRecipe}>{foodOfTheDay.strMeal}</Text>
+                </TouchableOpacity>
+              </View>
+            )}
 
-          {drinkOfTheDay ? (
-            <View style={styles.ofTheDayContainer}>
-              <Text style={styles.ofTheDayTitle}>Drink of the Day</Text>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('CocktailDetail', { idDrink: drinkOfTheDay.idDrink })}
-                style={styles.otdNavigation}>
+            {drinkOfTheDay ? (
+              <View style={styles.ofTheDayContainer}>
+                <Entypo name="pin" size={24} color="#f96521"/>
+                <Text style={styles.ofTheDayTitle}>Drink of the Day</Text>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('CocktailDetail', { idDrink: drinkOfTheDay.idDrink })}
+                  style={styles.otdNavigation}>
 
-                <Image source={{ uri: drinkOfTheDay.strDrinkThumb }} style={styles.ofTheDayImage} />
-                <Text style={styles.otdRecipe}>{drinkOfTheDay.strDrink}</Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <Text>Loading Drink of the Day...</Text>
-          )}
-        </View>
+                  <Image source={{ uri: drinkOfTheDay.strDrinkThumb }} style={styles.ofTheDayImage} />
+                  <Text style={styles.otdRecipe}>{drinkOfTheDay.strDrink}</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <Text>Loading Drink of the Day...</Text>
+            )}
+          </View>
 
-        {/* RecipeBook Section */}
-        <Text style={styles.sectionTitle}>Recipes</Text>
-        <View style={styles.bookContainer}>
-          {/* Book Image Background */}
-          <View style={styles.bookBackgroundContainer}>
-            <Image
-              source={require('../images/logos/book.png')}
-              style={styles.bookImage}
-            />
+          {/* RecipeBook Section */}
+          <Text style={styles.sectionTitle}>Recipes</Text>
+          <View style={styles.bookContainer}>
+            {/* Book Image Background */}
+            <View style={styles.bookBackgroundContainer}>
+              <Image
+                source={require('../images/logos/book.png')}
+                style={styles.bookImage}
+              />
 
-            {/* Buttons Overlay */}
-            <View style={styles.buttonOverlay}>
-              <TouchableOpacity
-                style={styles.RecipeButton}
-                onPress={() => navigation.navigate('CreateRecipe')}
-              >
-                <Image
-                  source={require('../images/logos/createRecipe.png')}
-                  style={styles.recipeImage} />
-                <Text style={styles.recipeButtonText}>New recipe</Text>
-              </TouchableOpacity>
+              {/* Buttons Overlay */}
+              <View style={styles.buttonOverlay}>
+                <TouchableOpacity
+                  style={styles.RecipeButton}
+                  onPress={() => navigation.navigate('CreateRecipe')}
+                >
+                  <Image
+                    source={require('../images/logos/createRecipe.png')}
+                    style={styles.recipeImage} />
+                  <Text style={styles.recipeButtonText}>New recipe</Text>
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.RecipeButton}
-                onPress={() => navigation.navigate('RecipeList')}
-              >
-                <Image
-                  source={require('../images/logos/recipelist.png')}
-                  style={styles.recipeImage}
-                />
-                <Text style={styles.recipeButtonText}>Your recipes</Text>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.RecipeButton}
+                  onPress={() => navigation.navigate('RecipeList')}
+                >
+                  <Image
+                    source={require('../images/logos/recipelist.png')}
+                    style={styles.recipeImage}
+                  />
+                  <Text style={styles.recipeButtonText}>Your recipes</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
 
 
-        {/* Article Section */}
-        <Text style={styles.sectionTitle}>Food Articles</Text>
-        <ScrollView horizontal style={styles.articleCarousel}
-          showsHorizontalScrollIndicator={false}>
-          {exampleArticles.map((article, index) => (
-            <View key={index} style={styles.articleContainer}>
-              <Image source={{ uri: article.imageUrl }} style={styles.articleImage} />
-              <Text style={styles.articleTitle}>{article.title}</Text>
-              <Text style={styles.articleContent}>{article.content}</Text>
-            </View>
-          ))}
+          {/* Article Section */}
+          <Text style={styles.sectionTitle}>Food Articles</Text>
+          <ScrollView horizontal style={styles.articleCarousel}
+            showsHorizontalScrollIndicator={false}>
+            {exampleArticles.map((article, index) => (
+              <View key={index} style={styles.articleContainer}>
+                <Image source={{ uri: article.imageUrl }} style={styles.articleImage} />
+                <Text style={styles.articleTitle}>{article.title}</Text>
+                <Text style={styles.articleContent}>{article.content}</Text>
+              </View>
+            ))}
+          </ScrollView>
         </ScrollView>
-      </ScrollView>
-    </View>
+      </View>
+    </ImageBackground>
   );
 };
 

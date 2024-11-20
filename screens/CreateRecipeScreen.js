@@ -1,8 +1,10 @@
 // screens/CreateRecipeScreen.js
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, Image, ScrollView, ImageBackground } from 'react-native';
 import { useRecipes } from '../contexts/RecipeContext';
 import { useNavigation } from '@react-navigation/native';
+import styles from '../styles/style';
+
 
 const CreateRecipeScreen = () => {
     const { addRecipe } = useRecipes();
@@ -22,63 +24,64 @@ const CreateRecipeScreen = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                placeholder="Recipe Name"
-                value={name}
-                onChangeText={setName}
-            />
-            <TextInput
-                style={styles.ingredientsinput}
-                placeholder="Ingredients"
-                value={ingredients}
-                onChangeText={setIngredients}
-                multiline
-            />
-            <TextInput
-                style={styles.guideinput}
-                placeholder="Guide"
-                value={guide}
-                onChangeText={setGuide}
-                multiline
-            />
-            <Button title="Save Recipe" onPress={handleSaveRecipe} />
-        </View>
+        <ImageBackground
+            source={require('../images/winter.jpg')}
+            style={styles.background}
+            resizeMode="cover"
+        >
+            <View style={styles.container}>
+
+                <ScrollView showsVerticalScrollIndicator={false}>
+
+                    <View style={styles.recipeContent}>
+                        <View
+                            style={[styles.RecipeButton, { marginTop: 12 }]}
+                        >
+                            <Image
+                                source={require('../images/logos/createRecipe.png')}
+                                style={styles.recipeImage}
+                            />
+                        </View>
+                        <View style={styles.recipeName}>
+                            <TextInput
+                                style={styles.recipeInput}
+                                placeholder="Recipe Name"
+                                value={name}
+                                onChangeText={setName}
+                            />
+                        </View>
+                        <View style={styles.recipeTextAreas} >
+                            <Text style={styles.recipeTitle}>INGREDIENTS</Text>
+                            <TextInput
+                                style={styles.ingredientsinput}
+                                placeholder="Ingredients"
+                                value={ingredients}
+                                onChangeText={setIngredients}
+                                multiline
+                            />
+
+                            <Text style={styles.recipeTitle}>GUIDE</Text>
+                            <TextInput
+
+                                style={styles.guideinput}
+                                placeholder="Guide"
+                                value={guide}
+                                onChangeText={setGuide}
+                                multiline
+                            />
+
+                            <TouchableOpacity onPress={handleSaveRecipe} style={styles.saveRecipeBtn} >
+                                <Text style={{ fontWeight: 'bold' }}>SAVE</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                    </View>
+                </ScrollView>
+
+            </View>
+        </ImageBackground>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-        backgroundColor: '#fff',
-    },
-    input: {
-        height: 40,
-        borderColor: '#ccc',
-        borderWidth: 1,
-        marginBottom: 12,
-        paddingHorizontal: 8,
-    },
-    guideinput: {
-        height: 200,
-        borderColor: '#ccc',
-        borderWidth: 1,
-        marginBottom: 12,
-        paddingHorizontal: 8,
-        textAlignVertical: 'top',  
-        paddingTop: 8,
-    },
-    ingredientsinput: {
-        height: 100,
-        borderColor: '#ccc',
-        borderWidth: 1,
-        marginBottom: 12,
-        paddingHorizontal: 8,
-        textAlignVertical: 'top',  
-        paddingTop: 8,
-    },
-});
 
 export default CreateRecipeScreen;

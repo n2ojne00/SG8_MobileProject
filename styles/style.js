@@ -1,9 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  
+
   container: {
-    padding: 5,
+    paddingHorizontal: 5,
+    flex: 1,
+    backgroundColor: '#f2ffffae',
+  },
+  background: {
     flex: 1,
   },
 
@@ -14,6 +18,7 @@ export default StyleSheet.create({
     marginVertical: 10,
   },
 
+  //Food/Drink of the DAY
   foodDrinkContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -24,17 +29,17 @@ export default StyleSheet.create({
   ofTheDayContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '48%',
-    backgroundColor: '#ebf3ec3d',
-    paddingVertical: 12,
+    width: '49%',
+    backgroundColor: '#f3fff5',
+    paddingVertical: 10,
+    paddingHorizontal: 6,
     borderRadius: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
+    elevation: 4,
+
   },
   otdNavigation: {
-    backgroundColor: '#386641',
+    width: '100%',
+    backgroundColor: '#386641ec',
     paddingVertical: 15,
     paddingHorizontal: 7,
     borderRadius: 10,
@@ -57,20 +62,142 @@ export default StyleSheet.create({
     color: '#ffffff',
     borderTopWidth: 2,
     borderColor: '#f67b43',
-    backgroundColor: '#ffefe728',
     height: 55,
-    borderRadius: 2,
   },
   ofTheDayImage: {
-    width: 182,
+    width: '100%',
     height: 150,
     borderRadius: 10,
     marginBottom: 10,
     elevation: 3,
-    
+
   },
 
- //Article section
+  //RECIPE LIST AND CREATE RECIPE
+  bookContainer: {
+    alignItems: 'center',
+  },
+  bookBackgroundContainer: {
+    width: '100%',
+    height: 200,
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f3fff5ac',
+    borderTopEndRadius: 100,
+    borderTopStartRadius: 10,
+    borderBottomStartRadius: 100,
+    borderBottomEndRadius: 10,
+  },
+  bookImage: {
+    width: '100%',
+    height: '100%',
+    tintColor: '#122215',
+    position: 'absolute',
+    resizeMode: 'stretch',
+  },
+  buttonOverlay: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '100%',
+  },
+  RecipeButton: {
+    backgroundColor: '#6a994e8e',
+    padding: 15,
+    borderRadius: 60,
+    width: '32%',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  recipeButtonText: {
+    color: '#021e01',
+    marginTop: 5,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  recipeImage: {
+    height: 90,
+    width: 90,
+  },
+
+  //CREATE RECIPE
+  recipeContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
+  recipeTitle: {
+    justifyContent: 'center',
+    marginTop: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  recipeName: {
+    height: 55,
+    width: '80%',
+    borderWidth: 2,
+    borderColor: '#386641',
+    backgroundColor: '#fcf6eb',
+    borderRadius: 30,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  recipeTextAreas: {
+    width: '90%',
+    paddingVertical: 15,
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: '#386641',
+    alignItems: 'center',
+    backgroundColor: '#fcf6eb'
+  },
+
+  recipeInput: {
+    height: 50,
+    width: 250,
+    paddingHorizontal: 8,
+  },
+  ingredientsinput: {
+    width: '85%',
+    height: 150,
+    borderColor: '#386641',
+    borderWidth: 2,
+    marginBottom: 5,
+    paddingHorizontal: 10,
+    textAlignVertical: 'top',
+    paddingTop: 8,
+
+  },
+  guideinput: {
+    width: '85%',
+    height: 200,
+    borderColor: '#386641',
+    borderWidth: 2,
+    paddingHorizontal: 8,
+    textAlignVertical: 'top',
+    paddingTop: 8,
+    marginBottom: 15,
+
+  },
+  saveRecipeBtn :{
+    justifyContent: 'center',
+    marginTop: 20,
+    backgroundColor: '#dbfaEB',
+    width: 100,
+    height: 40,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#386641',
+    alignItems: 'center',
+  },
+
+
+  //YOUR RECIPES
+
+  //Article section
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -83,7 +210,7 @@ export default StyleSheet.create({
   },
   articleCarousel: {
     paddingVertical: 10,
-    backgroundColor: '#386641',
+    backgroundColor: '#386641a9',
     elevation: 2,
   },
   articleContainer: {
@@ -119,51 +246,6 @@ export default StyleSheet.create({
     fontSize: 16,
     color: '#24422a',
   },
-
-  //RECIPE LIST AND CREATE RECIPE
-  bookContainer: {
-    alignItems: 'center',
-  },
-  bookBackgroundContainer: {
-    width: '100%',
-    height: 200,
-    position: 'relative',
-    justifyContent: 'center', 
-    alignItems: 'center', 
-  },
-  bookImage: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    resizeMode: 'contain', 
-  },
-  buttonOverlay: {
-    flex: 1, 
-    flexDirection: 'row', 
-    justifyContent: 'space-evenly', 
-    alignItems: 'center', 
-    width: '100%', 
-  },
-  RecipeButton: {
-    backgroundColor: '#6a994e4e',
-    padding: 15,
-    borderRadius: 60,
-    width: '32%', 
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  recipeButtonText: {
-    color: '#021e01',
-    marginTop: 5,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  recipeImage: {
-    height: 90,
-    width: 90,
-  },
-  
-
 
   //SEARCH INPUT
   searchRow: {
@@ -246,7 +328,7 @@ export default StyleSheet.create({
     paddingBottom: 10,
     marginBottom: 10,
     borderBottomWidth: 2,
-    height: '14%',
+    height: '12%',
   },
 
   //MEALS AND DRINKS
@@ -272,8 +354,11 @@ export default StyleSheet.create({
   },
 
   //RECIPE SCREENS (DetailScreen)
-  
-  //innerContainerMealDS: {},
+
+  innerContainerMealDS: {
+    backgroundColor: '#f3fff5e9',
+    borderRadius: 10,
+  },
 
   scrollContentMealDS: {
     padding: 10,
@@ -292,22 +377,21 @@ export default StyleSheet.create({
     paddingVertical: 10,
 
   },
-
   sectionTitleDS: {
     borderBottomWidth: 2,
     borderColor: '#6A994E',
     fontSize: 18,
     fontWeight: 'bold',
     paddingVertical: 10,
-   margin: 15,
+    margin: 15,
   },
-
   ingredientDS: {
     textAlign: 'center',
     borderBottomWidth: 1,
     borderColor: '#ffc6ac',
-    backgroundColor: '#ffc6ac20',
+    backgroundColor: '#ffeee694',
     fontSize: 16,
+    fontWeight: 'bold',
     lineHeight: 26,
     paddingVertical: 5,
     marginHorizontal: 20,
@@ -318,7 +402,6 @@ export default StyleSheet.create({
     lineHeight: 30,
     marginHorizontal: 15,
     paddingVertical: 5,
-    
   },
 
   //MEAL CATEGORY INFO
@@ -333,9 +416,9 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 8,
     flexDirection: 'row',
-    alignItems: 'center', 
+    alignItems: 'center',
   },
-  
+
 
 
 

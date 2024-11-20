@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { TouchableOpacity } from 'react-native';
+import { ImageBackground, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -142,10 +142,11 @@ const TabNavigator = () => (
         } else if (route.name === 'ShoppingList') {
           iconName = 'cart-outline';
         }
-        return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+        return <MaterialCommunityIcons name={iconName} size={30} color={color} />;
       },
-      tabBarActiveTintColor: 'steelblue',
-      tabBarInactiveTintColor: 'gray',
+      tabBarActiveTintColor: '#f67b43',
+      tabBarActiveBackgroundColor: '#fbd3c038',
+      tabBarInactiveTintColor: '#386641',
     })}
   >
     <Tab.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
@@ -159,6 +160,7 @@ const App = () => {
   return (
     <RecipeProvider>
     <ThemeProvider>
+  
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />

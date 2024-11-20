@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, Image, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
 import styles from "../styles/style";
 import { useTheme } from '../contexts/ThemeContext';
 import CountryFlag from 'react-native-country-flag';
@@ -125,8 +125,13 @@ const MealDetailScreen = ({ route }) => {
   const categoryImage = getCategoryImage(meal.strCategory);
 
   return (
+    <ImageBackground
+    source={require('../images/winter.jpg')}
+    style={styles.background}
+    resizeMode="cover"
+  >
+    <View style={styles.container}>
     <ScrollView
-      style={{ backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }}
       contentContainerStyle={styles.scrollContentMealDS}
       showsVerticalScrollIndicator={false}
     >
@@ -172,6 +177,8 @@ const MealDetailScreen = ({ route }) => {
         </Text>
       </View>
     </ScrollView>
+    </View>
+    </ImageBackground>
   );
 };
 

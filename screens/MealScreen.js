@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import styles from "../styles/style";
 
@@ -84,9 +84,13 @@ const MealScreen = ({ route, navigation }) => {
   }, [search, selectedCategory]);
 
   return (
+    <ImageBackground
+    source={require('../images/winter.jpg')}
+    style={styles.background}
+    resizeMode="cover"
+  >
 
-    <View style={[styles.container,
-    { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
+    <View style={styles.container}>
       <View style={styles.searchRow}>
         <FontAwesome name="search" size={20} color="#6A994E" style={styles.icon} />
         <TextInput
@@ -178,6 +182,7 @@ const MealScreen = ({ route, navigation }) => {
 
 
     </View>
+    </ImageBackground>
   );
 };
 

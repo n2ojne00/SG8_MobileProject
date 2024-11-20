@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TextInput, FlatList, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/style';
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
@@ -86,7 +86,12 @@ const CocktailScreen = () => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
+    <ImageBackground
+    source={require('../images/winter.jpg')}
+    style={styles.background}
+    resizeMode="cover"
+  >
+    <View style={styles.container}>
 
       <View style={styles.searchRow}>
         <FontAwesome name="search" size={20} color="#6A994E" style={styles.icon} />
@@ -173,6 +178,7 @@ const CocktailScreen = () => {
       
 
     </View>
+    </ImageBackground>
   );
 };
 

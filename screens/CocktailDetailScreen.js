@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, FlatList, Button, Alert } from 'react-native';
+import { View, Text, Image, Alert, ImageBackground } from 'react-native';
 import axios from 'axios';
 import styles from "../styles/style";
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
@@ -62,12 +62,17 @@ const CocktailDetailScreen = ({ route }) => {
 
 
   return (
+    <ImageBackground
+    source={require('../images/winter.jpg')}
+    style={styles.background}
+    resizeMode="cover"
+  >
+    <View style={styles.container}>
     <ScrollView
-      style={{ backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }}
       contentContainerStyle={styles.scrollContentMealDS}
       showsVerticalScrollIndicator={false}
     >
-      <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
+      <View style={styles.innerContainerMealDS}>
 
         <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.imageDS} />
         <Text style={[styles.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}
@@ -118,6 +123,8 @@ const CocktailDetailScreen = ({ route }) => {
       </View>
 
     </ScrollView>
+    </View>
+    </ImageBackground>
   );
 };
 
