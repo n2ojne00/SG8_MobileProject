@@ -9,15 +9,17 @@ export default StyleSheet.create({
 
   //MAIN SCREEN
   logo: {
-    width: 250,
+    width: '100%',
     height: 250,
+    marginVertical: 10,
   },
+
   foodDrinkContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     paddingVertical: 5,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   ofTheDayContainer: {
     alignItems: 'center',
@@ -33,10 +35,10 @@ export default StyleSheet.create({
   },
   otdNavigation: {
     backgroundColor: '#386641',
-    paddingVertical: 12,
-    paddingHorizontal: 8,
+    paddingVertical: 15,
+    paddingHorizontal: 7,
     borderRadius: 10,
-    height: 225,
+    height: 240,
   },
   ofTheDayTitle: {
     fontSize: 20,
@@ -49,17 +51,25 @@ export default StyleSheet.create({
     borderColor: '#f67b43'
   },
   otdRecipe: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    padding: 5,
+    color: '#ffffff',
+    borderTopWidth: 2,
+    borderColor: '#f67b43',
+    backgroundColor: '#ffefe728',
+    height: 55,
+    borderRadius: 2,
   },
   ofTheDayImage: {
     width: 182,
-    height: 160,
-    borderRadius: 12,
-    marginBottom: 5,
+    height: 150,
+    borderRadius: 10,
+    marginBottom: 10,
     elevation: 3,
+    
   },
+
  //Article section
   sectionTitle: {
     fontSize: 20,
@@ -72,13 +82,14 @@ export default StyleSheet.create({
     borderColor: '#f67b43'
   },
   articleCarousel: {
-    marginBottom: 20,
-    borderWidth: 1,
+    paddingVertical: 10,
+    backgroundColor: '#386641',
+    elevation: 2,
   },
   articleContainer: {
     width: 200,
     marginRight: 15,
-    backgroundColor: '#fff',
+    backgroundColor: '#f3fff5',
     padding: 10,
     borderRadius: 8,
     shadowColor: '#000',
@@ -89,19 +100,24 @@ export default StyleSheet.create({
   },
   articleImage: {
     width: '100%',
-    height: 100,
+    height: 120,
     borderRadius: 8,
     marginBottom: 10,
+    elevation: 3,
   },
   articleTitle: {
-    fontSize: 16,
+    paddingVertical: 3,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: '#333',
+    color: '#122115',
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
+    borderColor: '#f67b43'
   },
   articleContent: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 16,
+    color: '#24422a',
   },
 
   //RECIPE LIST AND CREATE RECIPE
