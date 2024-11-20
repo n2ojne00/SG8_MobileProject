@@ -120,7 +120,7 @@ const MealDetailScreen = ({ route }) => {
     return <Text style={styles.errorMessage}>Meal details not found.</Text>;
   }
 
-  const countryCode = getCountryCodeFromArea(meal.strArea); // Using the function here
+  const countryCode = getCountryCodeFromArea(meal.strArea);
 
   const categoryImage = getCategoryImage(meal.strCategory);
 

@@ -48,14 +48,12 @@ const CocktailDetailScreen = ({ route }) => {
     const normalizedAlcoholType = alcoholType.toLowerCase().replace(/\s+/g, '_'); // Replace spaces with underscores
 
     const alcoholImages = {
-      alcoholic: require('../images/logos/alcohol.png'), // Replace with the actual image path
-      non_alcoholic: require('../images/logos/zeroAlcohol.png') // Replace with the actual image path
+      alcoholic: require('../images/logos/alcohol.png'),
+      non_alcoholic: require('../images/logos/zeroAlcohol.png')
     };
 
-    return alcoholImages[normalizedAlcoholType] || null; // Default to null if no image found
+    return alcoholImages[normalizedAlcoholType] || null;
   };
-
-
 
   // Order Button Handler
   const handleOrder = () => {
@@ -72,8 +70,7 @@ const CocktailDetailScreen = ({ route }) => {
       <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#ffffff' }]}>
 
         <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.imageDS} />
-        <Text style={[styles.titleDS,
-        { color: isDarkMode ? '#ffffff' : '#000000' }]}
+        <Text style={[styles.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}
         >{cocktail.strDrink}</Text>
 
         <View style={[styles.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
@@ -111,8 +108,10 @@ const CocktailDetailScreen = ({ route }) => {
             </Text>
           ))}
         </View>
+
         <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}
         >Instructions:</Text>
+
         <Text style={[styles.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}
         >{cocktail.strInstructions}</Text>
 

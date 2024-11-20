@@ -1,10 +1,153 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  
   container: {
     padding: 5,
     flex: 1,
   },
+
+  //MAIN SCREEN
+  logo: {
+    width: 250,
+    height: 250,
+  },
+  foodDrinkContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingVertical: 5,
+    marginBottom: 20,
+  },
+  ofTheDayContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '48%',
+    backgroundColor: '#ebf3ec3d',
+    paddingVertical: 12,
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+  },
+  otdNavigation: {
+    backgroundColor: '#386641',
+    paddingVertical: 12,
+    paddingHorizontal: 8,
+    borderRadius: 10,
+    height: 225,
+  },
+  ofTheDayTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#386641',
+    padding: 5,
+    width: '100%',
+    borderBottomWidth: 2,
+    borderColor: '#f67b43'
+  },
+  otdRecipe: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+  ofTheDayImage: {
+    width: 182,
+    height: 160,
+    borderRadius: 12,
+    marginBottom: 5,
+    elevation: 3,
+  },
+ //Article section
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#386641',
+    padding: 5,
+    width: '100%',
+    borderBottomWidth: 2,
+    borderColor: '#f67b43'
+  },
+  articleCarousel: {
+    marginBottom: 20,
+    borderWidth: 1,
+  },
+  articleContainer: {
+    width: 200,
+    marginRight: 15,
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  articleImage: {
+    width: '100%',
+    height: 100,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  articleTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#333',
+  },
+  articleContent: {
+    fontSize: 14,
+    color: '#666',
+  },
+
+  //RECIPE LIST AND CREATE RECIPE
+  bookContainer: {
+    alignItems: 'center',
+  },
+  bookBackgroundContainer: {
+    width: '100%',
+    height: 200,
+    position: 'relative',
+    justifyContent: 'center', 
+    alignItems: 'center', 
+  },
+  bookImage: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    resizeMode: 'contain', 
+  },
+  buttonOverlay: {
+    flex: 1, 
+    flexDirection: 'row', 
+    justifyContent: 'space-evenly', 
+    alignItems: 'center', 
+    width: '100%', 
+  },
+  RecipeButton: {
+    backgroundColor: '#6a994e4e',
+    padding: 15,
+    borderRadius: 60,
+    width: '32%', 
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  recipeButtonText: {
+    color: '#021e01',
+    marginTop: 5,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  recipeImage: {
+    height: 90,
+    width: 90,
+  },
+  
+
 
   //SEARCH INPUT
   searchRow: {
@@ -169,45 +312,14 @@ export default StyleSheet.create({
 
   foodDetCatTitle: {
     height: 50,
-    flex: 1, // Allow this text container to take remaining space
     alignContent: 'center',
     fontSize: 14,
     fontWeight: 'bold',
     marginVertical: 8,
     flexDirection: 'row',
-    alignItems: 'center', // Align content vertically
+    alignItems: 'center', 
   },
   
-
-  
-  //DRINK RECIPE SCREEN (DetailScreen)
-  titleDrinkDS: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-
-  },
-  imageDrinkDS: {
-    width: '100%',
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 20,
-  },
-  drinkHLSection: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 10,
-  },
-  drinkIngredient: {
-    fontSize: 16,
-    paddingLeft: 10,
-  },
-  drinkInstructions: {
-    fontSize: 16,
-    marginTop: 10,
-  },
-
-
 
 
 
