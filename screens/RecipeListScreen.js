@@ -16,7 +16,7 @@ const RecipeListScreen = () => {
             onPress={() => navigation.navigate('RecipeDetail', { recipe: item })}
         >
             <Text style={styles.recipeListName}>{item.name}</Text>
-            {/* Display the date */}
+
             <Text style={styles.recipeDate}>{item.date}</Text>
         </TouchableOpacity>
     );

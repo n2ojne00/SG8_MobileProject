@@ -16,6 +16,7 @@ const RecipeDetailScreen = ({ route }) => {
                     showsVerticalScrollIndicator={false}
                     style={styles.scrollContentRecipeDS}>
                     <Text style={styles.titleDS}>{recipe.name}</Text>
+                    <Text style={styles.dateRecipeDS}>{recipe.date}</Text>
                     <Text style={styles.sectionTitleDS}>Ingredients</Text>
                     <Text style={styles.instructionsDS}>{recipe.ingredients}</Text>
                     <Text style={styles.sectionTitleDS}>Guide</Text>

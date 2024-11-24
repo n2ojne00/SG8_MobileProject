@@ -10,13 +10,47 @@ export default StyleSheet.create({
   background: {
     flex: 1,
   },
-
-  //MAIN SCREEN
   logo: {
     width: '100%',
     height: 250,
     marginVertical: 10,
   },
+
+
+  //LOGIN SCREEN
+  containerLogin: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f2ffffae',
+
+  },
+  buttonLogin: {
+    justifyContent: 'center',
+    marginTop: 20,
+    backgroundColor: '#dbfaEB',
+    width: 300,
+    height: 55,
+    borderRadius: 30,
+    alignItems: 'center',
+    elevation: 2
+  },
+  buttonTextLogin: {
+    color: '#386641',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  
+  welcomeText: {
+    fontSize: 20,
+    color: '#386641',  // Darker color for readability
+    textAlign: 'center',
+    marginVertical: 20,
+    padding: 20,
+    backgroundColor: '#f3fff5ac',
+    
+  },
+
 
   //Food/Drink of the DAY
   foodDrinkContainer: {
@@ -205,7 +239,14 @@ export default StyleSheet.create({
     right: 10,  
     fontSize: 12,
     color: '#213b26',
-    fontStyle: 'italic',
+},
+dateRecipeDS: {
+  marginTop: 10,
+  alignItems: 'center',
+  width: '100%',
+  fontSize: 16,
+  textAlign: 'center',
+
 },
 
   //YOUR RECIPES (RecipeListScreen)
@@ -486,8 +527,6 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
 
-
-
   containerDrinkScr: {
     padding: 20,
     flex: 1,
@@ -535,20 +574,7 @@ export default StyleSheet.create({
   removeShop: {
     color: 'red',
   },
-  containerLogin: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f9f9f9',
-    padding: 25,
-  },
-  logoLogin: {
-    width: 450,
-    height: 300,
-    marginBottom: 20,
-    borderRadius: 10,
-    marginBottom: 24,
-  },
+
   titleLogin: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -567,21 +593,8 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
     elevation: 2,
   },
-  buttonLogin: {
-    width: '50%',
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: 'steelblue',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10,
-    elevation: 5,
-  },
-  buttonTextLogin: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
+
+ 
   containerMain: {
     flex: 1,
     justifyContent: 'center',
@@ -589,16 +602,7 @@ export default StyleSheet.create({
     backgroundColor: '#f9f9f9',
     padding: 16,
   },
-  welcomeText: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#444',  // Darker color for readability
-    textAlign: 'center',
-    marginVertical: 20,
-    fontFamily: 'sans-serif-light',  // Customize with any font loaded in your project
-    letterSpacing: 0.5,
-    lineHeight: 28,
-  },
+
   titleMain: {
     fontSize: 24,
     fontWeight: 'bold',
