@@ -73,7 +73,7 @@ export default StyleSheet.create({
 
   },
 
-  //RECIPE LIST AND CREATE RECIPE
+  //RECIPE LIST AND CREATE RECIPE Touchable
   bookContainer: {
     alignItems: 'center',
   },
@@ -122,12 +122,12 @@ export default StyleSheet.create({
     width: 90,
   },
 
-  //CREATE RECIPE
+  //CREATE RECIPE 
   recipeContent: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    
+
   },
   recipeTitle: {
     justifyContent: 'center',
@@ -182,7 +182,7 @@ export default StyleSheet.create({
     marginBottom: 15,
 
   },
-  saveRecipeBtn :{
+  saveRecipeBtn: {
     justifyContent: 'center',
     marginTop: 20,
     backgroundColor: '#dbfaEB',
@@ -194,8 +194,65 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
 
+  //OWN RECIPE DETAIL SCREEN (RecipeDetailScreen)
+  scrollContentRecipeDS: {
+    backgroundColor: '#fcf6eba1',
+    marginVertical: 20,
+  },
+  recipeDate: {
+    position: 'absolute',
+    bottom: 10, 
+    right: 10,  
+    fontSize: 12,
+    color: '#213b26',
+    fontStyle: 'italic',
+},
 
-  //YOUR RECIPES
+  //YOUR RECIPES (RecipeListScreen)
+  recipeContainer: {
+    justifyContent: 'center',
+    height: 55,
+    width: 330,
+    borderBottomWidth: 3,
+    borderTopWidth: 1,
+    borderColor: '#386641',
+    backgroundColor: '#fcf6eb',
+    borderRadius: 5,
+    marginVertical: 5,
+    elevation: 2,
+
+  },
+  recipeListName: {
+    justifyContent: 'center',
+    color: '#386641',
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginLeft: '10%',
+  },
+  emptyText: {
+    fontSize: 18,
+    color: '#386641',
+    textAlign: 'center',
+    marginVertical: 20,
+  },
+  createButton: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 15,
+    backgroundColor: '#dbfaEB',
+    width: 200,
+    height: 40,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#386641',
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  buttonTextRL: {
+    color: '#386641',
+    fontSize: 16,
+    fontWeight: '600',
+  },
 
   //Article section
   sectionTitle: {
@@ -311,12 +368,12 @@ export default StyleSheet.create({
 
   // SELECTED CATEGORY
   selectedCategory: {
-    borderColor: '#f67b43', // Add border to indicate selection
+    borderColor: '#f67b43',
     borderWidth: 3,
   },
 
   selectedCategoryText: {
-    color: '#FFC6AC', // Color when selected
+    color: '#FFC6AC', 
   },
 
   // FLATLIST

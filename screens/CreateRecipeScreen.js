@@ -16,7 +16,13 @@ const CreateRecipeScreen = () => {
 
     const handleSaveRecipe = () => {
         if (name && ingredients && guide) {
-            addRecipe({ name, ingredients, guide });
+            const date = new Date();
+            const longFormattedDate = new Intl.DateTimeFormat('en-US', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+            }).format(date);
+            addRecipe({ name, ingredients, guide, date: longFormattedDate });
             navigation.navigate('RecipeList');
         } else {
             alert('Please fill in all fields');
@@ -71,7 +77,7 @@ const CreateRecipeScreen = () => {
                             />
 
                             <TouchableOpacity onPress={handleSaveRecipe} style={styles.saveRecipeBtn} >
-                                <Text style={{ fontWeight: 'bold' }}>SAVE</Text>
+                                <Text style={{ fontWeight: 'bold', color: '#386641' }}>SAVE</Text>
                             </TouchableOpacity>
                         </View>
 

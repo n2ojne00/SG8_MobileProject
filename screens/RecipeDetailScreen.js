@@ -1,56 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, ScrollView, ImageBackground } from 'react-native';
+import styles from '../styles/style';
 
 const RecipeDetailScreen = ({ route }) => {
     const { recipe } = route.params;
 
     return (
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ImageBackground
+            source={require('../images/winter.jpg')}
+            style={styles.background}
+            resizeMode="cover"
+        >
             <View style={styles.container}>
-                <Text style={styles.title}>{recipe.name}</Text>
-                <Text style={styles.heading}>Ingredients</Text>
-                <Text style={styles.content}>{recipe.ingredients}</Text>
-                <Text style={styles.heading}>Guide</Text>
-                <Text style={styles.content}>{recipe.guide}</Text>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    style={styles.scrollContentRecipeDS}>
+                    <Text style={styles.titleDS}>{recipe.name}</Text>
+                    <Text style={styles.sectionTitleDS}>Ingredients</Text>
+                    <Text style={styles.instructionsDS}>{recipe.ingredients}</Text>
+                    <Text style={styles.sectionTitleDS}>Guide</Text>
+                    <Text style={styles.instructionsDS}>{recipe.guide}</Text>
+
+                </ScrollView>
             </View>
-        </ScrollView>
+        </ImageBackground>
     );
 };
 
-const styles = StyleSheet.create({
-    scrollContainer: {
-        flexGrow: 1,
-        paddingBottom: 20,
-    },
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#ffffff',
-    },
-    title: {
-        fontSize: 26,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 20,
-    },
-    heading: {
-        fontSize: 20,
-        fontWeight: '600',
-        color: '#555555',
-        marginTop: 20,
-        marginBottom: 10,
-    },
-    content: {
-        fontSize: 16,
-        lineHeight: 24,
-        color: '#666666',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        backgroundColor: '#f9f9f9',
-        borderRadius: 8,
-        marginBottom: 20,
-    },
-});
+
 
 export default RecipeDetailScreen;
