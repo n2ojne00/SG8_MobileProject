@@ -322,6 +322,7 @@ dateRecipeDS: {
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 3,
+    marginLeft: 8,
   },
   articleImage: {
     width: '100%',
