@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ImageBackground, SafeAreaViewComponent, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -28,7 +29,7 @@ import CreateRecipeScreen from './screens/CreateRecipeScreen';
 import ShoppingListDetailScreen from './screens/ShoppingListDetailScreen';
 import RecipeDetailScreen from './screens/RecipeDetailScreen';
 import RecipeListScreen from './screens/RecipeListScreen';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -135,15 +136,15 @@ const TabNavigator = () => (
       tabBarIcon: ({ color, size }) => {
         let iconName;
         if (route.name === 'Main') {
-          iconName = 'home-outline';
+          iconName = 'home';
         } else if (route.name === 'Meals') {
-          iconName = 'food-fork-drink';
+          iconName = 'hamburger';
         } else if (route.name === 'Cocktails') {
-          iconName = 'glass-cocktail';
-        } else if (route.name === 'ShoppingList') {
-          iconName = 'cart-outline';
+          iconName = 'cocktail';
+        } else if (route.name === 'Shopping List') {
+          iconName = 'shopping-basket';
         }
-        return <MaterialCommunityIcons name={iconName} size={30} color={color} />;
+        return <FontAwesome5 name={iconName} size={25} color={color} />;
       },
       tabBarActiveTintColor: '#f67b43',
       tabBarActiveBackgroundColor: '#fbd3c038',
@@ -153,7 +154,7 @@ const TabNavigator = () => (
     <Tab.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
     <Tab.Screen name="Meals" component={MealStack} options={{ headerShown: false }} />
     <Tab.Screen name="Cocktails" component={CocktailStack} options={{ headerShown: false }} />
-    <Tab.Screen name="ShoppingList" component={ShoppingListStack} options={{ headerShown: false }} />
+    <Tab.Screen name="Shopping List" component={ShoppingListStack} options={{ headerShown: false }} />
   </Tab.Navigator>
 );
 
