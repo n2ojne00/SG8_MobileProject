@@ -19,16 +19,16 @@ const categories = [
   "Cocktail", 
   "Ordinary Drink", 
   "Shot", "Beer", 
-  "Punch / Party Drink", 
-  "Coffee / Tea"];
+  "Punch & Party Drink", 
+  "Coffee & Tea"];
 
   const categoryImages = {
     "Cocktail": cocktailImage,
     "Ordinary Drink": ordinaryDrinkImage,
     "Shot": shotImage,
     "Beer": beerImage,
-    "Punch / Party Drink": punchImage,
-    "Coffee / Tea": coffeeTeaImage,
+    "Punch & Party Drink": punchImage,
+    "Coffee & Tea": coffeeTeaImage,
   };
   
 
