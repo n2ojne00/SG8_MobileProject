@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, Switch, TouchableOpacity, Alert } fr
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../contexts/ThemeContext';
 
-const SettingsScreen = () => {
+const SettingsScreen = ({ navigation }) => {
   const { isDarkMode, toggleTheme } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,6 +39,14 @@ const SettingsScreen = () => {
     Alert.alert('Success', 'Account information updated.');
     setPassword(newPassword || password);
     setNewPassword('');
+  };
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('user'); // Clear the user session
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }], // Navigate back to the Login screen
+    });
   };
 
   return (
@@ -85,6 +93,11 @@ const SettingsScreen = () => {
           <Text style={styles.saveButtonText}>Save Changes</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Logout Button */}
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Text style={styles.logoutButtonText}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -124,6 +137,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   saveButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  logoutButton: {
+    backgroundColor: 'crimson',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 30,
+  },
+  logoutButtonText: {
     color: '#ffffff',
     fontSize: 16,
     fontWeight: 'bold',
