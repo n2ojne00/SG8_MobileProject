@@ -17,20 +17,12 @@ const LoginScreen = ({ navigation }) => {
         Discover delicious recipes and cocktails to elevate your culinary journey. Let's get started!
       </Text>
 
-      {/* MSAL Login Button */}
-      <TouchableOpacity
-        style={styles.buttonLogin}
-        onPress={() => handleStudentLogin()}  // Define this function to handle MSAL login
-      >
-        <Text style={styles.buttonTextLogin}>Login with Student Account</Text>
-      </TouchableOpacity>
-
       {/* Local Login Button */}
       <TouchableOpacity
         style={styles.buttonLogin}
         onPress={() => navigation.navigate('LocalLogin')}
       >
-        <Text style={styles.buttonTextLogin}>Login with Local Account</Text>
+        <Text style={styles.buttonTextLogin}>Login</Text>
       </TouchableOpacity>
 
       {/* Register Button */}
@@ -51,12 +43,6 @@ const LoginScreen = ({ navigation }) => {
     </View>
     </ImageBackground>
   );
-};
-
-// Placeholder for student login functionality
-const handleStudentLogin = () => {
-  // Implement MSAL login logic here
-  console.log("Student login initiated.");
 };
 
 export default LoginScreen;
