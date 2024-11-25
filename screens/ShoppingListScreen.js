@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, Button, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+  Button,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 import { useTheme } from '../contexts/ThemeContext';
@@ -33,11 +43,6 @@ const ShoppingListScreen = ({ navigation }) => {
     }
   };
 
-  const removeItem = (index) => {
-    const newList = shoppingList.filter((_, i) => i !== index);
-    setShoppingList(newList);
-  };
-
   const saveList = () => {
     if (shoppingList.length > 0 && listName) {
       setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
@@ -46,29 +51,10 @@ const ShoppingListScreen = ({ navigation }) => {
     }
   };
 
-  const navigateToListDetail = (list) => {
-    navigation.navigate('PrintListScreen', { list });
+  const removeItem = (index) => {
+    const newList = shoppingList.filter((_, i) => i !== index);
+    setShoppingList(newList);
   };
-
-  const renderItem = ({ item, index }) => (
-    <View style={styles.itemContainer}>
-      <Text style={[styles.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
-      <TouchableOpacity onPress={() => removeItem(index)}>
-        <Text style={[styles.removeText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>Remove</Text>
-      </TouchableOpacity>
-    </View>
-  );
-
-  const renderSavedListItem = ({ item, index }) => (
-    <TouchableOpacity
-      style={styles.savedListItem}
-      onPress={() => navigateToListDetail(item)}
-    >
-      <Text style={[styles.savedListText, { color: isDarkMode ? '#80bdff' : '#007bff' }]}>
-        {item.name || `List ${index + 1}`}
-      </Text>
-    </TouchableOpacity>
-  );
 
   const renderMap = () => (
     <View style={styles.mapContainer}>
@@ -100,78 +86,95 @@ const ShoppingListScreen = ({ navigation }) => {
   );
 
   return (
-    <View style={styles.container}>
-      {/* List Name and Item Input Fields */}
-      <TextInput
-        style={[
-          styles.input,
-          { backgroundColor: isDarkMode ? '#1e1e1e' : '#fff', color: isDarkMode ? '#ffffff' : '#000000' },
-        ]}
-        placeholder="List Name"
-        placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
-        value={listName}
-        onChangeText={setListName}
-      />
-      <TextInput
-        style={[
-          styles.input,
-          { backgroundColor: isDarkMode ? '#1e1e1e' : '#fff', color: isDarkMode ? '#ffffff' : '#000000' },
-        ]}
-        placeholder="Add an item..."
-        placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
-        value={item}
-        onChangeText={setItem}
-      />
-      <Button title="Add to List" onPress={addItem} />
-
-      {/* Save List Button (Outside FlatList) */}
-      <TouchableOpacity
-        style={[styles.saveButton, { backgroundColor: isDarkMode ? '#007bff' : '#007bff' }]}
-        onPress={saveList}
-      >
-        <Text style={styles.saveButtonText}>Save List</Text>
-      </TouchableOpacity>
-
-      {/* FlatList for the shopping list */}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
       <FlatList
-        data={[
-          { key: 'Current List', type: 'shoppingList' },
-          { key: 'Saved Lists', type: 'savedLists' },
-          { key: 'Map', type: 'map' },
-        ]}
+        data={[{ key: 'input' }, { key: 'list' }, { key: 'saved' }, { key: 'map' }]}
+        keyExtractor={(item) => item.key}
+        keyboardShouldPersistTaps="handled"
         renderItem={({ item }) => {
-          switch (item.type) {
-            case 'shoppingList':
-              return (
-                <View style={[styles.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
-                  <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Current Shopping List</Text>
-                  <FlatList
-                    data={shoppingList}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={renderItem}
-                  />
-                </View>
-              );
-            case 'savedLists':
-              return (
-                <View style={[styles.savedListsContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
-                  <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Saved Shopping Lists</Text>
-                  <FlatList
-                    data={savedLists}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={renderSavedListItem}
-                  />
-                </View>
-              );
-            case 'map':
-              return renderMap();
-            default:
-              return null;
+          if (item.key === 'input') {
+            return (
+              <View>
+                <TextInput
+                  style={[
+                    styles.input,
+                    { backgroundColor: isDarkMode ? '#1e1e1e' : '#fff', color: isDarkMode ? '#ffffff' : '#000000' },
+                  ]}
+                  placeholder="List Name"
+                  placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
+                  value={listName}
+                  onChangeText={setListName}
+                />
+                <TextInput
+                  style={[
+                    styles.input,
+                    { backgroundColor: isDarkMode ? '#1e1e1e' : '#fff', color: isDarkMode ? '#ffffff' : '#000000' },
+                  ]}
+                  placeholder="Add an item..."
+                  placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
+                  value={item}
+                  onChangeText={setItem}
+                />
+                <Button title="Add to List" onPress={addItem} />
+                <TouchableOpacity
+                  style={[styles.saveButton, { backgroundColor: isDarkMode ? '#007bff' : '#007bff' }]}
+                  onPress={saveList}
+                >
+                  <Text style={styles.saveButtonText}>Save List</Text>
+                </TouchableOpacity>
+              </View>
+            );
+          } else if (item.key === 'list') {
+            return (
+              <View style={[styles.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
+                <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
+                  Current Shopping List
+                </Text>
+                <FlatList
+                  data={shoppingList}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item, index }) => (
+                    <View style={styles.itemContainer}>
+                      <Text style={[styles.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
+                      <TouchableOpacity onPress={() => removeItem(index)}>
+                        <Text style={[styles.removeText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>Remove</Text>
+                      </TouchableOpacity>
+                    </View>
+                  )}
+                />
+              </View>
+            );
+          } else if (item.key === 'saved') {
+            return (
+              <View style={[styles.savedListsContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
+                <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
+                  Saved Shopping Lists
+                </Text>
+                <FlatList
+                  data={savedLists}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({ item, index }) => (
+                    <TouchableOpacity
+                      style={styles.savedListItem}
+                      onPress={() => navigation.navigate('PrintListScreen', { list: item })}
+                    >
+                      <Text style={[styles.savedListText, { color: isDarkMode ? '#80bdff' : '#007bff' }]}>
+                        {item.name || `List ${index + 1}`}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            );
+          } else if (item.key === 'map') {
+            return renderMap();
           }
         }}
-        keyExtractor={(item) => item.key}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
