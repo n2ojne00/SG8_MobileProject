@@ -1,6 +1,6 @@
 // screens/MainScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, Modal, Button, ImageBackground } from 'react-native';
 import styles from '../styles/style';
 import Entypo from '@expo/vector-icons/Entypo';
 
@@ -9,6 +9,8 @@ import Entypo from '@expo/vector-icons/Entypo';
 const MainScreen = ({ navigation }) => {
   const [foodOfTheDay, setFoodOfTheDay] = useState(null);
   const [drinkOfTheDay, setDrinkOfTheDay] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState(null);
 
   const fetchFoodOfTheDay = async () => {
     try {
@@ -62,6 +64,15 @@ const MainScreen = ({ navigation }) => {
     },
 
   ];
+  const openArticleModal = (article) => {
+    setSelectedArticle(article);
+    setModalVisible(true);
+  };
+
+  const closeArticleModal = () => {
+    setModalVisible(false);
+    setSelectedArticle(null);
+  };
 
   return (
     <ImageBackground
@@ -148,18 +159,41 @@ const MainScreen = ({ navigation }) => {
           <ScrollView horizontal style={styles.articleCarousel}
             showsHorizontalScrollIndicator={false}>
             {exampleArticles.map((article, index) => (
-              <View key={index} style={styles.articleContainer}>
+              <TouchableOpacity
+                key={index}
+                onPress={() => openArticleModal(article)}
+                style={styles.articleContainer}
+              >
                 <Image source={{ uri: article.imageUrl }} style={styles.articleImage} />
                 <Text style={styles.articleTitle}>{article.title}</Text>
                 <Text style={styles.articleContent}>{article.content}</Text>
-              </View>
+              </TouchableOpacity>
             ))}
           </ScrollView>
+
+          {/* Modal for Article */}
+          {selectedArticle && (
+            <Modal
+              visible={modalVisible}
+              animationType="slide"
+              transparent={true}
+            >
+              <View style={styles.modalOverlay}>
+                <View style={styles.modalContent}>
+                  <Image source={{ uri: selectedArticle.imageUrl }} style={styles.modalImage} />
+                  <Text style={styles.modalTitle}>{selectedArticle.title}</Text>
+                  <Text style={styles.modalDescription}>{selectedArticle.content}</Text>
+                  <Button title="Close" onPress={closeArticleModal} />
+                </View>
+              </View>
+            </Modal>
+          )}
         </ScrollView>
       </View>
     </ImageBackground>
   );
 };
+
 
 
 export default MainScreen;
