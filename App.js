@@ -43,6 +43,15 @@ const SettingsIcon = ({ navigation }) => (
 const CocktailStack = () => (
   <Stack.Navigator
     screenOptions={({ navigation }) => ({
+      headerStyle: {
+        height: 80,
+      },
+      headerTransparent: true,
+      headerTintColor: '#386641',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 18,
+      },
       headerLeft: () => (
         navigation.canGoBack() ? (
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -73,6 +82,15 @@ const CocktailStack = () => (
 const MealStack = () => (
   <Stack.Navigator
     screenOptions={({ navigation }) => ({
+      headerStyle: {
+        height: 80,
+      },
+      headerTransparent: true,
+      headerTintColor: '#386641',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 18,
+      },
       headerLeft: () => (
         navigation.canGoBack() ? (
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -103,6 +121,15 @@ const MealStack = () => (
 const ShoppingListStack = () => (
   <Stack.Navigator
     screenOptions={({ navigation }) => ({
+      headerStyle: {
+        height: 80,
+      },
+      headerTransparent: true,
+      headerTintColor: '#386641',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 18,
+      },
       headerLeft: () => (
         navigation.canGoBack() ? (
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -168,10 +195,9 @@ const App = () => {
           <Stack.Navigator initialRouteName="Login"
             screenOptions={({ navigation }) => ({
               headerStyle: {
-                opacity: 10,
-                backgroundColor: '#c7fcfc31',
                 height: 80,
               },
+              headerTransparent: true,
               headerTintColor: '#386641',
               headerTitleStyle: {
                 fontWeight: 'bold',
