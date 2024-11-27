@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from "../styles/style";
 import { View, Text, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import ThemeLayout from "../contexts/ThemeLayout";
 
 const LoginScreen = ({ navigation }) => {
   return (
+    <ThemeLayout>
     <ImageBackground
-    source={require('../images/winter.jpg')}
     style={styles.background}
     resizeMode="cover"
   >
@@ -42,6 +43,8 @@ const LoginScreen = ({ navigation }) => {
       </TouchableOpacity>
     </View>
     </ImageBackground>
+    </ThemeLayout>
+
   );
 };
 

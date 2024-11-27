@@ -3,6 +3,7 @@ import { View, Text, Image, ScrollView, ActivityIndicator, ImageBackground } fro
 import styles from "../styles/style";
 import { useTheme } from '../contexts/ThemeContext';
 import CountryFlag from 'react-native-country-flag';
+import ThemeLayout from "../contexts/ThemeLayout";
 
 // Updated image paths for categories
 import chickenImg from '../images/logos/logoChicken.png';
@@ -125,8 +126,8 @@ const MealDetailScreen = ({ route }) => {
   const categoryImage = getCategoryImage(meal.strCategory);
 
   return (
+    <ThemeLayout>
     <ImageBackground
-    source={require('../images/winter.jpg')}
     style={styles.background}
     resizeMode="cover"
   >
@@ -179,6 +180,7 @@ const MealDetailScreen = ({ route }) => {
     </ScrollView>
     </View>
     </ImageBackground>
+    </ThemeLayout>
   );
 };
 

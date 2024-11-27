@@ -5,6 +5,7 @@ import { useRecipes } from '../contexts/RecipeContext';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import styles from '../styles/style';
+import ThemeLayout from "../contexts/ThemeLayout";
 
 const RecipeListScreen = () => {
     const { recipes } = useRecipes();
@@ -23,8 +24,8 @@ const RecipeListScreen = () => {
     
 
     return (
+        <ThemeLayout>
         <ImageBackground
-            source={require('../images/winter.jpg')}
             style={styles.background}
             resizeMode="cover"
         >
@@ -54,6 +55,7 @@ const RecipeListScreen = () => {
                 </View>
             </View>
         </ImageBackground>
+        </ThemeLayout>
     );
 };
 

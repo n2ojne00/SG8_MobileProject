@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from "../styles/style";
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ThemeLayout from "../contexts/ThemeLayout";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -37,6 +38,7 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
+    <ThemeLayout>
     <View style={styles.containerLogin}>
       <Text style={styles.titleLogin}>Create an Account</Text>
 
@@ -70,6 +72,7 @@ const RegisterScreen = ({ navigation }) => {
         <Text style={styles.buttonTextLogin}>Register</Text>
       </TouchableOpacity>
     </View>
+    </ThemeLayout>
   );
 };
 

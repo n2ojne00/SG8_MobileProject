@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from "../styles/style";
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 import { ScrollView } from 'react-native';
+import ThemeLayout from "../contexts/ThemeLayout";
 
 const CocktailDetailScreen = ({ route }) => {
   const { idDrink } = route.params;
@@ -62,8 +63,8 @@ const CocktailDetailScreen = ({ route }) => {
 
 
   return (
+    <ThemeLayout>
     <ImageBackground
-    source={require('../images/winter.jpg')}
     style={styles.background}
     resizeMode="cover"
   >
@@ -125,6 +126,7 @@ const CocktailDetailScreen = ({ route }) => {
     </ScrollView>
     </View>
     </ImageBackground>
+    </ThemeLayout>
   );
 };
 

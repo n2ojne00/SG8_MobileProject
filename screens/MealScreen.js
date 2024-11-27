@@ -14,6 +14,8 @@ import pastaImage from '../images/categories/pasta.jpg'
 import dessertImage from '../images/categories/dessert.jpg'
 import startersImage from '../images/categories/snacks.jpg'
 
+import ThemeLayout from "../contexts/ThemeLayout";
+
 
 const categories = ["Chicken", "Beef", "Pork", "Fish", "Vegan", "Pasta", "Dessert", "Starters"];
 
@@ -84,8 +86,8 @@ const MealScreen = ({ route, navigation }) => {
   }, [search, selectedCategory]);
 
   return (
+    <ThemeLayout>
     <ImageBackground
-    source={require('../images/winter.jpg')}
     style={styles.background}
     resizeMode="cover"
   >
@@ -183,6 +185,7 @@ const MealScreen = ({ route, navigation }) => {
 
     </View>
     </ImageBackground>
+    </ThemeLayout>
   );
 };
 

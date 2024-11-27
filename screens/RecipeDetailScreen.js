@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text, ScrollView, ImageBackground } from 'react-native';
 import styles from '../styles/style';
+import ThemeLayout from "../contexts/ThemeLayout";
 
 const RecipeDetailScreen = ({ route }) => {
     const { recipe } = route.params;
 
     return (
+        <ThemeLayout>
         <ImageBackground
-            source={require('../images/winter.jpg')}
             style={styles.background}
             resizeMode="cover"
         >
@@ -25,6 +26,7 @@ const RecipeDetailScreen = ({ route }) => {
                 </ScrollView>
             </View>
         </ImageBackground>
+        </ThemeLayout>
     );
 };
 

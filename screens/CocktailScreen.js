@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/style';
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import ThemeLayout from "../contexts/ThemeLayout";
 
 import cocktailImage from '../images/categories/cocktail.jpg';
 import ordinaryDrinkImage from '../images/categories/cold.jpg';
@@ -86,8 +87,8 @@ const CocktailScreen = () => {
   };
 
   return (
+    <ThemeLayout>
     <ImageBackground
-    source={require('../images/winter.jpg')}
     style={styles.background}
     resizeMode="cover"
   >
@@ -179,6 +180,8 @@ const CocktailScreen = () => {
 
     </View>
     </ImageBackground>
+    </ThemeLayout>
+
   );
 };
 

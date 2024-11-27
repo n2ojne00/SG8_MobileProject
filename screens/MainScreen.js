@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, Modal, Button, ImageBackground } from 'react-native';
 import styles from '../styles/style';
 import Entypo from '@expo/vector-icons/Entypo';
-
+import ThemeLayout from "../contexts/ThemeLayout";
 
 
 const MainScreen = ({ navigation }) => {
@@ -75,8 +75,8 @@ const MainScreen = ({ navigation }) => {
   };
 
   return (
+    <ThemeLayout>
     <ImageBackground
-      source={require('../images/winter.jpg')}
       style={styles.background}
       resizeMode="cover"
     >
@@ -191,6 +191,7 @@ const MainScreen = ({ navigation }) => {
         </ScrollView>
       </View>
     </ImageBackground>
+    </ThemeLayout>
   );
 };
 

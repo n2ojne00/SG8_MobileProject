@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, Switch, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../contexts/ThemeContext';
+import ThemeLayout from '../contexts/ThemeLayout';
 
 const SettingsScreen = ({ navigation }) => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -10,7 +11,6 @@ const SettingsScreen = ({ navigation }) => {
   const [newPassword, setNewPassword] = useState('');
 
   useEffect(() => {
-    // Load existing account information
     const loadAccountInfo = async () => {
       const account = await AsyncStorage.getItem('localAccount');
       if (account) {
@@ -42,22 +42,20 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   const handleLogout = async () => {
-    await AsyncStorage.removeItem('user'); // Clear the user session
+    await AsyncStorage.removeItem('user');
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Login' }], // Navigate back to the Login screen
+      routes: [{ name: 'Login' }],
     });
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#15202B' : '#f5f5f5' }]}>
-      {/* Dark Mode Toggle */}
+    <ThemeLayout>
       <View style={styles.settingItem}>
         <Text style={[styles.settingText, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Dark Mode</Text>
         <Switch value={isDarkMode} onValueChange={toggleTheme} />
       </View>
 
-      {/* Editable Account Settings */}
       <View style={styles.form}>
         <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Email</Text>
         <TextInput
@@ -76,7 +74,7 @@ const SettingsScreen = ({ navigation }) => {
           placeholder="Enter your current password"
           placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
           secureTextEntry
-          editable={false} // Current password is displayed but not editable
+          editable={false}
         />
 
         <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>New Password</Text>
@@ -94,19 +92,14 @@ const SettingsScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Logout Button */}
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutButtonText}>Logout</Text>
       </TouchableOpacity>
-    </View>
+    </ThemeLayout>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
   settingItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',

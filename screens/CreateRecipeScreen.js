@@ -4,6 +4,7 @@ import { View, TextInput, TouchableOpacity, Text, Image, ScrollView, ImageBackgr
 import { useRecipes } from '../contexts/RecipeContext';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/style';
+import ThemeLayout from "../contexts/ThemeLayout";
 
 
 const CreateRecipeScreen = () => {
@@ -30,8 +31,8 @@ const CreateRecipeScreen = () => {
     };
 
     return (
+        <ThemeLayout>
         <ImageBackground
-            source={require('../images/winter.jpg')}
             style={styles.background}
             resizeMode="cover"
         >
@@ -86,6 +87,8 @@ const CreateRecipeScreen = () => {
 
             </View>
         </ImageBackground>
+        </ThemeLayout>
+
     );
 };
 
