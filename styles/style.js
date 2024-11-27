@@ -154,7 +154,7 @@ export default StyleSheet.create({
     width: 90,
   },
 
-  //CREATE RECIPE 
+  //CREATE RECIPE (CreateRecipeScreen.js)
   recipeContent: {
     flex: 1,
     justifyContent: 'center',
@@ -450,7 +450,7 @@ dateRecipeDS: {
     borderBottomLeftRadius: 15,
   },
 
-  //RECIPE SCREENS (DetailScreen)
+  //RECIPE SCREENS (DetailScreen.js)
 
   innerContainerMealDS: {
     backgroundColor: '#f3fff5e9',
@@ -595,6 +595,61 @@ dateRecipeDS: {
     textAlign: 'center',
     color: '#ff6b6b',
     fontSize: 16,
+  },
+
+  //SettingsScreen.js
+  settingItem: {
+    backgroundColor: '#f2ffff75',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderBottomWidth: 1,
+    borderBottomColor: '#386641',
+    marginBottom: 20,
+  },
+  settingsLogin: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  form: {
+    marginTop: 20,
+    borderWidth: 1,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  accountInput: {
+    width: '90%',
+    fontSize: 16,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#386641',
+    borderRadius: 5,
+    marginBottom: 15,
+  },
+  saveButtonText: {
+    color: '#386641',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  logoutButton: {
+    backgroundColor: '#386641',
+    padding: 15,
+    borderRadius: 30,
+    alignItems: 'center',
+    marginTop: 30,
+    width: '50%',
+  },
+  logoutButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  settingText: {
+    fontSize: 18,
   },
 
 

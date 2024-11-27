@@ -13,7 +13,6 @@ import {
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 import { useTheme } from '../contexts/ThemeContext';
-import styles from '../styles/style';
 import { Entypo, MaterialIcons } from '@expo/vector-icons';
 
 
