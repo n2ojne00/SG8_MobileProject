@@ -31,11 +31,11 @@ const CreateRecipeScreen = () => {
     };
 
     return (
+    <ImageBackground
+        style={styles.background}
+        resizeMode="cover"
+    >
         <ThemeLayout>
-        <ImageBackground
-            style={styles.background}
-            resizeMode="cover"
-        >
             <View style={styles.container}>
 
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -86,8 +86,8 @@ const CreateRecipeScreen = () => {
                 </ScrollView>
 
             </View>
-        </ImageBackground>
         </ThemeLayout>
+    </ImageBackground>
 
     );
 };

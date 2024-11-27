@@ -24,11 +24,11 @@ const RecipeListScreen = () => {
     
 
     return (
-        <ThemeLayout>
         <ImageBackground
             style={styles.background}
             resizeMode="cover"
         >
+            <ThemeLayout>
             <View style={styles.container}>
                 <View style={styles.recipeContent}>
                     <View
@@ -54,8 +54,8 @@ const RecipeListScreen = () => {
                     </TouchableOpacity>
                 </View>
             </View>
+            </ThemeLayout>
         </ImageBackground>
-        </ThemeLayout>
     );
 };
 

@@ -63,11 +63,11 @@ const CocktailDetailScreen = ({ route }) => {
 
 
   return (
-    <ThemeLayout>
-    <ImageBackground
+  <ImageBackground
     style={styles.background}
     resizeMode="cover"
   >
+    <ThemeLayout>
     <View style={styles.container}>
     <ScrollView
       contentContainerStyle={styles.scrollContentMealDS}
@@ -125,8 +125,8 @@ const CocktailDetailScreen = ({ route }) => {
 
     </ScrollView>
     </View>
-    </ImageBackground>
     </ThemeLayout>
+    </ImageBackground>
   );
 };
 

@@ -5,11 +5,11 @@ import ThemeLayout from "../contexts/ThemeLayout";
 
 const LoginScreen = ({ navigation }) => {
   return (
-    <ThemeLayout>
     <ImageBackground
     style={styles.background}
     resizeMode="cover"
   >
+  <ThemeLayout>
     <View style={styles.containerLogin}>
       <Image source={require('../images/succlyLogo.png')} style={styles.logo} />
 
@@ -42,8 +42,8 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.buttonTextLogin}>Enter Without Login</Text>
       </TouchableOpacity>
     </View>
-    </ImageBackground>
     </ThemeLayout>
+    </ImageBackground>
 
   );
 };

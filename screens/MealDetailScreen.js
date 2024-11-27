@@ -126,11 +126,11 @@ const MealDetailScreen = ({ route }) => {
   const categoryImage = getCategoryImage(meal.strCategory);
 
   return (
-    <ThemeLayout>
     <ImageBackground
     style={styles.background}
     resizeMode="cover"
-  >
+    >
+    <ThemeLayout>
     <View style={styles.container}>
     <ScrollView
       contentContainerStyle={styles.scrollContentMealDS}
@@ -179,8 +179,8 @@ const MealDetailScreen = ({ route }) => {
       </View>
     </ScrollView>
     </View>
-    </ImageBackground>
     </ThemeLayout>
+    </ImageBackground>
   );
 };
 

@@ -75,11 +75,11 @@ const MainScreen = ({ navigation }) => {
   };
 
   return (
-    <ThemeLayout>
     <ImageBackground
       style={styles.background}
       resizeMode="cover"
     >
+      <ThemeLayout>
       <View style={styles.container}>
         <ScrollView>
 
@@ -190,8 +190,8 @@ const MainScreen = ({ navigation }) => {
           )}
         </ScrollView>
       </View>
+      </ThemeLayout>
     </ImageBackground>
-    </ThemeLayout>
   );
 };
 

@@ -86,11 +86,11 @@ const MealScreen = ({ route, navigation }) => {
   }, [search, selectedCategory]);
 
   return (
-    <ThemeLayout>
     <ImageBackground
     style={styles.background}
     resizeMode="cover"
-  >
+    >
+    <ThemeLayout>
 
     <View style={styles.container}>
       <View style={styles.searchRow}>
@@ -184,8 +184,8 @@ const MealScreen = ({ route, navigation }) => {
 
 
     </View>
-    </ImageBackground>
     </ThemeLayout>
+    </ImageBackground>
   );
 };
 

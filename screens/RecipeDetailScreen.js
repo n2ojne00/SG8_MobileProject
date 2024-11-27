@@ -7,11 +7,11 @@ const RecipeDetailScreen = ({ route }) => {
     const { recipe } = route.params;
 
     return (
+    <ImageBackground
+        style={styles.background}
+        resizeMode="cover"
+    >
         <ThemeLayout>
-        <ImageBackground
-            style={styles.background}
-            resizeMode="cover"
-        >
             <View style={styles.container}>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
@@ -25,8 +25,8 @@ const RecipeDetailScreen = ({ route }) => {
 
                 </ScrollView>
             </View>
-        </ImageBackground>
         </ThemeLayout>
+    </ImageBackground>
     );
 };
 

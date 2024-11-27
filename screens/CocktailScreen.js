@@ -87,11 +87,12 @@ const CocktailScreen = () => {
   };
 
   return (
-    <ThemeLayout>
-    <ImageBackground
+    
+  <ImageBackground
     style={styles.background}
     resizeMode="cover"
   >
+    <ThemeLayout>
     <View style={styles.container}>
 
       <View style={styles.searchRow}>
@@ -179,8 +180,8 @@ const CocktailScreen = () => {
       
 
     </View>
-    </ImageBackground>
     </ThemeLayout>
+  </ImageBackground>
 
   );
 };
