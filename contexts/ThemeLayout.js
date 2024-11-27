@@ -1,6 +1,7 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import { useTheme } from './ThemeContext'; // Same folder, so relative path remains './'
+import styles from '../styles/style';
 
 // Map theme names to image paths
 const backgroundImages = {
@@ -13,20 +14,10 @@ const ThemeLayout = ({ children }) => {
   const backgroundImage = isDarkMode ? backgroundImages.dark : backgroundImages.light;
 
   return (
-    <ImageBackground source={backgroundImage} style={styles.background}>
-      <View style={styles.content}>{children}</View>
+    <ImageBackground source={backgroundImage} style={styles.ThemeLayoutBackground}>
+      <View style={styles.ThemeLayoutContent}>{children}</View>
     </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-  content: {
-    flex: 1,
-  },
-});
 
 export default ThemeLayout;

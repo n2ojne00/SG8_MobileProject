@@ -597,6 +597,15 @@ dateRecipeDS: {
     fontSize: 16,
   },
 
+  // Themelayout
+  ThemeLayoutBackground: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  ThemeLayoutContent: {
+    flex: 1,
+  },
+
 
   //OLD STYLES.. WORKING ON IT
 
