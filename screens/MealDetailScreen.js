@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
+import { View, Text, Image, ScrollView, ActivityIndicator, ImageBackground, TouchableOpacity, Modal, Button } from 'react-native';
 import styles from "../styles/style";
 import { useTheme } from '../contexts/ThemeContext';
 import CountryFlag from 'react-native-country-flag';
@@ -23,6 +23,9 @@ const MealDetailScreen = ({ route }) => {
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const { isDarkMode } = useTheme();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [savedIngredients, setSavedIngredients] = useState([]);
+  const [selectedIngredient, setSelectedIngredient] = useState('');
 
   // Function to map area names to country codes
   const getCountryCodeFromArea = (area) => {
@@ -93,10 +96,8 @@ const MealDetailScreen = ({ route }) => {
       Breakfast: starterImg,
       Goat: sheepImg,
       Lamb: sheepImg,
-      Miscellaneous : MisceImg,
-      
+      Miscellaneous: MisceImg,
     };
-    //console.log('Category being processed:', category);
     return categoryImages[category] || null; // Default to null if no image found
   };
 
@@ -113,6 +114,18 @@ const MealDetailScreen = ({ route }) => {
     return ingredients;
   };
 
+  // Open the modal with the selected ingredient
+  const handleIngredientClick = (ingredient) => {
+    setSelectedIngredient(ingredient);
+    setModalVisible(true);
+  };
+
+  // Save the ingredient and close the modal
+  const handleSaveIngredient = () => {
+    setSavedIngredients(prev => [...prev, selectedIngredient]);
+    setModalVisible(false);
+  };
+
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
@@ -122,64 +135,79 @@ const MealDetailScreen = ({ route }) => {
   }
 
   const countryCode = getCountryCodeFromArea(meal.strArea);
-
   const categoryImage = getCategoryImage(meal.strCategory);
 
   return (
-    <ImageBackground
-    style={styles.background}
-    resizeMode="cover"
-    >
-    <ThemeLayout>
-    <View style={styles.container}>
-    <ScrollView
-      contentContainerStyle={styles.scrollContentMealDS}
-      showsVerticalScrollIndicator={false}
-    >
-      <View style={styles.innerContainerMealDS}>
-        <Image source={{ uri: meal.strMealThumb }} style={styles.imageDS} />
+    <ImageBackground style={styles.background} resizeMode="cover">
+      <ThemeLayout>
+        <View style={styles.container}>
+          <ScrollView contentContainerStyle={styles.scrollContentMealDS} showsVerticalScrollIndicator={false}>
+            <View style={styles.innerContainerMealDS}>
+              <Image source={{ uri: meal.strMealThumb }} style={styles.imageDS} />
+              <Text style={[styles.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                {meal.strMeal}
+              </Text>
 
-        <Text style={[styles.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-          {meal.strMeal}
-        </Text>
+              <View style={[styles.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
+                <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                  Category: {categoryImage && <Image source={categoryImage} style={{ width: 35, height: 35 }} />}
+                </Text>
+                <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                  Area: {countryCode && (
+                    <View style={{ marginVertical: 10 }}>
+                      <CountryFlag isoCode={countryCode} size={35} />
+                    </View>
+                  )}
+                </Text>
+              </View>
 
-        <View style={[styles.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
-          <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-          Category: {categoryImage && (
-            <Image source={categoryImage} style={{ width: 35, height: 35,}} />
-          )}
+              <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                Ingredients:
+              </Text>
+              {getIngredients().map((ingredient, index) => (
+                <TouchableOpacity key={index} onPress={() => handleIngredientClick(ingredient)}>
+                  <Text style={[styles.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                    {ingredient}
+                  </Text>
+                </TouchableOpacity>
+              ))}
 
-          </Text>
-          <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-            Area: {countryCode && (
-          <View style={{ marginVertical: 10 }}>
-            <CountryFlag isoCode={countryCode} size={35} />
-          </View>
-        )}
-        </Text>         
-        </View>
+              <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                Instructions:
+              </Text>
+              <Text style={[styles.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                {meal.strInstructions}
+              </Text>
+            </View>
+          </ScrollView>
 
-       
+          {/* Modal to show selected ingredients */}
+          <Modal
+  animationType="slide"
+  transparent={true}
+  visible={modalVisible}
+  onRequestClose={() => setModalVisible(false)}
+>
+  <View style={styles.modalView}>
+    <View style={styles.modalContent}>
+      <Text style={styles.modalTitle}>Selected Ingredients</Text>
+      <Text style={styles.selectedIngredient}>{selectedIngredient}</Text>
+      <TouchableOpacity onPress={handleSaveIngredient} style={styles.button}>
+        <Text style={styles.buttonText}>Save</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => setModalVisible(false)} style={[styles.button, styles.closeButton]}>
+        <Text style={styles.buttonText}>Close</Text>
+      </TouchableOpacity>
 
-        <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-          Ingredients:
-        </Text>
-        {getIngredients().map((ingredient, index) => (
-          <Text key={index} style={[styles.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-            {ingredient}
-          </Text>
-        ))}
-
-        <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-          Instructions:
-        </Text>
-        <Text style={[styles.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-          {meal.strInstructions}
-        </Text>
-      </View>
-    </ScrollView>
+      <Text style={styles.savedIngredientsTitle}>Saved Ingredients:</Text>
+      {savedIngredients.map((ingredient, index) => (
+        <Text key={index} style={styles.savedIngredient}>{ingredient}</Text>
+      ))}
     </View>
-    </ThemeLayout>
+  </View>
+</Modal>
+        </View>
+      </ThemeLayout>
     </ImageBackground>
   );
 };

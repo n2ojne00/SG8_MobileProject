@@ -22,7 +22,6 @@ const RecipeDetailScreen = ({ route }) => {
                     <Text style={styles.instructionsDS}>{recipe.ingredients}</Text>
                     <Text style={styles.sectionTitleDS}>Guide</Text>
                     <Text style={styles.instructionsDS}>{recipe.guide}</Text>
-
                 </ScrollView>
             </View>
         </ThemeLayout>

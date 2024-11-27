@@ -767,6 +767,69 @@ dateRecipeDS: {
     textAlign: 'center',
     marginBottom: 20,
   },
+  modalView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)', // Dark semi-transparent background
+    padding: 20,
+  },
+  modalContent: {
+    width: '90%',
+    maxWidth: 350,
+    backgroundColor: '#ffffff',
+    borderRadius: 15,
+    padding: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5, // For Android
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 15,
+  },
+  selectedIngredient: {
+    fontSize: 18,
+    color: '#444',
+    marginVertical: 10,
+    textAlign: 'center',
+    paddingHorizontal: 20,
+    fontStyle: 'italic',
+    maxWidth: 300,
+  },
+  savedIngredientsTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginVertical: 15,
+  },
+  savedIngredient: {
+    fontSize: 16,
+    color: '#555',
+    marginBottom: 5,
+    textAlign: 'center',
+    fontStyle: 'italic',
+  },
+  button: {
+    backgroundColor: '#6C63FF', // Modern button color
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    marginVertical: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  closeButton: {
+    backgroundColor: '#FF6F61', // Red color for close
+  },
   
 
 
