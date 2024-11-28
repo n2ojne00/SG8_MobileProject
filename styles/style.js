@@ -344,6 +344,51 @@ export default StyleSheet.create({
     color: '#24422a',
   },
 
+  //Article Modal 
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#2525257e',
+  },
+  modalContent: {
+    width: '90%',
+    backgroundColor: '#f3fff5',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+    elevation: 5, // Shadow for Android
+    shadowColor: '#000', // Shadow for iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+  },
+  modalImage: {
+    width: '100%',
+    height: 200,
+    borderRadius: 10,
+    marginBottom: 15,
+  },
+  modalTitle: {
+    textAlign: 'center',
+    paddingVertical: 3,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#122115',
+    width: '100%',
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
+    borderColor: '#f67b43'
+  },
+  modalDescription: {
+    fontSize: 17,
+    color: '#386641',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+
+
   //SEARCH INPUT
   searchRow: {
     flexDirection: 'row',
@@ -792,68 +837,14 @@ export default StyleSheet.create({
   },
 
 
-  //modal style
+  //modal style SaveIngredients
 
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    width: '90%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
-    alignItems: 'center',
-    elevation: 5, // Shadow for Android
-    shadowColor: '#000', // Shadow for iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
-  modalImage: {
-    width: '100%',
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 15,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  modalDescription: {
-    fontSize: 14,
-    color: '#555',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
   modalView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.6)', // Dark semi-transparent background
     padding: 20,
-  },
-  modalContent: {
-    width: '90%',
-    maxWidth: 350,
-    backgroundColor: '#ffffff',
-    borderRadius: 15,
-    padding: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 5, // For Android
-  },
-  modalTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 15,
   },
   selectedIngredient: {
     fontSize: 18,
