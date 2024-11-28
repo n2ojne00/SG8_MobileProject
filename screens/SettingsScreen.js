@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, Switch, TouchableOpacity, Alert } fr
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../contexts/ThemeContext';
 import ThemeLayout from '../contexts/ThemeLayout';
+import styles from '../styles/style';
 
 const SettingsScreen = ({ navigation }) => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -51,104 +52,57 @@ const SettingsScreen = ({ navigation }) => {
 
   return (
     <ThemeLayout>
-      <View style={styles.settingItem}>
-        <Text style={[styles.settingText, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Dark Mode</Text>
-        <Switch value={isDarkMode} onValueChange={toggleTheme} />
+      <View style={styles.container}>
+        <View style={styles.settingItem}>
+          <Text style={[styles.settingText, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Dark Mode</Text>
+          <Switch value={isDarkMode} onValueChange={toggleTheme} />
+        </View>
+
+        <View style={styles.settingsLogin}>
+          <View style={styles.recipeTextAreas}>
+            <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Email</Text>
+            <TextInput
+              style={[styles.accountInput, { backgroundColor: isDarkMode ? '#1c2938' : '#ffffff', color: isDarkMode ? '#ffffff' : '#000000' }]}
+              value={email}
+              onChangeText={setEmail}
+              placeholder="Enter your email"
+              placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
+              autoCapitalize="none"
+            />
+
+            <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Current Password</Text>
+            <TextInput
+              style={[styles.accountInput, { backgroundColor: isDarkMode ? '#1c2938' : '#ffffff', color: isDarkMode ? '#ffffff' : '#000000' }]}
+              value={password}
+              placeholder="Enter your current password"
+              placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
+              secureTextEntry
+              editable={false}
+            />
+
+            <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>New Password</Text>
+            <TextInput
+              style={[styles.accountInput, { backgroundColor: isDarkMode ? '#1c2938' : '#ffffff', color: isDarkMode ? '#ffffff' : '#000000' }]}
+              value={newPassword}
+              onChangeText={setNewPassword}
+              placeholder="Enter a new password"
+              placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
+              secureTextEntry
+            />
+
+            <TouchableOpacity style={styles.saveRecipeBtn} onPress={handleSaveChanges}>
+              <Text style={styles.saveButtonText}>Save Changes</Text>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+            <Text style={styles.logoutButtonText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-
-      <View style={styles.form}>
-        <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Email</Text>
-        <TextInput
-          style={[styles.input, { backgroundColor: isDarkMode ? '#1c2938' : '#ffffff', color: isDarkMode ? '#ffffff' : '#000000' }]}
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Enter your email"
-          placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
-          autoCapitalize="none"
-        />
-
-        <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Current Password</Text>
-        <TextInput
-          style={[styles.input, { backgroundColor: isDarkMode ? '#1c2938' : '#ffffff', color: isDarkMode ? '#ffffff' : '#000000' }]}
-          value={password}
-          placeholder="Enter your current password"
-          placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
-          secureTextEntry
-          editable={false}
-        />
-
-        <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>New Password</Text>
-        <TextInput
-          style={[styles.input, { backgroundColor: isDarkMode ? '#1c2938' : '#ffffff', color: isDarkMode ? '#ffffff' : '#000000' }]}
-          value={newPassword}
-          onChangeText={setNewPassword}
-          placeholder="Enter a new password"
-          placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
-          secureTextEntry
-        />
-
-        <TouchableOpacity style={styles.saveButton} onPress={handleSaveChanges}>
-          <Text style={styles.saveButtonText}>Save Changes</Text>
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutButtonText}>Logout</Text>
-      </TouchableOpacity>
     </ThemeLayout>
   );
 };
 
-const styles = StyleSheet.create({
-  settingItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  form: {
-    marginTop: 20,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  input: {
-    fontSize: 16,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    marginBottom: 15,
-  },
-  saveButton: {
-    backgroundColor: 'steelblue',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  saveButtonText: {
-    color: '#ffffff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  logoutButton: {
-    backgroundColor: 'crimson',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginTop: 30,
-  },
-  logoutButtonText: {
-    color: '#ffffff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  settingText: {
-    fontSize: 18,
-  },
-});
 
 export default SettingsScreen;

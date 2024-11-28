@@ -17,7 +17,6 @@ export default StyleSheet.create({
     marginVertical: 10,
   },
 
-
   //LOGIN SCREEN
   containerLogin: {
     flex: 1,
@@ -234,19 +233,19 @@ export default StyleSheet.create({
   },
   recipeDate: {
     position: 'absolute',
-    bottom: 10, 
-    right: 10,  
+    bottom: 10,
+    right: 10,
     fontSize: 12,
     color: '#213b26',
-},
-dateRecipeDS: {
-  marginTop: 10,
-  alignItems: 'center',
-  width: '100%',
-  fontSize: 16,
-  textAlign: 'center',
+  },
+  dateRecipeDS: {
+    marginTop: 10,
+    alignItems: 'center',
+    width: '100%',
+    fontSize: 16,
+    textAlign: 'center',
 
-},
+  },
 
   //YOUR RECIPES (RecipeListScreen)
   recipeContainer: {
@@ -414,7 +413,7 @@ dateRecipeDS: {
   },
 
   selectedCategoryText: {
-    color: '#FFC6AC', 
+    color: '#FFC6AC',
   },
 
   // FLATLIST
@@ -535,7 +534,7 @@ dateRecipeDS: {
     marginLeft: 20,
     borderRadius: 10,
     justifyContent: 'center',
-  }, 
+  },
   inputShopListName: {
     height: 50,
     fontSize: 20,
@@ -561,12 +560,12 @@ dateRecipeDS: {
     marginVertical: 5,
     elevation: 2,
   },
- 
+
   itemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottomWidth: 1, 
+    borderBottomWidth: 1,
     borderColor: '#539861',
     width: '95%',
     marginHorizontal: 10,
@@ -606,6 +605,68 @@ dateRecipeDS: {
   ThemeLayoutContent: {
     flex: 1,
   },
+
+  //SettingsScreen.js
+
+  //SettingsScreen.js
+  settingItem: {
+    backgroundColor: '#f2ffff75',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderBottomWidth: 1,
+    borderBottomColor: '#386641',
+    marginBottom: 20,
+  },
+  settingsLogin: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  form: {
+    marginTop: 20,
+    borderWidth: 1,
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 5,
+    fontWeight: 'bold',
+    paddingVertical: 10,
+
+  },
+  accountInput: {
+    width: '90%',
+    fontSize: 16,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#386641',
+    borderRadius: 5,
+
+  },
+  saveButtonText: {
+    color: '#386641',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  logoutButton: {
+    backgroundColor: '#386641',
+    padding: 15,
+    borderRadius: 30,
+    alignItems: 'center',
+    marginTop: 30,
+    width: '50%',
+  },
+  logoutButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  settingText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
 
 
   //OLD STYLES.. WORKING ON IT
@@ -682,7 +743,7 @@ dateRecipeDS: {
     elevation: 2,
   },
 
- 
+
   containerMain: {
     flex: 1,
     justifyContent: 'center',
@@ -831,7 +892,7 @@ dateRecipeDS: {
   closeButton: {
     backgroundColor: '#FF6F61', // Red color for close
   },
-  
+
 
 
 
