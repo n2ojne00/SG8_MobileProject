@@ -164,6 +164,12 @@ const MealDetailScreen = ({ route }) => {
               <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                 Ingredients:
               </Text>
+              <TouchableOpacity 
+    onPress={() => setModalVisible(true)} 
+    style={[styles.button, { marginLeft: 10, marginRight: 10, marginBottom: 10, borderColor: isDarkMode ? '#ffffff' : '#000000', borderWidth: 1, width: '60%', alignSelf: 'center' }]} // Add margin for spacing
+  >
+    <Text style={styles.buttonText}>Saved Ingredients</Text>
+  </TouchableOpacity>
               {getIngredients().map((ingredient, index) => (
                 <TouchableOpacity key={index} onPress={() => handleIngredientClick(ingredient)}>
                   <Text style={[styles.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
