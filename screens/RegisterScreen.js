@@ -40,25 +40,29 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <ThemeLayout>
     <View style={styles.containerLogin}>
+    
       <Text style={styles.titleLogin}>Create an Account</Text>
 
+      <Text style={styles.label}>Email</Text>
       <TextInput
-        style={styles.inputLogin}
+        style={styles.accountInput}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
       />
+      <Text style={styles.label}>Password</Text>
       <TextInput
-        style={styles.inputLogin}
+        style={styles.accountInput}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
+      <Text style={styles.label}>Confirm Password</Text>
       <TextInput
-        style={styles.inputLogin}
+        style={styles.accountInput}
         placeholder="Confirm Password"
         value={confirmPassword}
         onChangeText={setConfirmPassword}

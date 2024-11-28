@@ -708,10 +708,11 @@ export default StyleSheet.create({
   accountInput: {
     width: '90%',
     fontSize: 16,
-    padding: 10,
+    padding: 12,
     borderWidth: 1,
     borderColor: '#386641',
     borderRadius: 5,
+    backgroundColor: '#ecffeff5',
 
   },
   saveButtonText: {
@@ -735,6 +736,15 @@ export default StyleSheet.create({
   settingText: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+
+  //RegisterScreen.js  //LocalLoginScreen.js
+  titleLogin: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 24,
+    textAlign: 'center',
+    color: '#333',
   },
 
 
@@ -794,24 +804,6 @@ export default StyleSheet.create({
     color: 'red',
   },
 
-  titleLogin: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 24,
-    textAlign: 'center',
-    color: '#333',
-  },
-  inputLogin: {
-    width: '100%',
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 25,
-    paddingHorizontal: 16,
-    marginBottom: 16,
-    backgroundColor: '#fff',
-    elevation: 2,
-  },
 
 
   containerMain: {

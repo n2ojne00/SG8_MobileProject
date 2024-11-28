@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from "../styles/style";
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ThemeLayout from '../contexts/ThemeLayout';
 
 const LocalLoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -25,19 +26,22 @@ const LocalLoginScreen = ({ navigation }) => {
   };
 
   return (
+    <ThemeLayout>
     <View style={styles.containerLogin}>
       <Text style={styles.titleLogin}>Login with Local Account</Text>
 
+      <Text style={styles.label}>Email</Text>
       <TextInput
-        style={styles.inputLogin}
+        style={styles.accountInput}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
       />
+      <Text style={styles.label}>Password</Text>
       <TextInput
-        style={styles.inputLogin}
+        style={styles.accountInput}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
@@ -48,6 +52,7 @@ const LocalLoginScreen = ({ navigation }) => {
         <Text style={styles.buttonTextLogin}>Login</Text>
       </TouchableOpacity>
     </View>
+    </ThemeLayout>
   );
 };
 
