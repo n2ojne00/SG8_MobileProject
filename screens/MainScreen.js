@@ -80,7 +80,7 @@ const MainScreen = ({ navigation }) => {
       resizeMode="cover"
     >
       <ThemeLayout>
-        <View style={styles.container}>
+        <View style={styles.MainContainer}>
           <ScrollView>
 
             <Image source={require('../images/succlyLogo.png')} style={styles.logo} />

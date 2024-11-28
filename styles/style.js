@@ -8,6 +8,11 @@ export default StyleSheet.create({
     backgroundColor: '#f2ffffae',
     paddingTop: 80,
   },
+  MainContainer: {
+    paddingHorizontal: 5,
+    flex: 1,
+    backgroundColor: '#f2ffffae',
+  },
   background: {
     flex: 1,
   },
@@ -17,7 +22,17 @@ export default StyleSheet.create({
     marginVertical: 10,
   },
 
-  //LOGIN SCREEN
+  // Themelayout.js
+  ThemeLayoutBackground: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  ThemeLayoutContent: {
+    flex: 1,
+  },
+
+
+  //LOGIN SCREEN LoginScreen.js
   containerLogin: {
     flex: 1,
     justifyContent: 'center',
@@ -49,8 +64,9 @@ export default StyleSheet.create({
     backgroundColor: '#f3fff5ac',
   },
 
+  //MainScreen.js
 
-  //Food/Drink of the DAY
+  //Food/Drink of the DAY  (MainScreen)
   foodDrinkContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -105,7 +121,7 @@ export default StyleSheet.create({
 
   },
 
-  //RECIPE LIST AND CREATE RECIPE Touchable
+  //RECIPE LIST AND CREATE RECIPE RecipeBook Section (MainScreen)
   bookContainer: {
     alignItems: 'center',
   },
@@ -154,7 +170,103 @@ export default StyleSheet.create({
     width: 90,
   },
 
-  //CREATE RECIPE 
+  //Article section (MainScreen)
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#386641',
+    padding: 5,
+    width: '100%',
+    borderBottomWidth: 2,
+    borderColor: '#f67b43'
+  },
+  articleCarousel: {
+    paddingVertical: 10,
+    backgroundColor: '#386641a9',
+    elevation: 2,
+  },
+  articleContainer: {
+    width: 200,
+    marginRight: 15,
+    backgroundColor: '#f3fff5',
+    padding: 10,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
+    marginLeft: 8,
+  },
+  articleImage: {
+    width: '100%',
+    height: 120,
+    borderRadius: 8,
+    marginBottom: 10,
+    elevation: 3,
+  },
+  articleTitle: {
+    paddingVertical: 3,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#122115',
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
+    borderColor: '#f67b43'
+  },
+  articleContent: {
+    fontSize: 16,
+    color: '#24422a',
+  },
+
+  //Article Modal (MainScreen)
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#2525257e',
+  },
+  modalContent: {
+    width: '90%',
+    backgroundColor: '#f3fff5',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+    elevation: 5, // Shadow for Android
+    shadowColor: '#000', // Shadow for iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+  },
+  modalImage: {
+    width: '100%',
+    height: 200,
+    borderRadius: 10,
+    marginBottom: 15,
+  },
+  modalTitle: {
+    textAlign: 'center',
+    paddingVertical: 3,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#122115',
+    width: '100%',
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
+    borderColor: '#f67b43'
+  },
+  modalDescription: {
+    fontSize: 17,
+    color: '#386641',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+
+
+  //CREATE RECIPE (CreateRecipeScreen.js)
   recipeContent: {
     flex: 1,
     justifyContent: 'center',
@@ -226,7 +338,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
 
-  //OWN RECIPE DETAIL SCREEN (RecipeDetailScreen)
+  //OWN RECIPE DETAIL SCREEN (RecipeDetailScreen.js)
   scrollContentRecipeDS: {
     backgroundColor: '#fcf6eba1',
     marginVertical: 20,
@@ -293,101 +405,7 @@ export default StyleSheet.create({
     fontWeight: '600',
   },
 
-  //Article section
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#386641',
-    padding: 5,
-    width: '100%',
-    borderBottomWidth: 2,
-    borderColor: '#f67b43'
-  },
-  articleCarousel: {
-    paddingVertical: 10,
-    backgroundColor: '#386641a9',
-    elevation: 2,
-  },
-  articleContainer: {
-    width: 200,
-    marginRight: 15,
-    backgroundColor: '#f3fff5',
-    padding: 10,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 3,
-    marginLeft: 8,
-  },
-  articleImage: {
-    width: '100%',
-    height: 120,
-    borderRadius: 8,
-    marginBottom: 10,
-    elevation: 3,
-  },
-  articleTitle: {
-    paddingVertical: 3,
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    color: '#122115',
-    borderBottomWidth: 2,
-    borderTopWidth: 2,
-    borderColor: '#f67b43'
-  },
-  articleContent: {
-    fontSize: 16,
-    color: '#24422a',
-  },
-
-  //Article Modal 
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2525257e',
-  },
-  modalContent: {
-    width: '90%',
-    backgroundColor: '#f3fff5',
-    borderRadius: 10,
-    padding: 20,
-    alignItems: 'center',
-    elevation: 5, // Shadow for Android
-    shadowColor: '#000', // Shadow for iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
-  modalImage: {
-    width: '100%',
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 15,
-  },
-  modalTitle: {
-    textAlign: 'center',
-    paddingVertical: 3,
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    color: '#122115',
-    width: '100%',
-    borderBottomWidth: 2,
-    borderTopWidth: 2,
-    borderColor: '#f67b43'
-  },
-  modalDescription: {
-    fontSize: 17,
-    color: '#386641',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-
+  //Meal and Cocktail screens (MealScreen.js & CocktailScreen.js)
 
   //SEARCH INPUT
   searchRow: {
@@ -495,8 +513,7 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 15,
   },
 
-  //RECIPE SCREENS (DetailScreen)
-
+  //RECIPE SCREENS ((MealDetailScreen.js & CocktailDetailScreen.js))
   innerContainerMealDS: {
     backgroundColor: '#f3fff5e9',
     borderRadius: 10,
@@ -545,12 +562,9 @@ export default StyleSheet.create({
     marginHorizontal: 15,
     paddingVertical: 5,
   },
-
-  //MEAL CATEGORY INFO
   foodDetCat: {
     marginHorizontal: 15,
   },
-
   foodDetCatTitle: {
     height: 50,
     alignContent: 'center',
@@ -561,7 +575,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
 
-  //SHOPPING LIST
+  //SHOPPING LIST (ShoppingListScreen.js)
   shopListCreation: {
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -641,17 +655,6 @@ export default StyleSheet.create({
     color: '#ff6b6b',
     fontSize: 16,
   },
-
-  // Themelayout
-  ThemeLayoutBackground: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-  ThemeLayoutContent: {
-    flex: 1,
-  },
-
-  //SettingsScreen.js
 
   //SettingsScreen.js
   settingItem: {
