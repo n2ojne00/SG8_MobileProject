@@ -737,6 +737,8 @@ export default StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  settingInfo: {
+  },
 
   //RegisterScreen.js  //LocalLoginScreen.js
   titleLogin: {

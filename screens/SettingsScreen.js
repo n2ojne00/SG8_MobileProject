@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../contexts/ThemeContext';
 import ThemeLayout from '../contexts/ThemeLayout';
 import styles from '../styles/style';
+import Entypo from '@expo/vector-icons/Entypo';
 
 const SettingsScreen = ({ navigation }) => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -48,6 +49,10 @@ const SettingsScreen = ({ navigation }) => {
       index: 0,
       routes: [{ name: 'Login' }],
     });
+  };
+
+  const info = async () => {
+    Alert.alert('Tiimi 8', 'Topias Tyni, Lauri Itkonen, Joni Neuvonen, Netta Ojala, Elias Konttaniemi');
   };
 
   return (
@@ -99,6 +104,9 @@ const SettingsScreen = ({ navigation }) => {
             <Text style={styles.logoutButtonText}>Logout</Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity onPress={info} style={styles.settingInfo}>
+          <Entypo name="info" size={30}/>
+          </TouchableOpacity>
       </View>
     </ThemeLayout>
   );
