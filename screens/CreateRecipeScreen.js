@@ -4,7 +4,10 @@ import * as ImagePicker from 'expo-image-picker';
 import { useRecipes } from '../contexts/RecipeContext';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/style';
+import { globalStyles } from '../styles/GlobalStyles';
 import ThemeLayout from "../contexts/ThemeLayout";
+import { MainStyles } from '../styles/MainScreenStyles';
+import { CreateRecipe } from '../styles/CreateRecipeStyles';
 
 const CreateRecipeScreen = () => {
     const { addRecipe } = useRecipes();
@@ -67,38 +70,38 @@ const CreateRecipeScreen = () => {
     };
 
     return (
-        <ImageBackground style={styles.background} resizeMode="cover">
+        <ImageBackground style={globalStyles.background} resizeMode="cover">
             <ThemeLayout>
-                <View style={styles.container}>
+                <View style={globalStyles.container}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={styles.recipeContent}>
-                            <View style={[styles.RecipeButton, { marginTop: 12 }]}>
+                        <View style={CreateRecipe.recipeContent}>
+                            <View style={[MainStyles.RecipeButton, { marginTop: 12 }]}>
                                 <Image
                                     source={require('../images/logos/createRecipe.png')}
-                                    style={styles.recipeImage}
+                                    style={MainStyles.recipeImage}
                                 />
                             </View>
-                            <View style={styles.recipeName}>
+                            <View style={CreateRecipe.recipeName}>
                                 <TextInput
-                                    style={styles.recipeInput}
+                                    style={CreateRecipe.recipeInput}
                                     placeholder="Recipe Name"
                                     value={name}
                                     onChangeText={setName}
                                 />
                             </View>
-                            <View style={styles.recipeTextAreas}>
-                                <Text style={styles.recipeTitle}>INGREDIENTS</Text>
+                            <View style={CreateRecipe.recipeTextAreas}>
+                                <Text style={CreateRecipe.recipeTitle}>INGREDIENTS</Text>
                                 <TextInput
-                                    style={styles.ingredientsinput}
+                                    style={CreateRecipe.ingredientsinput}
                                     placeholder="Ingredients"
                                     value={ingredients}
                                     onChangeText={setIngredients}
                                     multiline
                                 />
 
-                                <Text style={styles.recipeTitle}>GUIDE</Text>
+                                <Text style={CreateRecipe.recipeTitle}>GUIDE</Text>
                                 <TextInput
-                                    style={styles.guideinput}
+                                    style={CreateRecipe.guideinput}
                                     placeholder="Guide"
                                     value={guide}
                                     onChangeText={setGuide}
@@ -107,23 +110,23 @@ const CreateRecipeScreen = () => {
                             </View>
 
                             <View style={styles.photoSection}>
-                        {photo ? (
-                        <Image 
-                            source={{ uri: photo }} 
-                            style={styles.recipePhoto} 
-                        />
-                        ) : (
-                        <Text style={styles.noPhotoText}>No photo selected</Text>
-                        )}
-                        <TouchableOpacity onPress={openCamera} style={styles.photoButton}>
-                            <Text style={{ color: '#fff' }}>Take Photo</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={openGallery} style={styles.photoButton}>
-                            <Text style={{ color: '#fff' }}>Choose from Gallery</Text>
-                        </TouchableOpacity>
+                                {photo ? (
+                                    <Image
+                                        source={{ uri: photo }}
+                                        style={CreateRecipe.recipePhoto}
+                                    />
+                                ) : (
+                                    <Text style={styles.noPhotoText}>No photo selected</Text>
+                                )}
+                                <TouchableOpacity onPress={openCamera} style={CreateRecipe.photoButton}>
+                                    <Text style={{ color: '#fff' }}>Take Photo</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={openGallery} style={CreateRecipe.photoButton}>
+                                    <Text style={{ color: '#fff' }}>Choose from Gallery</Text>
+                                </TouchableOpacity>
                             </View>
 
-                            <TouchableOpacity onPress={handleSaveRecipe} style={styles.saveRecipeBtn}>
+                            <TouchableOpacity onPress={handleSaveRecipe} style={CreateRecipe.saveRecipeBtn}>
                                 <Text style={{ fontWeight: 'bold', color: '#386641' }}>SAVE</Text>
                             </TouchableOpacity>
                         </View>

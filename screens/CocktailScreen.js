@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import styles from '../styles/style';
+import { globalStyles } from '../styles/GlobalStyles';
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ThemeLayout from "../contexts/ThemeLayout";
@@ -12,6 +12,7 @@ import shotImage from '../images/categories/shots.jpg';
 import beerImage from '../images/categories/Beer.jpg';
 import punchImage from '../images/categories/punch.jpg';
 import coffeeTeaImage from '../images/categories/hotdrink.jpg';
+import { MealAndDrink } from '../styles/MealsAndDrinks';
 
 
 
@@ -89,16 +90,16 @@ const CocktailScreen = () => {
   return (
     
   <ImageBackground
-    style={styles.background}
+    style={globalStyles.background}
     resizeMode="cover"
   >
     <ThemeLayout>
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
 
-      <View style={styles.searchRow}>
-        <FontAwesome name="search" size={20} color="#6A994E" style={styles.icon} />
+      <View style={MealAndDrink.searchRow}>
+        <FontAwesome name="search" size={20} color="#6A994E" style={MealAndDrink.icon} />
         <TextInput
-          style={[styles.textInput, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
+          style={[MealAndDrink.textInput, { backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5', color: isDarkMode ? '#ffffff' : '#000000' }]}
           placeholder="Search for a cocktail..."
           placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
           value={search}
@@ -113,7 +114,7 @@ const CocktailScreen = () => {
   
        {/* Horizontal FlatList for categories */}
 <FlatList
-  style={styles.categoryList}
+  style={MealAndDrink.categoryList}
   data={categories}
   keyExtractor={(item) => item}
   horizontal
@@ -122,24 +123,24 @@ const CocktailScreen = () => {
     <TouchableOpacity
       onPress={() => handleCategorySelect(item)}
       style={[
-        styles.categoryButton,
-        selectedCategory === item && styles.selectedCategory,
+        MealAndDrink.categoryButton,
+        selectedCategory === item && MealAndDrink.selectedCategory,
       ]}
     >
-      <View style={styles.categoryContainer}>
+      <View style={MealAndDrink.categoryContainer}>
         {/* Display image as background */}
         {categoryImages[item] && (
           <Image
             source={categoryImages[item]}
-            style={styles.categoryImage}
+            style={MealAndDrink.categoryImage}
           />
         )}
         {/* Overlay text */}
-        <View style={styles.overlay}>
+        <View style={MealAndDrink.overlay}>
           <Text
             style={[
-              styles.categoryText,
-              selectedCategory === item && styles.selectedCategoryText,
+              MealAndDrink.categoryText,
+              selectedCategory === item && MealAndDrink.selectedCategoryText,
             ]}
           >
             {item}
@@ -153,16 +154,16 @@ const CocktailScreen = () => {
 
         {/* FlatList for cocktails */}
         <FlatList
-        style={styles.foodList}
+        style={MealAndDrink.foodList}
           data={cocktails}
           keyExtractor={(item) => item.idDrink}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => goToDetail(item.idDrink)}>
-              <View style={styles.mealSelect}>
-                <Image source={{ uri: item.strDrinkThumb }} style={styles.mealImage} />
+              <View style={MealAndDrink.mealSelect}>
+                <Image source={{ uri: item.strDrinkThumb }} style={MealAndDrink.mealImage} />
                 <Text
                   style={[
-                    styles.mealTitle,
+                    MealAndDrink.mealTitle,
                     { color: isDarkMode ? '#000000' : '#ffffff' },
                   ]}
                 >
@@ -172,7 +173,7 @@ const CocktailScreen = () => {
             </TouchableOpacity>
           )}
           ListEmptyComponent={
-            <Text style={[styles.emptyMessage, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+            <Text style={[MealAndDrink.emptyMessage, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
               No cocktails found.
             </Text>
           }

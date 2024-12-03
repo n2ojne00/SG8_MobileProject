@@ -1,7 +1,7 @@
 import React from 'react';
 import { ImageBackground, View } from 'react-native';
 import { useTheme } from './ThemeContext'; // Same folder, so relative path remains './'
-import styles from '../styles/style';
+import { globalStyles } from '../styles/GlobalStyles';
 
 // Map theme names to image paths
 const backgroundImages = {
@@ -14,8 +14,8 @@ const ThemeLayout = ({ children }) => {
   const backgroundImage = isDarkMode ? backgroundImages.dark : backgroundImages.light;
 
   return (
-    <ImageBackground source={backgroundImage} style={styles.ThemeLayoutBackground}>
-      <View style={styles.ThemeLayoutContent}>{children}</View>
+    <ImageBackground source={backgroundImage} style={globalStyles.ThemeLayoutBackground}>
+      <View style={globalStyles.ThemeLayoutContent}>{children}</View>
     </ImageBackground>
   );
 };

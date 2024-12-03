@@ -3,6 +3,8 @@ import styles from "../styles/style";
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ThemeLayout from "../contexts/ThemeLayout";
+import { LoginStyles } from '../styles/LoginScreenStyles';
+import { Settings } from '../styles/SettingsStyles';
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -39,30 +41,30 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <ThemeLayout>
-    <View style={styles.containerLogin}>
+    <View style={LoginStyles.containerLogin}>
     
-      <Text style={styles.titleLogin}>Create an Account</Text>
+      <Text style={LoginStyles.titleLogin}>Create an Account</Text>
 
-      <Text style={styles.label}>Email</Text>
+      <Text style={Settings.label}>Email</Text>
       <TextInput
-        style={styles.accountInput}
+        style={Settings.accountInput}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
       />
-      <Text style={styles.label}>Password</Text>
+      <Text style={Settings.label}>Password</Text>
       <TextInput
-        style={styles.accountInput}
+        style={Settings.accountInput}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Text style={styles.label}>Confirm Password</Text>
+      <Text style={Settings.label}>Confirm Password</Text>
       <TextInput
-        style={styles.accountInput}
+        style={Settings.accountInput}
         placeholder="Confirm Password"
         value={confirmPassword}
         onChangeText={setConfirmPassword}
@@ -70,10 +72,10 @@ const RegisterScreen = ({ navigation }) => {
       />
 
       <TouchableOpacity
-        style={styles.buttonLogin}
+        style={LoginStyles.buttonLogin}
         onPress={handleRegister}
       >
-        <Text style={styles.buttonTextLogin}>Register</Text>
+        <Text style={LoginStyles.buttonTextLogin}>Register</Text>
       </TouchableOpacity>
     </View>
     </ThemeLayout>

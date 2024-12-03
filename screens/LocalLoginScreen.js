@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import styles from "../styles/style";
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ThemeLayout from '../contexts/ThemeLayout';
+import { LoginStyles } from '../styles/LoginScreenStyles';
+import { Settings } from '../styles/SettingsStyles';
 
 const LocalLoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -27,29 +28,29 @@ const LocalLoginScreen = ({ navigation }) => {
 
   return (
     <ThemeLayout>
-    <View style={styles.containerLogin}>
-      <Text style={styles.titleLogin}>Login with Local Account</Text>
+    <View style={LoginStyles.containerLogin}>
+      <Text style={LoginStyles.titleLogin}>Login with Local Account</Text>
 
-      <Text style={styles.label}>Email</Text>
+      <Text style={Settings.label}>Email</Text>
       <TextInput
-        style={styles.accountInput}
+        style={Settings.accountInput}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
       />
-      <Text style={styles.label}>Password</Text>
+      <Text style={Settings.label}>Password</Text>
       <TextInput
-        style={styles.accountInput}
+        style={Settings.accountInput}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.buttonLogin} onPress={handleLogin}>
-        <Text style={styles.buttonTextLogin}>Login</Text>
+      <TouchableOpacity style={LoginStyles.buttonLogin} onPress={handleLogin}>
+        <Text style={LoginStyles.buttonTextLogin}>Login</Text>
       </TouchableOpacity>
     </View>
     </ThemeLayout>

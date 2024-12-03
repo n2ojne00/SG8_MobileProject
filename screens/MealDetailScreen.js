@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, ActivityIndicator, ImageBackground, TouchableOpacity, Modal, Button } from 'react-native';
-import styles from "../styles/style";
 import { useTheme } from '../contexts/ThemeContext';
 import CountryFlag from 'react-native-country-flag';
 import ThemeLayout from "../contexts/ThemeLayout";
-
+import { globalStyles } from '../styles/GlobalStyles';
+import { MealAndDrink } from '../styles/MealsAndDrinks';
 // Updated image paths for categories
 import chickenImg from '../images/logos/logoChicken.png';
 import beefImg from '../images/logos/logoBeef.png';
@@ -16,6 +16,7 @@ import dessertImg from '../images/logos/logoDess.png';
 import starterImg from '../images/logos/logoStarter.png';
 import sheepImg from '../images/logos/logoSheep.png';
 import MisceImg from '../images/logos/logoMisc.png';
+
 
 
 const MealDetailScreen = ({ route }) => {
@@ -85,7 +86,7 @@ const MealDetailScreen = ({ route }) => {
       Chicken: chickenImg,
       Beef: beefImg,
       Pork: porkImg,
-      Seafood: fishImg, 
+      Seafood: fishImg,
       Vegan: veganImg,
       Vegetarian: veganImg,
       Pasta: pastaImg,
@@ -131,28 +132,28 @@ const MealDetailScreen = ({ route }) => {
   }
 
   if (!meal) {
-    return <Text style={styles.errorMessage}>Meal details not found.</Text>;
+    return <Text style={MealAndDrink.errorMessage}>Meal details not found.</Text>;
   }
 
   const countryCode = getCountryCodeFromArea(meal.strArea);
   const categoryImage = getCategoryImage(meal.strCategory);
 
   return (
-    <ImageBackground style={styles.background} resizeMode="cover">
+    <ImageBackground style={globalStyles.background} resizeMode="cover">
       <ThemeLayout>
-        <View style={styles.container}>
-          <ScrollView contentContainerStyle={styles.scrollContentMealDS} showsVerticalScrollIndicator={false}>
-            <View style={styles.innerContainerMealDS}>
-              <Image source={{ uri: meal.strMealThumb }} style={styles.imageDS} />
-              <Text style={[styles.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+        <View style={globalStyles.container}>
+          <ScrollView contentContainerStyle={MealAndDrink.scrollContentMealDS} showsVerticalScrollIndicator={false}>
+            <View style={MealAndDrink.innerContainerMealDS}>
+              <Image source={{ uri: meal.strMealThumb }} style={MealAndDrink.imageDS} />
+              <Text style={[MealAndDrink.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                 {meal.strMeal}
               </Text>
 
-              <View style={[styles.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
-                <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              <View style={[MealAndDrink.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
+                <Text style={[MealAndDrink.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                   Category: {categoryImage && <Image source={categoryImage} style={{ width: 35, height: 35 }} />}
                 </Text>
-                <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                <Text style={[MealAndDrink.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                   Area: {countryCode && (
                     <View style={{ marginVertical: 10 }}>
                       <CountryFlag isoCode={countryCode} size={35} />
@@ -161,27 +162,27 @@ const MealDetailScreen = ({ route }) => {
                 </Text>
               </View>
 
-              <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              <Text style={[MealAndDrink.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                 Ingredients:
               </Text>
-              <TouchableOpacity 
-    onPress={() => setModalVisible(true)} 
-    style={[styles.button, { marginLeft: 10, marginRight: 10, marginBottom: 10, borderColor: isDarkMode ? '#ffffff' : '#000000', borderWidth: 1, width: '60%', alignSelf: 'center' }]} // Add margin for spacing
-  >
-    <Text style={styles.buttonText}>Saved Ingredients</Text>
-  </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setModalVisible(true)}
+                style={[MealAndDrink.button, { marginLeft: 10, marginRight: 10, marginBottom: 10, borderColor: isDarkMode ? '#ffffff' : '#000000', borderWidth: 1, width: '60%', alignSelf: 'center' }]} // Add margin for spacing
+              >
+                <Text style={MealAndDrink.buttonText}>Saved Ingredients</Text>
+              </TouchableOpacity>
               {getIngredients().map((ingredient, index) => (
                 <TouchableOpacity key={index} onPress={() => handleIngredientClick(ingredient)}>
-                  <Text style={[styles.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                  <Text style={[MealAndDrink.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                     {ingredient}
                   </Text>
                 </TouchableOpacity>
               ))}
 
-              <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              <Text style={[MealAndDrink.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                 Instructions:
               </Text>
-              <Text style={[styles.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              <Text style={[MealAndDrink.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                 {meal.strInstructions}
               </Text>
             </View>
@@ -189,29 +190,29 @@ const MealDetailScreen = ({ route }) => {
 
           {/* Modal to show selected ingredients */}
           <Modal
-  animationType="slide"
-  transparent={true}
-  visible={modalVisible}
-  onRequestClose={() => setModalVisible(false)}
->
-  <View style={styles.modalView}>
-    <View style={styles.modalContent}>
-      <Text style={styles.modalTitle}>Selected Ingredients</Text>
-      <Text style={styles.selectedIngredient}>{selectedIngredient}</Text>
-      <TouchableOpacity onPress={handleSaveIngredient} style={styles.button}>
-        <Text style={styles.buttonText}>Save</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setModalVisible(false)} style={[styles.button, styles.closeButton]}>
-        <Text style={styles.buttonText}>Close</Text>
-      </TouchableOpacity>
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View style={MealAndDrink.modalView}>
+              <View style={MealAndDrink.modalContent}>
+                <Text style={MealAndDrink.modalTitle}>Selected Ingredients</Text>
+                <Text style={MealAndDrink.selectedIngredient}>{selectedIngredient}</Text>
+                <TouchableOpacity onPress={handleSaveIngredient} style={MealAndDrink.button}>
+                  <Text style={MealAndDrink.buttonText}>Save</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setModalVisible(false)} style={[MealAndDrink.button, MealAndDrink.closeButton]}>
+                  <Text style={MealAndDrink.buttonText}>Close</Text>
+                </TouchableOpacity>
 
-      <Text style={styles.savedIngredientsTitle}>Saved Ingredients:</Text>
-      {savedIngredients.map((ingredient, index) => (
-        <Text key={index} style={styles.savedIngredient}>{ingredient}</Text>
-      ))}
-    </View>
-  </View>
-</Modal>
+                <Text style={MealAndDrink.savedIngredientsTitle}>Saved Ingredients:</Text>
+                {savedIngredients.map((ingredient, index) => (
+                  <Text key={index} style={MealAndDrink.savedIngredient}>{ingredient}</Text>
+                ))}
+              </View>
+            </View>
+          </Modal>
         </View>
       </ThemeLayout>
     </ImageBackground>

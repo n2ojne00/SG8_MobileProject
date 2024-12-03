@@ -15,6 +15,8 @@ import dessertImage from '../images/categories/dessert.jpg'
 import startersImage from '../images/categories/snacks.jpg'
 
 import ThemeLayout from "../contexts/ThemeLayout";
+import { globalStyles } from '../styles/GlobalStyles';
+import { MealAndDrink } from '../styles/MealsAndDrinks';
 
 
 const categories = ["Chicken", "Beef", "Pork", "Fish", "Vegan", "Pasta", "Dessert", "Starters"];
@@ -87,16 +89,16 @@ const MealScreen = ({ route, navigation }) => {
 
   return (
     <ImageBackground
-    style={styles.background}
+    style={globalStyles.background}
     resizeMode="cover"
     >
     <ThemeLayout>
 
-    <View style={styles.container}>
-      <View style={styles.searchRow}>
-        <FontAwesome name="search" size={20} color="#6A994E" style={styles.icon} />
+    <View style={globalStyles.container}>
+      <View style={MealAndDrink.searchRow}>
+        <FontAwesome name="search" size={20} color="#6A994E" style={MealAndDrink.icon} />
         <TextInput
-          style={[styles.textInput,
+          style={[MealAndDrink.textInput,
           {
             backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5',
             color: isDarkMode ? '#ffffff' : '#000000'
@@ -114,7 +116,7 @@ const MealScreen = ({ route, navigation }) => {
 
       {/* Horizontal FlatList for categories */}
       <FlatList
-        style={styles.categoryList}
+        style={MealAndDrink.categoryList}
         data={categories}
         keyExtractor={(item) => item}
         horizontal
@@ -123,24 +125,24 @@ const MealScreen = ({ route, navigation }) => {
           <TouchableOpacity
             onPress={() => handleCategorySelect(item)}
             style={[
-              styles.categoryButton,
-              selectedCategory === item && styles.selectedCategory,
+              MealAndDrink.categoryButton,
+              selectedCategory === item && MealAndDrink.selectedCategory,
             ]}
           >
-            <View style={styles.categoryContainer}>
+            <View style={MealAndDrink.categoryContainer}>
               {/* Display image as background */}
               {categoryImages[item] && (
                 <Image
                   source={categoryImages[item]}
-                  style={styles.categoryImage}
+                  style={MealAndDrink.categoryImage}
                 />
               )}
               {/* Overlay text */}
-              <View style={styles.overlay}>
+              <View style={MealAndDrink.overlay}>
                 <Text
                   style={[
-                    styles.categoryText,
-                    selectedCategory === item && styles.selectedCategoryText,
+                    MealAndDrink.categoryText,
+                    selectedCategory === item && MealAndDrink.selectedCategoryText,
                   ]}
                 >
                   {item}
@@ -155,7 +157,7 @@ const MealScreen = ({ route, navigation }) => {
 
       {/* FlatList for meals */}
       <FlatList
-        style={styles.foodList}
+        style={MealAndDrink.foodList}
         data={meals}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.idMeal}
@@ -164,11 +166,11 @@ const MealScreen = ({ route, navigation }) => {
 
             onPress={() => navigation.navigate('MealDetail', { idMeal: item.idMeal })}
           >
-            <View style={styles.mealSelect}>
-              <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
+            <View style={MealAndDrink.mealSelect}>
+              <Image source={{ uri: item.strMealThumb }} style={MealAndDrink.mealImage} />
               <Text
                 style={[
-                  styles.mealTitle,
+                  MealAndDrink.mealTitle,
                   { color: isDarkMode ? '#000000' : '#ffffff' },
                 ]}
               >
@@ -178,7 +180,7 @@ const MealScreen = ({ route, navigation }) => {
           </TouchableOpacity>
         )}
         ListEmptyComponent={
-          <Text style={styles.emptyMessage}>No meals found.</Text>
+          <Text style={MealAndDrink.emptyMessage}>No meals found.</Text>
         }
       />
 

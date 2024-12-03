@@ -4,6 +4,8 @@ import { View, Text, Image, TouchableOpacity, ScrollView, Modal, Button, ImageBa
 import styles from '../styles/style';
 import Entypo from '@expo/vector-icons/Entypo';
 import ThemeLayout from "../contexts/ThemeLayout";
+import { MainStyles } from '../styles/MainScreenStyles';
+import { globalStyles } from '../styles/GlobalStyles';
 
 
 const MainScreen = ({ navigation }) => {
@@ -76,40 +78,40 @@ const MainScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-      style={styles.background}
+      style={globalStyles.background}
       resizeMode="cover"
     >
       <ThemeLayout>
-        <View style={styles.MainContainer}>
+        <View style={MainStyles.MainContainer}>
           <ScrollView>
 
-            <Image source={require('../images/succlyLogo.png')} style={styles.logo} />
+            <Image source={require('../images/succlyLogo.png')} style={globalStyles.logo} />
 
             {/* Food and Drink of the Day Section */}
-            <View style={styles.foodDrinkContainer}>
+            <View style={MainStyles.foodDrinkContainer}>
               {foodOfTheDay && (
-                <View style={styles.ofTheDayContainer}>
+                <View style={MainStyles.ofTheDayContainer}>
                   <Entypo name="pin" size={24} color="#f96521" />
-                  <Text style={styles.ofTheDayTitle}>Food of the Day</Text>
+                  <Text style={MainStyles.ofTheDayTitle}>Food of the Day</Text>
                   <TouchableOpacity
                     onPress={() => navigation.navigate('MealDetailScreen', { idMeal: foodOfTheDay.idMeal })}
-                    style={styles.otdNavigation}>
-                    <Image source={{ uri: foodOfTheDay.strMealThumb }} style={styles.ofTheDayImage} />
-                    <Text style={styles.otdRecipe}>{foodOfTheDay.strMeal}</Text>
+                    style={MainStyles.otdNavigation}>
+                    <Image source={{ uri: foodOfTheDay.strMealThumb }} style={MainStyles.ofTheDayImage} />
+                    <Text style={MainStyles.otdRecipe}>{foodOfTheDay.strMeal}</Text>
                   </TouchableOpacity>
                 </View>
               )}
 
               {drinkOfTheDay ? (
-                <View style={styles.ofTheDayContainer}>
+                <View style={MainStyles.ofTheDayContainer}>
                   <Entypo name="pin" size={24} color="#f96521" />
-                  <Text style={styles.ofTheDayTitle}>Drink of the Day</Text>
+                  <Text style={MainStyles.ofTheDayTitle}>Drink of the Day</Text>
                   <TouchableOpacity
                     onPress={() => navigation.navigate('CocktailDetail', { idDrink: drinkOfTheDay.idDrink })}
-                    style={styles.otdNavigation}>
+                    style={MainStyles.otdNavigation}>
 
-                    <Image source={{ uri: drinkOfTheDay.strDrinkThumb }} style={styles.ofTheDayImage} />
-                    <Text style={styles.otdRecipe}>{drinkOfTheDay.strDrink}</Text>
+                    <Image source={{ uri: drinkOfTheDay.strDrinkThumb }} style={MainStyles.ofTheDayImage} />
+                    <Text style={MainStyles.otdRecipe}>{drinkOfTheDay.strDrink}</Text>
                   </TouchableOpacity>
                 </View>
               ) : (
@@ -118,36 +120,36 @@ const MainScreen = ({ navigation }) => {
             </View>
 
             {/* RecipeBook Section */}
-            <Text style={styles.sectionTitle}>Recipes</Text>
-            <View style={styles.bookContainer}>
+            <Text style={MainStyles.sectionTitle}>Recipes</Text>
+            <View style={MainStyles.bookContainer}>
               {/* Book Image Background */}
-              <View style={styles.bookBackgroundContainer}>
+              <View style={MainStyles.bookBackgroundContainer}>
                 <Image
                   source={require('../images/logos/book.png')}
-                  style={styles.bookImage}
+                  style={MainStyles.bookImage}
                 />
 
                 {/* Buttons Overlay */}
-                <View style={styles.buttonOverlay}>
+                <View style={MainStyles.buttonOverlay}>
                   <TouchableOpacity
-                    style={styles.RecipeButton}
+                    style={MainStyles.RecipeButton}
                     onPress={() => navigation.navigate('CreateRecipe')}
                   >
                     <Image
                       source={require('../images/logos/createRecipe.png')}
-                      style={styles.recipeImage} />
-                    <Text style={styles.recipeButtonText}>New recipe</Text>
+                      style={MainStyles.recipeImage} />
+                    <Text style={MainStyles.recipeButtonText}>New recipe</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    style={styles.RecipeButton}
+                    style={MainStyles.RecipeButton}
                     onPress={() => navigation.navigate('RecipeList')}
                   >
                     <Image
                       source={require('../images/logos/recipelist.png')}
-                      style={styles.recipeImage}
+                      style={MainStyles.recipeImage}
                     />
-                    <Text style={styles.recipeButtonText}>Your recipes</Text>
+                    <Text style={MainStyles.recipeButtonText}>Your recipes</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -155,18 +157,18 @@ const MainScreen = ({ navigation }) => {
 
 
             {/* Article Section */}
-            <Text style={styles.sectionTitle}>Food Articles</Text>
-            <ScrollView horizontal style={styles.articleCarousel}
+            <Text style={MainStyles.sectionTitle}>Food Articles</Text>
+            <ScrollView horizontal style={MainStyles.articleCarousel}
               showsHorizontalScrollIndicator={false}>
               {exampleArticles.map((article, index) => (
                 <TouchableOpacity
                   key={index}
                   onPress={() => openArticleModal(article)}
-                  style={styles.articleContainer}
+                  style={MainStyles.articleContainer}
                 >
-                  <Image source={{ uri: article.imageUrl }} style={styles.articleImage} />
-                  <Text style={styles.articleTitle}>{article.title}</Text>
-                  <Text style={styles.articleContent}>{article.content}</Text>
+                  <Image source={{ uri: article.imageUrl }} style={MainStyles.articleImage} />
+                  <Text style={MainStyles.articleTitle}>{article.title}</Text>
+                  <Text style={MainStyles.articleContent}>{article.content}</Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -178,11 +180,11 @@ const MainScreen = ({ navigation }) => {
                 animationType="slide"
                 transparent={true}
               >
-                <View style={styles.modalOverlay}>
-                  <View style={styles.modalContent}>
-                    <Image source={{ uri: selectedArticle.imageUrl }} style={styles.modalImage} />
-                    <Text style={styles.modalTitle}>{selectedArticle.title}</Text>
-                    <Text style={styles.modalDescription}>{selectedArticle.content}</Text>
+                <View style={MainStyles.modalOverlay}>
+                  <View style={MainStyles.modalContent}>
+                    <Image source={{ uri: selectedArticle.imageUrl }} style={MainStyles.modalImage} />
+                    <Text style={MainStyles.modalTitle}>{selectedArticle.title}</Text>
+                    <Text style={MainStyles.modalDescription}>{selectedArticle.content}</Text>
                     <Pressable onPress={closeArticleModal} style={styles.saveRecipeBtn}>
                       <Text>CLOSE</Text>
                     </Pressable>

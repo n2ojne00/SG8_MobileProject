@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, Alert, ImageBackground, TouchableOpacity, Modal, ActivityIndicator, ScrollView } from 'react-native';
 import axios from 'axios';
 import styles from "../styles/style";
+import { globalStyles } from '../styles/GlobalStyles';
 import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
 import ThemeLayout from "../contexts/ThemeLayout";
 
@@ -77,7 +78,7 @@ const CocktailDetailScreen = ({ route }) => {
   return (
     <ImageBackground style={styles.background} resizeMode="cover">
       <ThemeLayout>
-        <View style={styles.container}>
+        <View style={globalStyles.container}>
           <ScrollView contentContainerStyle={styles.scrollContentMealDS} showsVerticalScrollIndicator={false}>
             <View style={styles.innerContainerMealDS}>
               <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.imageDS} />

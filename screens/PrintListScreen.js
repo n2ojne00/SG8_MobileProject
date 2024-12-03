@@ -1,28 +1,33 @@
 import React from 'react';
 import { View, Text, FlatList, ImageBackground, Pressable } from 'react-native';
 import styles from "../styles/style";
+import { globalStyles } from '../styles/GlobalStyles';
 import ThemeLayout from '../contexts/ThemeLayout';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { MainStyles } from '../styles/MainScreenStyles';
+import { PrintList } from '../styles/PrintListStyles';
+import { MealAndDrink } from '../styles/MealsAndDrinks';
+
 
 const PrintListScreen = ({ route, navigation }) => {
   const { list } = route.params;
 
   return (
-    <ImageBackground style={styles.background} resizeMode="cover">
+    <ImageBackground style={globalStyles.background} resizeMode="cover">
       <ThemeLayout>
-        <View style={styles.container}>
-          <View style={styles.innerContainerPrintList}>
+        <View style={globalStyles.container}>
+          <View style={PrintList.innerContainerPrintList}>
             <View
-              style={[styles.RecipeButton, { marginTop: 12, alignSelf: 'center' }]}>
+              style={[MainStyles.RecipeButton, { marginTop: 12, alignSelf: 'center' }]}>
               <FontAwesome5 name='shopping-basket' size={25} color="#386641" />;
             </View>
 
-            <Text style={styles.titleDS}>{list?.name || 'Shopping List'}</Text>
+            <Text style={MealAndDrink.titleDS}>{list?.name || 'Shopping List'}</Text>
             <FlatList
               data={list?.items || []}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
-                <Text style={styles.shoppinglistItem}>{item}</Text>
+                <Text style={PrintList.shoppinglistItem}>{item}</Text>
               )}
             />
             <Pressable style={[styles.createButton, { alignSelf: 'center' }]} onPress={() => navigation.goBack()} >
