@@ -16,9 +16,13 @@ const RecipeListScreen = () => {
             style={styles.recipeContainer}
             onPress={() => navigation.navigate('RecipeDetail', { recipe: item })}
         >
+        {item.photo && (
+            <Image source={{ uri: item.photo }} style={styles.recipeImageThumbnail} />
+        )}
+        <View style={styles.recipeTextContainer}>
             <Text style={styles.recipeListName}>{item.name}</Text>
-
             <Text style={styles.recipeDate}>{item.date}</Text>
+        </View>
         </TouchableOpacity>
     );
     

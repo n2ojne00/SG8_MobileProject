@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, ScrollView, Image, ImageBackground } from 'react-native';
 import styles from '../styles/style';
 import ThemeLayout from "../contexts/ThemeLayout";
 
@@ -16,6 +16,14 @@ const RecipeDetailScreen = ({ route }) => {
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                     style={styles.scrollContentRecipeDS}>
+                {/* Display the user photo if available */}
+                {recipe.photo ? (
+                    <Image source={{ uri: recipe.photo }} style={styles.recipePhoto} />
+                        ) : (
+                <View style={styles.placeholderPhoto}>
+                    <Text style={styles.placeholderText}>No Photo Available</Text>
+                </View>
+                        )}
                     <Text style={styles.titleDS}>{recipe.name}</Text>
                     <Text style={styles.dateRecipeDS}>{recipe.date}</Text>
                     <Text style={styles.sectionTitleDS}>Ingredients</Text>

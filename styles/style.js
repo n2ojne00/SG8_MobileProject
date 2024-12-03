@@ -170,6 +170,7 @@ export default StyleSheet.create({
     width: 90,
   },
 
+
   //Article section (MainScreen)
   sectionTitle: {
     fontSize: 20,
@@ -337,6 +338,23 @@ export default StyleSheet.create({
     borderColor: '#386641',
     alignItems: 'center',
   },
+  photoContainer: {
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  recipePhoto: {
+    height: 250,
+    elevation: 2,
+    borderRadius: 10,
+  },
+  photoButton: {
+    backgroundColor: '#386641',
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 5,
+    alignItems: 'center',
+  },
+  
 
   //OWN RECIPE DETAIL SCREEN (RecipeDetailScreen.js)
   scrollContentRecipeDS: {
@@ -358,6 +376,30 @@ export default StyleSheet.create({
     textAlign: 'center',
 
   },
+  recipeImageThumbnail: {
+    width: 50,
+    height: 50,
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  recipeTextContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  placeholderPhoto: {
+    width: '100%',
+    height: 200,
+    backgroundColor: '#cccccc',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginBottom: 16,
+},
+placeholderText: {
+    color: '#777',
+    fontSize: 16,
+},
+
 
   //YOUR RECIPES (RecipeListScreen)
   recipeContainer: {
