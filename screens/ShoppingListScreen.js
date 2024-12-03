@@ -12,6 +12,7 @@ import {
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 import { useTheme } from '../contexts/ThemeContext';
+import { Alert } from 'react-native';
 
 const ShoppingListScreen = ({ navigation }) => {
   const [item, setItem] = useState('');
@@ -42,13 +43,23 @@ const ShoppingListScreen = ({ navigation }) => {
     }
   };
 
-  const saveList = () => {
-    if (shoppingList.length > 0 && listName) {
-      setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
-      setShoppingList([]);
-      setListName('');
-    }
-  };
+ const saveList = () => {
+  if (!listName.trim()) {
+    // Show an alert pop-up if the list name is empty
+    Alert.alert(
+      'Error',
+      'List name cannot be empty',
+      [{ text: 'OK', style: 'cancel' }]
+    );
+    return; // Stop further execution
+  }
+
+  if (shoppingList.length > 0) {
+    setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
+    setShoppingList([]);
+    setListName('');
+  }
+};
 
   const removeItem = (index) => {
     const newList = shoppingList.filter((_, i) => i !== index);
@@ -208,7 +219,12 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     marginTop: 20,
-    height: 300,
+    height: 350,
+    width: '100%',
+    borderRadius: 8,
+    overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: '#ccc',
   },
   map: {
     ...StyleSheet.absoluteFillObject,
