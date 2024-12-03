@@ -6,7 +6,7 @@ import ThemeLayout from '../contexts/ThemeLayout';
 import styles from '../styles/style';
 
 const SettingsScreen = ({ navigation }) => {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode, toggleTheme, theme } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -52,51 +52,62 @@ const SettingsScreen = ({ navigation }) => {
 
   return (
     <ThemeLayout>
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
         <View style={styles.settingItem}>
-          <Text style={[styles.settingText, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Dark Mode</Text>
-          <Switch value={isDarkMode} onValueChange={toggleTheme} />
+          <Text style={[styles.settingText, { color: theme.textColor }]}>Dark Mode</Text>
+          <Switch
+            value={isDarkMode}
+            onValueChange={toggleTheme}
+            trackColor={{ false: '#767577', true: '#81b0ff' }}
+            thumbColor={isDarkMode ? '#f4f3f4' : '#f4f3f4'}
+          />
         </View>
 
         <View style={styles.settingsLogin}>
           <View style={styles.recipeTextAreas}>
-            <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Email</Text>
+            <Text style={[styles.label, { color: theme.textColor }]}>Email</Text>
             <TextInput
-              style={[styles.accountInput, { backgroundColor: isDarkMode ? '#1c2938' : '#ffffff', color: isDarkMode ? '#ffffff' : '#000000' }]}
+              style={[styles.accountInput, { backgroundColor: theme.inputBackground, color: theme.inputText }]}
               value={email}
               onChangeText={setEmail}
               placeholder="Enter your email"
-              placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
+              placeholderTextColor={theme.placeholderTextColor}
               autoCapitalize="none"
             />
 
-            <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Current Password</Text>
+            <Text style={[styles.label, { color: theme.textColor }]}>Current Password</Text>
             <TextInput
-              style={[styles.accountInput, { backgroundColor: isDarkMode ? '#1c2938' : '#ffffff', color: isDarkMode ? '#ffffff' : '#000000' }]}
+              style={[styles.accountInput, { backgroundColor: theme.inputBackground, color: theme.inputText }]}
               value={password}
               placeholder="Enter your current password"
-              placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
+              placeholderTextColor={theme.placeholderTextColor}
               secureTextEntry
               editable={false}
             />
 
-            <Text style={[styles.label, { color: isDarkMode ? '#ffffff' : '#000000' }]}>New Password</Text>
+            <Text style={[styles.label, { color: theme.textColor }]}>New Password</Text>
             <TextInput
-              style={[styles.accountInput, { backgroundColor: isDarkMode ? '#1c2938' : '#ffffff', color: isDarkMode ? '#ffffff' : '#000000' }]}
+              style={[styles.accountInput, { backgroundColor: theme.inputBackground, color: theme.inputText }]}
               value={newPassword}
               onChangeText={setNewPassword}
               placeholder="Enter a new password"
-              placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
+              placeholderTextColor={theme.placeholderTextColor}
               secureTextEntry
             />
 
-            <TouchableOpacity style={styles.saveRecipeBtn} onPress={handleSaveChanges}>
-              <Text style={styles.saveButtonText}>Save Changes</Text>
+            <TouchableOpacity
+              style={[styles.saveRecipeBtn, { backgroundColor: theme.buttonBackground }]}
+              onPress={handleSaveChanges}
+            >
+              <Text style={[styles.saveButtonText, { color: theme.buttonText }]}>Save Changes</Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-            <Text style={styles.logoutButtonText}>Logout</Text>
+          <TouchableOpacity
+            style={[styles.logoutButton, { backgroundColor: theme.buttonBackground }]}
+            onPress={handleLogout}
+          >
+            <Text style={[styles.logoutButtonText, { color: theme.buttonText }]}>Logout</Text>
           </TouchableOpacity>
         </View>
       </View>
