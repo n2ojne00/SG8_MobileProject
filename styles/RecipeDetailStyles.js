@@ -44,6 +44,13 @@ placeholderText: {
     color: '#021e01',
     fontSize: 16,
 },
+recipePhoto: {
+  width: 200,
+  height: 200,
+  resizeMode: 'cover',
+  borderRadius: 10,
+  backgroundColor: 'lightgray',
+},
 
 
 })
