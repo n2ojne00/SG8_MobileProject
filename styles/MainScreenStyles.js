@@ -161,14 +161,14 @@ export const MainStyles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
-        color: '#122115',
+        color: '#021e01',
         borderBottomWidth: 2,
         borderTopWidth: 2,
         borderColor: '#f67b43'
     },
     articleContent: {
         fontSize: 16,
-        color: '#24422a',
+        color: '#386641',
     },
 
     //Article Modal (MainScreen)

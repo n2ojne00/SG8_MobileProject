@@ -3,14 +3,12 @@ import { StyleSheet } from 'react-native';
 export const Settings = StyleSheet.create({
    //SettingsScreen.js
   settingItem: {
-    backgroundColor: '#f2ffff75',
+    backgroundColor: '#f5f5f544',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 15,
     paddingHorizontal: 30,
-    borderBottomWidth: 1,
-    borderBottomColor: '#386641',
     marginBottom: 20,
   },
   settingsLogin: {

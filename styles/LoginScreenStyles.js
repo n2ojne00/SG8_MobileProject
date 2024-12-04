@@ -10,7 +10,7 @@ titleLogin: {
   fontWeight: 'bold',
   marginBottom: 24,
   textAlign: 'center',
-  color: '#333',
+  color: '#021e01',
 },
 
   containerLogin: {

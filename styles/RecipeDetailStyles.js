@@ -11,7 +11,7 @@ export const RecipeDetails = StyleSheet.create({
     bottom: 10,
     right: 10,
     fontSize: 12,
-    color: '#213b26',
+    color: '#386641',
   },
   dateRecipeDS: {
     marginTop: 10,
@@ -41,7 +41,7 @@ export const RecipeDetails = StyleSheet.create({
     marginBottom: 16,
 },
 placeholderText: {
-    color: '#777',
+    color: '#021e01',
     fontSize: 16,
 },
 
