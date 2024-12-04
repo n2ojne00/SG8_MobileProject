@@ -75,8 +75,19 @@ export const CreateRecipe = StyleSheet.create({
     },
 
     //Also in RecipeDetailScreen.js
+    photoSection: {
+        width: '90%',
+        alignItems: 'center',
+
+    },
+    photoButtonRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        
+    },
     recipePhoto: {
         height: 250,
+        width: '90%',
         elevation: 2,
         borderRadius: 10,
     },
@@ -86,7 +97,10 @@ export const CreateRecipe = StyleSheet.create({
         borderRadius: 5,
         marginVertical: 5,
         alignItems: 'center',
+        width: '40%',
+        marginTop: 10,
+        marginHorizontal: 15,
     },
-
+    
 
 })
