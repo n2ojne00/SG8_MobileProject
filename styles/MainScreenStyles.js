@@ -214,9 +214,24 @@ export const MainStyles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20,
     },
-
-
-
-
-
+      closeButton: {
+        width: '100%',
+        padding: 12,
+        backgroundColor: '#f67b43',
+        borderRadius: 8,
+        alignItems: 'center',
+        marginTop: 10,
+      },
+      closeButtonText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#fff',
+      },
+      modalScroll: {
+        maxHeight: 300,
+        marginBottom: 10,
+        borderBottomWidth: 1,
+        borderColor: '#ccc', 
+      },
+      
 })
