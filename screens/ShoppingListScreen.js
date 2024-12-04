@@ -5,14 +5,21 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
-  Button,
-  StyleSheet,
-  ScrollView
+  ScrollView,
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 import { useTheme } from '../contexts/ThemeContext';
-import { Alert } from 'react-native';
+import { Entypo, MaterialIcons } from '@expo/vector-icons';
+import { globalStyles } from '../styles/GlobalStyles';
+import { ShopList } from '../styles/ShoppingListStyles';
+import { MainStyles } from '../styles/MainScreenStyles';
+import { RecipeList } from '../styles/RecipeListStyles';
+import ThemeLayout from '../contexts/ThemeLayout';
+
 
 const ShoppingListScreen = ({ navigation }) => {
   const [item, setItem] = useState('');
@@ -30,7 +37,6 @@ const ShoppingListScreen = ({ navigation }) => {
         setErrorMsg('Permission to access location was denied');
         return;
       }
-
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
@@ -43,37 +49,34 @@ const ShoppingListScreen = ({ navigation }) => {
     }
   };
 
- const saveList = () => {
-  if (!listName.trim()) {
-    // Show an alert pop-up if the list name is empty
-    Alert.alert(
-      'Error',
-      'List name cannot be empty',
-      [{ text: 'OK', style: 'cancel' }]
-    );
-    return; // Stop further execution
-  }
-
-  if (shoppingList.length > 0) {
-    setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
-    setShoppingList([]);
-    setListName('');
-  }
-};
+  const saveList = () => {
+    if (!listName.trim()) {
+      alert('List name cannot be empty');
+      return;
+    }
+    if (shoppingList.length > 0) {
+      setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
+      setShoppingList([]);
+      setListName('');
+    }
+  };
 
   const removeItem = (index) => {
-    const newList = shoppingList.filter((_, i) => i !== index);
-    setShoppingList(newList);
+    setShoppingList((prevList) => prevList.filter((_, i) => i !== index));
+  };
+
+  const navigateToListDetail = (list) => {
+    navigation.navigate('PrintListScreen', { list });
   };
 
   const renderMap = () => (
-    <View style={styles.mapContainer}>
-      <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Your Location</Text>
+    <View style={ShopList.mapContainer}>
+      <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Your Location</Text>
       {errorMsg ? (
-        <Text style={[styles.errorText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>{errorMsg}</Text>
+        <Text style={[ShopList.errorText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>{errorMsg}</Text>
       ) : location ? (
         <MapView
-          style={styles.map}
+          style={ShopList.map}
           initialRegion={{
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
@@ -95,156 +98,106 @@ const ShoppingListScreen = ({ navigation }) => {
     </View>
   );
 
+  const renderItem = ({ item, index }) => (
+    <View style={ShopList.itemContainer}>
+      <Text style={[ShopList.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
+      <TouchableOpacity onPress={() => removeItem(index)}>
+        <MaterialIcons name="highlight-remove" size={24} color="#fb4040" />
+      </TouchableOpacity>
+    </View>
+  );
+
+  const renderSavedListItem = ({ item, index }) => (
+    <TouchableOpacity style={ShopList.savedListItem} onPress={() => navigateToListDetail(item)}>
+      <Text style={[ShopList.savedListText, { color: isDarkMode ? '#80bdff' : '#007bff' }]}>{item.name || `List ${index + 1}`}</Text>
+    </TouchableOpacity>
+  );
+
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
-        <TextInput
-          style={[
-            styles.input,
-            { backgroundColor: isDarkMode ? '#1e1e1e' : '#fff', color: isDarkMode ? '#ffffff' : '#000000' },
-          ]}
-          placeholder="List Name"
-          placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
-          value={listName}
-          onChangeText={setListName}
-        />
-        <TextInput
-          style={[
-            styles.input,
-            { backgroundColor: isDarkMode ? '#1e1e1e' : '#fff', color: isDarkMode ? '#ffffff' : '#000000' },
-          ]}
-          placeholder="Add an item..."
-          placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
-          value={item}
-          onChangeText={setItem}
-        />
-        <Button title="Add to List" onPress={addItem} />
-        <TouchableOpacity style={styles.saveButton} onPress={saveList}>
-          <Text style={styles.saveButtonText}>Save List</Text>
-        </TouchableOpacity>
-  
-        <View style={[styles.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
-          <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
-            Current Shopping List
-          </Text>
-          <FlatList
-            data={shoppingList}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <View style={styles.itemContainer}>
-                <Text style={[styles.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
-                <TouchableOpacity onPress={() => removeItem(index)}>
-                  <Text style={[styles.removeText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>Remove</Text>
+    <ThemeLayout>
+      <ImageBackground
+        source={require('../images/winter.jpg')}
+        style={globalStyles.background}
+        resizeMode="cover"
+      >
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
+          <ScrollView contentContainerStyle={ShopList.scrollContainer}>
+            <View style={globalStyles.container}>
+              <View style={ShopList.shopListCreation}>
+                <TextInput
+                  style={ShopList.inputShopListName}
+                  placeholder="List Name"
+                  placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
+                  value={listName}
+                  onChangeText={setListName}
+                />
+                <View style={ShopList.addItem}>
+                  <TextInput
+                    style={ShopList.inputShopListItem}
+                    placeholder="Add an item..."
+                    placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
+                    value={item}
+                    onChangeText={setItem}
+                  />
+                  <TouchableOpacity style={ShopList.addShopButton} onPress={addItem}>
+                    <Entypo name="add-to-list" size={25} color="black" />
+                  </TouchableOpacity>
+                </View>
+                <TouchableOpacity style={RecipeList.createButton} onPress={saveList}>
+                  <Text style={RecipeList.buttonTextRL}>Save List</Text>
                 </TouchableOpacity>
               </View>
-            )}
-          />
-        </View>
-  
-        <View style={[styles.savedListsContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#e9ecef' }]}>
-          <Text style={[styles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
-            Saved Shopping Lists
-          </Text>
-          <FlatList
-            data={savedLists}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity
-                style={styles.savedListItem}
-                onPress={() => navigation.navigate('PrintListScreen', { list: item })}
-              >
-                <Text style={[styles.savedListText, { color: isDarkMode ? '#80bdff' : '#007bff' }]}>
-                  {item.name || `List ${index + 1}`}
-                </Text>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-        {renderMap()}
-      </View>
-    </ScrollView>
+              <FlatList
+                data={[
+                  { key: 'Current List', type: 'shoppingList' },
+                  { key: 'Saved Lists', type: 'savedLists' },
+                  { key: 'Map', type: 'map' },
+                ]}
+                renderItem={({ item }) => {
+                  switch (item.type) {
+                    case 'shoppingList':
+                      return (
+                        <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
+                          <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
+                            Current Shopping List
+                          </Text>
+                          <FlatList
+                            data={shoppingList}
+                            keyExtractor={(item, index) => index.toString()}
+                            renderItem={renderItem}
+                          />
+                        </View>
+                      );
+                    case 'savedLists':
+                      return (
+                        <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
+                          <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
+                            Saved Shopping Lists
+                          </Text>
+                          <FlatList
+                            data={savedLists}
+                            keyExtractor={(item, index) => index.toString()}
+                            renderItem={renderSavedListItem}
+                          />
+                        </View>
+                      );
+                    case 'map':
+                      return renderMap();
+                    default:
+                      return null;
+                  }
+                }}
+                keyExtractor={(item) => item.key}
+              />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </ThemeLayout>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    marginTop: 80,
-  },
-  input: {
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    marginBottom: 10,
-  },
-  currentListContainer: {
-    marginTop: 20,
-    padding: 10,
-    borderRadius: 8,
-    elevation: 1,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 10,
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
-  },
-  itemText: {
-    fontSize: 16,
-  },
-  removeText: {
-    fontWeight: 'bold',
-  },
-  savedListsContainer: {
-    marginTop: 20,
-    padding: 10,
-    borderRadius: 8,
-    elevation: 1,
-  },
-  savedListItem: {
-    marginVertical: 5,
-  },
-  savedListText: {
-    fontSize: 16,
-    textDecorationLine: 'underline',
-  },
-  mapContainer: {
-    marginTop: 20,
-    height: 350,
-    width: '100%',
-    borderRadius: 8,
-    overflow: 'hidden',
-    borderWidth: 2,
-    borderColor: '#ccc',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  errorText: {
-    textAlign: 'center',
-    color: '#ff6b6b',
-    fontSize: 16,
-  },
-  saveButton: {
-    marginTop: 20,
-    padding: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-    backgroundColor: '#007bff',
-  },
-  saveButtonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-});
 
 export default ShoppingListScreen;

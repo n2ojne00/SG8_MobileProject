@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 
 export const ShopList = StyleSheet.create({
     //SHOPPING LIST (ShoppingListScreen.js)
+
     shopListCreation: {
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -19,7 +20,8 @@ export const ShopList = StyleSheet.create({
         backgroundColor: '#6A994E',
         marginLeft: 20,
         borderRadius: 10,
-        justifyContent: 'center',
+        justifyContent: 'center', 
+        alignItems: 'center',    
     },
     inputShopListName: {
         height: 50,
