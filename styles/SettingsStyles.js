@@ -60,7 +60,9 @@ export const Settings = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  settingInfo: {
+  settingInfo: {},
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
   },
-
 })
