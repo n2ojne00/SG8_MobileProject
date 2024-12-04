@@ -150,54 +150,39 @@ const ShoppingListScreen = ({ navigation }) => {
                   <Text style={RecipeList.buttonTextRL}>Save List</Text>
                 </TouchableOpacity>
               </View>
-              <FlatList
-                data={[
-                  { key: 'Current List', type: 'shoppingList' },
-                  { key: 'Saved Lists', type: 'savedLists' },
-                  { key: 'Map', type: 'map' },
-                ]}
-                renderItem={({ item }) => {
-                  switch (item.type) {
-                    case 'shoppingList':
-                      return (
-                        <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
-                          <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
-                            Current Shopping List
-                          </Text>
-                          <FlatList
-                            data={shoppingList}
-                            keyExtractor={(item, index) => index.toString()}
-                            renderItem={renderItem}
-                          />
-                        </View>
-                      );
-                    case 'savedLists':
-                      return (
-                        <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
-                          <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
-                            Saved Shopping Lists
-                          </Text>
-                          <FlatList
-                            data={savedLists}
-                            keyExtractor={(item, index) => index.toString()}
-                            renderItem={renderSavedListItem}
-                          />
-                        </View>
-                      );
-                    case 'map':
-                      return renderMap();
-                    default:
-                      return null;
-                  }
-                }}
-                keyExtractor={(item) => item.key}
-              />
+              {/* Main Scroll Content */}
+              <View>
+                <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
+                  <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
+                    Current Shopping List
+                  </Text>
+                  {shoppingList.map((item, index) => (
+                    <View key={index.toString()} style={ShopList.listItem}>
+                      {renderItem({ item })}
+                    </View>
+                  ))}
+                </View>
+  
+                <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
+                  <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
+                    Saved Shopping Lists
+                  </Text>
+                  {savedLists.map((list, index) => (
+                    <View key={index.toString()} style={ShopList.listItem}>
+                      {renderSavedListItem({ item: list })}
+                    </View>
+                  ))}
+                </View>
+  
+                <View>{renderMap()}</View>
+              </View>
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
       </ImageBackground>
     </ThemeLayout>
   );
+  
 };
 
 export default ShoppingListScreen;
