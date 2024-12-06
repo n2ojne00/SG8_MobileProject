@@ -28,7 +28,7 @@ const ShoppingListScreen = ({ navigation }) => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [listName, setListName] = useState('');
   const { isDarkMode } = useTheme();
-  const { shoppingList, addToShoppingList } = useShoppingList();
+  const { shoppingList, addToShoppingList, removeFromShoppingList } = useShoppingList();
 
   useEffect(() => {
     (async () => {
@@ -49,7 +49,7 @@ const ShoppingListScreen = ({ navigation }) => {
     }
   };
   const removeItem = (item) => {
-    ShoppingList((prevList) => prevList.filter((shoppingItem) => shoppingItem !== item));
+    removeFromShoppingList(item); // Use the context function to remove an item
   };
   const saveList = () => {
     if (!listName.trim()) {
@@ -95,10 +95,10 @@ const ShoppingListScreen = ({ navigation }) => {
     </View>
   );
 
-  const renderItem = ({ item, index }) => (
+  const renderItem = ({ item }) => (
     <View style={ShopList.itemContainer}>
       <Text style={[ShopList.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
-      <TouchableOpacity onPress={() => removeItem(index)}>
+      <TouchableOpacity onPress={() => removeItem(item)}>
         <MaterialIcons name="highlight-remove" size={24} color="#fb4040" />
       </TouchableOpacity>
     </View>

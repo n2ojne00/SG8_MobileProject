@@ -15,6 +15,7 @@ import { globalStyles } from '../styles/GlobalStyles';
 import { useTheme } from '../contexts/ThemeContext';
 import ThemeLayout from "../contexts/ThemeLayout";
 import { useShoppingList } from '../contexts/ShoppingListContext';
+import { Snackbar } from 'react-native-paper';
 
 const CocktailDetailScreen = ({ route }) => {
   const { idDrink } = route.params;

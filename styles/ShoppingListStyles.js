@@ -74,7 +74,11 @@ export const ShopList = StyleSheet.create({
 
     mapContainer: {
         marginTop: 20,
-        height: 300,
+        height: 350,
+        borderWidth: 1.9, 
+        borderColor: '#386641',
+        borderRadius: 5,
+        margin: 20
     },
     map: {
         ...StyleSheet.absoluteFillObject,
