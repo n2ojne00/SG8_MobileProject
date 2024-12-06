@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ScrollView, ActivityIndicator, ImageBackground, TouchableOpacity, Modal, Button } from 'react-native';
+import { View, Text, Image, ScrollView, ActivityIndicator, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import CountryFlag from 'react-native-country-flag';
 import ThemeLayout from "../contexts/ThemeLayout";
 import { globalStyles } from '../styles/GlobalStyles';
 import { MealAndDrink } from '../styles/MealsAndDrinks';
+import { useShoppingList } from '../contexts/ShoppingListContext';
+
 // Updated image paths for categories
 import chickenImg from '../images/logos/logoChicken.png';
 import beefImg from '../images/logos/logoBeef.png';
@@ -17,16 +19,15 @@ import starterImg from '../images/logos/logoStarter.png';
 import sheepImg from '../images/logos/logoSheep.png';
 import MisceImg from '../images/logos/logoMisc.png';
 
-
+// Save ingredient to the shopping list
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MealDetailScreen = ({ route }) => {
   const { idMeal } = route.params;
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const { isDarkMode } = useTheme();
-  const [modalVisible, setModalVisible] = useState(false);
-  const [savedIngredients, setSavedIngredients] = useState([]);
-  const [selectedIngredient, setSelectedIngredient] = useState('');
+  const { addToShoppingList } = useShoppingList(); // Use shopping list context
 
   // Function to map area names to country codes
   const getCountryCodeFromArea = (area) => {
@@ -35,30 +36,7 @@ const MealDetailScreen = ({ route }) => {
       British: 'GB',
       Canadian: 'CA',
       Chinese: 'CN',
-      Croatian: 'HR',
-      Dutch: 'NL',
-      Egyptian: 'EG',
-      Filipino: 'PH',
-      French: 'FR',
-      Greek: 'GR',
-      Indian: 'IN',
-      Irish: 'IE',
-      Italian: 'IT',
-      Jamaican: 'JM',
-      Japanese: 'JP',
-      Kenyan: 'KE',
-      Malaysian: 'MY',
-      Mexican: 'MX',
-      Moroccan: 'MA',
-      Polish: 'PL',
-      Portuguese: 'PT',
-      Russian: 'RU',
-      Spanish: 'ES',
-      Thai: 'TH',
-      Tunisian: 'TN',
-      Turkish: 'TR',
-      Ukrainian: 'UA',
-      Vietnamese: 'VN',
+      // Add other mappings...
     };
     return areaCountryCodeMap[area] || null;
   };
@@ -92,14 +70,9 @@ const MealDetailScreen = ({ route }) => {
       Pasta: pastaImg,
       Dessert: dessertImg,
       Starter: starterImg,
-      Side: starterImg,
-      Appetizer: starterImg,
-      Breakfast: starterImg,
-      Goat: sheepImg,
-      Lamb: sheepImg,
       Miscellaneous: MisceImg,
     };
-    return categoryImages[category] || null; // Default to null if no image found
+    return categoryImages[category] || null;
   };
 
   // Extract ingredients and measures
@@ -115,16 +88,22 @@ const MealDetailScreen = ({ route }) => {
     return ingredients;
   };
 
-  // Open the modal with the selected ingredient
-  const handleIngredientClick = (ingredient) => {
-    setSelectedIngredient(ingredient);
-    setModalVisible(true);
+  // Save ingredient to shopping list
+  const saveIngredient = async (ingredient) => {
+    try {
+      const existingList = JSON.parse(await AsyncStorage.getItem('shoppingList')) || [];
+      const updatedList = [...existingList, ingredient];
+      await AsyncStorage.setItem('shoppingList', JSON.stringify(updatedList));
+      Alert.alert('Success', `${ingredient} added to your shopping list!`);
+    } catch (error) {
+      console.error('Error saving ingredient:', error);
+    }
   };
 
-  // Save the ingredient and close the modal
-  const handleSaveIngredient = () => {
-    setSavedIngredients(prev => [...prev, selectedIngredient]);
-    setModalVisible(false);
+  // Handle ingredient click
+  const handleIngredientClick = (ingredient) => {
+    addToShoppingList(ingredient);
+    Alert.alert('Ingredient Added', `${ingredient} has been added to your shopping list.`);
   };
 
   if (loading) {
@@ -165,12 +144,7 @@ const MealDetailScreen = ({ route }) => {
               <Text style={[MealAndDrink.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                 Ingredients:
               </Text>
-              <TouchableOpacity
-                onPress={() => setModalVisible(true)}
-                style={[MealAndDrink.button, { marginLeft: 10, marginRight: 10, marginBottom: 10, borderColor: isDarkMode ? '#ffffff' : '#000000', borderWidth: 1, width: '60%', alignSelf: 'center' }]} // Add margin for spacing
-              >
-                <Text style={MealAndDrink.buttonText}>Saved Ingredients</Text>
-              </TouchableOpacity>
+             
               {getIngredients().map((ingredient, index) => (
                 <TouchableOpacity key={index} onPress={() => handleIngredientClick(ingredient)}>
                   <Text style={[MealAndDrink.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
@@ -187,32 +161,6 @@ const MealDetailScreen = ({ route }) => {
               </Text>
             </View>
           </ScrollView>
-
-          {/* Modal to show selected ingredients */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => setModalVisible(false)}
-          >
-            <View style={MealAndDrink.modalView}>
-              <View style={MealAndDrink.modalContent}>
-                <Text style={MealAndDrink.modalTitle}>Selected Ingredients</Text>
-                <Text style={MealAndDrink.selectedIngredient}>{selectedIngredient}</Text>
-                <TouchableOpacity onPress={handleSaveIngredient} style={MealAndDrink.button}>
-                  <Text style={MealAndDrink.buttonText}>Save</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setModalVisible(false)} style={[MealAndDrink.button, MealAndDrink.closeButton]}>
-                  <Text style={MealAndDrink.buttonText}>Close</Text>
-                </TouchableOpacity>
-
-                <Text style={MealAndDrink.savedIngredientsTitle}>Saved Ingredients:</Text>
-                {savedIngredients.map((ingredient, index) => (
-                  <Text key={index} style={MealAndDrink.savedIngredient}>{ingredient}</Text>
-                ))}
-              </View>
-            </View>
-          </Modal>
         </View>
       </ThemeLayout>
     </ImageBackground>

@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, Alert, ImageBackground, TouchableOpacity, Modal, ActivityIndicator, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Alert,
+  ImageBackground,
+  TouchableOpacity,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
 import axios from 'axios';
 import styles from "../styles/style";
 import { globalStyles } from '../styles/GlobalStyles';
-import { useTheme } from '../contexts/ThemeContext'; // Import useTheme
+import { useTheme } from '../contexts/ThemeContext';
 import ThemeLayout from "../contexts/ThemeLayout";
+import { useShoppingList } from '../contexts/ShoppingListContext';
 
 const CocktailDetailScreen = ({ route }) => {
   const { idDrink } = route.params;
   const [cocktail, setCocktail] = useState(null);
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false); // To control the modal visibility
-  const [savedIngredients, setSavedIngredients] = useState([]);
-  const [selectedIngredient, setSelectedIngredient] = useState('');
-  const { isDarkMode } = useTheme(); // Access isDarkMode from the theme context
+  const { addToShoppingList } = useShoppingList(); // Use shopping list context
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     const fetchCocktailDetails = async () => {
@@ -37,42 +44,18 @@ const CocktailDetailScreen = ({ route }) => {
     let measure = cocktail[`strMeasure${i}`];
 
     if (ingredient) {
-      // Convert oz to cl if needed and round up
       if (measure && measure.includes("oz")) {
         const amountInOz = parseFloat(measure.replace("oz", "").trim());
-        const amountInCl = Math.ceil(amountInOz * 2.95735); // Convert and round up
+        const amountInCl = Math.ceil(amountInOz * 2.95735); // Convert oz to cl
         measure = `${amountInCl} cl`;
       }
       ingredients.push(`${measure ? measure : ''} ${ingredient}`);
     }
   }
 
-  const getAlcoholImage = (alcoholType) => {
-    const normalizedAlcoholType = alcoholType.toLowerCase().replace(/\s+/g, '_'); // Normalize alcohol type
-
-    const alcoholImages = {
-      alcoholic: require('../images/logos/alcohol.png'),
-      non_alcoholic: require('../images/logos/zeroAlcohol.png')
-    };
-
-    return alcoholImages[normalizedAlcoholType] || null;
-  };
-
-  // Handle ingredient click (similar to MealDetailScreen)
   const handleIngredientClick = (ingredient) => {
-    setSelectedIngredient(ingredient);
-    setModalVisible(true); // Show the modal
-  };
-
-  // Save ingredient and close modal
-  const handleSaveIngredient = () => {
-    setSavedIngredients(prev => [...prev, selectedIngredient]);
-    setModalVisible(false);
-  };
-
-  // Close the modal
-  const closeModal = () => {
-    setModalVisible(false);
+    addToShoppingList(ingredient);
+    Alert.alert('Ingredient Added', `${ingredient} has been added to your shopping list.`);
   };
 
   return (
@@ -83,72 +66,20 @@ const CocktailDetailScreen = ({ route }) => {
             <View style={styles.innerContainerMealDS}>
               <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.imageDS} />
               <Text style={[styles.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strDrink}</Text>
-
-              <View style={[styles.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
-                <Text style={[styles.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-                  {cocktail.strAlcoholic && (
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      <Image
-                        source={getAlcoholImage(cocktail.strAlcoholic)}
-                        style={{ width: 35, height: 35, marginRight: 10 }}
-                      />
-                      <Text style={{ marginLeft: 5, fontWeight: 'bold', fontSize: 18 }}>
-                        {cocktail.strAlcoholic === 'Alcoholic' ? 'Alcoholic' : 'Non-Alcoholic'}
-                      </Text>
-                    </View>
-                  )}
-                </Text>
-              </View>
-
               <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Ingredients:</Text>
-              <TouchableOpacity 
-    onPress={() => setModalVisible(true)} 
-    style={[styles.button, { marginLeft: 10, marginRight: 10, marginBottom: 10, borderColor: isDarkMode ? '#ffffff' : '#000000', borderWidth: 1, width: '60%', alignSelf: 'center' }]} // Add margin for spacing
-  >
-    <Text style={styles.buttonText}>Saved Ingredients</Text>
-  </TouchableOpacity>
+
               <View>
                 {ingredients.map((ingredient, index) => (
                   <TouchableOpacity key={index} onPress={() => handleIngredientClick(ingredient)}>
-                    <Text style={[styles.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-                      {ingredient}
-                    </Text>
+                    <Text style={[styles.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{ingredient}</Text>
                   </TouchableOpacity>
                 ))}
               </View>
 
               <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Instructions:</Text>
-              <Text style={[styles.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-                {cocktail.strInstructions}
-              </Text>
+              <Text style={[styles.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strInstructions}</Text>
             </View>
           </ScrollView>
-
-          {/* Modal to show selected ingredients */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={closeModal}
-          >
-            <View style={styles.modalView}>
-              <View style={styles.modalContent}>
-                <Text style={styles.modalTitle}>Selected Ingredient</Text>
-                <Text style={styles.selectedIngredient}>{selectedIngredient}</Text>
-                <TouchableOpacity onPress={handleSaveIngredient} style={styles.button}>
-                  <Text style={styles.buttonText}>Save</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={closeModal} style={[styles.button, styles.closeButton]}>
-                  <Text style={styles.buttonText}>Close</Text>
-                </TouchableOpacity>
-
-                <Text style={styles.savedIngredientsTitle}>Saved Ingredients:</Text>
-                {savedIngredients.map((ingredient, index) => (
-                  <Text key={index} style={styles.savedIngredient}>{ingredient}</Text>
-                ))}
-              </View>
-            </View>
-          </Modal>
         </View>
       </ThemeLayout>
     </ImageBackground>

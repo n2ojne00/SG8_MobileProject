@@ -19,16 +19,16 @@ import { ShopList } from '../styles/ShoppingListStyles';
 import { MainStyles } from '../styles/MainScreenStyles';
 import { RecipeList } from '../styles/RecipeListStyles';
 import ThemeLayout from '../contexts/ThemeLayout';
-
+import { useShoppingList } from '../contexts/ShoppingListContext';
 
 const ShoppingListScreen = ({ navigation }) => {
   const [item, setItem] = useState('');
-  const [shoppingList, setShoppingList] = useState([]);
   const [savedLists, setSavedLists] = useState([]);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [listName, setListName] = useState('');
   const { isDarkMode } = useTheme();
+  const { shoppingList, addToShoppingList } = useShoppingList();
 
   useEffect(() => {
     (async () => {
@@ -44,11 +44,13 @@ const ShoppingListScreen = ({ navigation }) => {
 
   const addItem = () => {
     if (item) {
-      setShoppingList([...shoppingList, item]);
+      addToShoppingList(item); // Add to context-based shopping list
       setItem('');
     }
   };
-
+  const removeItem = (item) => {
+    ShoppingList((prevList) => prevList.filter((shoppingItem) => shoppingItem !== item));
+  };
   const saveList = () => {
     if (!listName.trim()) {
       alert('List name cannot be empty');
@@ -56,13 +58,8 @@ const ShoppingListScreen = ({ navigation }) => {
     }
     if (shoppingList.length > 0) {
       setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
-      setShoppingList([]);
       setListName('');
     }
-  };
-
-  const removeItem = (index) => {
-    setShoppingList((prevList) => prevList.filter((_, i) => i !== index));
   };
 
   const navigateToListDetail = (list) => {
@@ -150,39 +147,38 @@ const ShoppingListScreen = ({ navigation }) => {
                   <Text style={RecipeList.buttonTextRL}>Save List</Text>
                 </TouchableOpacity>
               </View>
-              {/* Main Scroll Content */}
-              <View>
-                <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
-                  <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
-                    Current Shopping List
-                  </Text>
-                  {shoppingList.map((item, index) => (
-                    <View key={index.toString()} style={ShopList.listItem}>
-                      {renderItem({ item })}
-                    </View>
-                  ))}
-                </View>
-  
-                <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
-                  <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
-                    Saved Shopping Lists
-                  </Text>
-                  {savedLists.map((list, index) => (
-                    <View key={index.toString()} style={ShopList.listItem}>
-                      {renderSavedListItem({ item: list })}
-                    </View>
-                  ))}
-                </View>
-  
-                <View>{renderMap()}</View>
+              {/* Current List */}
+              <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
+                <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
+                  Current Shopping List
+                </Text>
+                {shoppingList.map((item, index) => (
+                  <View key={index.toString()} style={ShopList.listItem}>
+                    {renderItem({ item, index })}
+                  </View>
+                ))}
               </View>
+
+              {/* Saved Lists */}
+              <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
+                <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
+                  Saved Shopping Lists
+                </Text>
+                {savedLists.map((list, index) => (
+                  <View key={index.toString()} style={ShopList.listItem}>
+                    {renderSavedListItem({ item: list })}
+                  </View>
+                ))}
+              </View>
+
+              {/* Map */}
+              <View>{renderMap()}</View>
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
       </ImageBackground>
     </ThemeLayout>
   );
-  
 };
 
 export default ShoppingListScreen;

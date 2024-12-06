@@ -9,7 +9,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import ListDetailScreen from './screens/ListDetailScreen';
-
+import { ShoppingListProvider } from './contexts/ShoppingListContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { RecipeProvider } from './contexts/RecipeContext';
 
@@ -187,7 +187,7 @@ const TabNavigator = () => (
 
 const App = () => {
   return (
-
+<ShoppingListProvider>
     <RecipeProvider>
       <ThemeProvider>
 
@@ -233,6 +233,7 @@ const App = () => {
         </NavigationContainer>
       </ThemeProvider>
     </RecipeProvider>
+    </ShoppingListProvider>
 
   );
 };
