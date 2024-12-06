@@ -144,6 +144,10 @@ const MealDetailScreen = ({ route }) => {
               <Text style={[MealAndDrink.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
                 Ingredients:
               </Text>
+              <Text style={[globalStyles.helperText, { color: isDarkMode ? '#cccccc' : '#666666' }]}>
+  Tap on an ingredient to add it to your shopping list!
+</Text>
+
              
               {getIngredients().map((ingredient, index) => (
                 <TouchableOpacity key={index} onPress={() => handleIngredientClick(ingredient)}>

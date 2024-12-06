@@ -226,6 +226,7 @@ export const MealAndDrink = StyleSheet.create({
         fontSize: 16,
         color: 'gray',
     },
+    
 
 
 

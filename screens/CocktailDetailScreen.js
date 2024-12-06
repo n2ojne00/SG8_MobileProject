@@ -23,6 +23,8 @@ const CocktailDetailScreen = ({ route }) => {
   const { addToShoppingList } = useShoppingList(); // Use shopping list context
   const { isDarkMode } = useTheme();
 
+
+  
   useEffect(() => {
     const fetchCocktailDetails = async () => {
       try {
@@ -32,6 +34,8 @@ const CocktailDetailScreen = ({ route }) => {
         console.error("Error fetching cocktail details:", error);
       }
     };
+
+    
 
     fetchCocktailDetails();
   }, [idDrink]);
@@ -68,6 +72,9 @@ const CocktailDetailScreen = ({ route }) => {
               <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.imageDS} />
               <Text style={[styles.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>{cocktail.strDrink}</Text>
               <Text style={[styles.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Ingredients:</Text>
+              <Text style={[globalStyles.helperText, { color: isDarkMode ? '#cccccc' : '#666666' }]}>
+  Tap on an ingredient to add it to your shopping list!
+</Text>
 
               <View>
                 {ingredients.map((ingredient, index) => (
