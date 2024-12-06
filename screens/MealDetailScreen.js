@@ -88,17 +88,7 @@ const MealDetailScreen = ({ route }) => {
     return ingredients;
   };
 
-  // Save ingredient to shopping list
-  const saveIngredient = async (ingredient) => {
-    try {
-      const existingList = JSON.parse(await AsyncStorage.getItem('shoppingList')) || [];
-      const updatedList = [...existingList, ingredient];
-      await AsyncStorage.setItem('shoppingList', JSON.stringify(updatedList));
-      Alert.alert('Success', `${ingredient} added to your shopping list!`);
-    } catch (error) {
-      console.error('Error saving ingredient:', error);
-    }
-  };
+ 
 
   // Handle ingredient click
   const handleIngredientClick = (ingredient) => {

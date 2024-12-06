@@ -59,9 +59,12 @@ const CocktailDetailScreen = ({ route }) => {
   }
 
   const handleIngredientClick = (ingredient) => {
-    addToShoppingList(ingredient);
-    Alert.alert('Ingredient Added', `${ingredient} has been added to your shopping list.`);
+    // Regular expression to remove the leading measurement part (like 1 oz, 2 cl, etc.)
+    const ingredientName = ingredient.replace(/^\d+\s?(oz|cl|ml|tbsp|tsp)?\s?/i, '').trim();
+    addToShoppingList(ingredientName);  // Add only the ingredient name to the shopping list
+    Alert.alert('Ingredient Added', `${ingredientName} has been added to your shopping list.`);
   };
+  
 
   return (
     <ImageBackground style={styles.background} resizeMode="cover">

@@ -28,7 +28,7 @@ const ShoppingListScreen = ({ navigation }) => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [listName, setListName] = useState('');
   const { isDarkMode } = useTheme();
-  const { shoppingList, addToShoppingList, removeFromShoppingList } = useShoppingList();
+  const { shoppingList, setShoppingList, addToShoppingList, removeFromShoppingList } = useShoppingList(); // Use setShoppingList here
 
   useEffect(() => {
     (async () => {
@@ -59,6 +59,9 @@ const ShoppingListScreen = ({ navigation }) => {
     if (shoppingList.length > 0) {
       setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
       setListName('');
+      
+      // Clear the current shopping list after saving
+      setShoppingList([]); // Clear the shopping list state
     }
   };
 
