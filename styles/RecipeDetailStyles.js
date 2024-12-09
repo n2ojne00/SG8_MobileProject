@@ -4,7 +4,7 @@ export const RecipeDetails = StyleSheet.create({
      //OWN RECIPE DETAIL SCREEN (RecipeDetailScreen.js)
   scrollContentRecipeDS: {
     backgroundColor: '#fcf6eba1',
-    marginVertical: 20,
+    borderRadius: 10,
   },
   recipeDate: {
     position: 'absolute',
@@ -45,8 +45,9 @@ placeholderText: {
     fontSize: 16,
 },
 recipePhoto: {
-  width: 200,
-  height: 200,
+  alignSelf: 'center',
+  width: '95%',
+  height: 250,
   resizeMode: 'cover',
   borderRadius: 10,
   backgroundColor: 'lightgray',
