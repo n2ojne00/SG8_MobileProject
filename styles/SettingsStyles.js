@@ -60,9 +60,14 @@ export const Settings = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  settingInfo: {},
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
+  settingInfo: {
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderStyle: 'dotted',
+    borderRadius: 30,
+    borderColor: '#386641',
+    padding: 10,
+    marginVertical: 10,
   },
+ 
 })
