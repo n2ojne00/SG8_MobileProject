@@ -31,6 +31,9 @@ const lightTheme = {
 
     // Tint Colors
     bookTintColor: '#122215',
+
+    //Search Icon
+    searchIcon: '#6A994E',
   },
 };
 
@@ -67,6 +70,9 @@ const darkTheme = {
 
     // Tint Colors
     bookTintColor: '#A8A8A8',
+
+    //Search Icon
+    searchIcon: '#6A994E',
   },
 };
 

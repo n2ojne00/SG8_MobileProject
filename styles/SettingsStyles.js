@@ -32,11 +32,18 @@ export const Settings = StyleSheet.create({
     width: '90%',
     fontSize: 16,
     padding: 12,
+    marginBottom: 15,
     borderWidth: 1,
     borderColor: '#386641',
     borderRadius: 5,
     backgroundColor: '#ecffeff5',
-
+  },
+  saveButton: {
+    padding: 15,
+    borderRadius: 30,
+    alignItems: 'center',
+    margingTop: 30,
+    width: '50%',
   },
   saveButtonText: {
     color: '#386641',

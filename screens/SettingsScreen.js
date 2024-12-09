@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, Switch, TouchableOpacity, Alert, ImageBackground } from 'react-native';
+import { View, Text, TextInput, Switch, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../contexts/ThemeContext';
 import ThemeLayout from '../contexts/ThemeLayout';
-import { globalStyles } from '../styles/GlobalStyles';
-import Entypo from '@expo/vector-icons/Entypo';
 import { Settings } from '../styles/SettingsStyles';
-import { CreateRecipe } from '../styles/CreateRecipeStyles';
+import Entypo from '@expo/vector-icons/Entypo';
+import { globalStyles } from '../styles/GlobalStyles';
 
 const SettingsScreen = ({ navigation }) => {
   const { isDarkMode, toggleTheme, theme } = useTheme();
@@ -23,7 +22,6 @@ const SettingsScreen = ({ navigation }) => {
         setPassword(password);
       }
     };
-
     loadAccountInfo();
   }, []);
 
@@ -54,85 +52,85 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   const info = async () => {
-    Alert.alert('Tiimi 8', 'Topias Tyni, Lauri Itkonen, Joni Neuvonen, Netta Ojala, Elias Konttaniemi');
+    Alert.alert('Team 8', 'Topias Tyni, Lauri Itkonen, Joni Neuvonen, Netta Ojala, Elias Konttaniemi');
   };
 
   return (
-    <ImageBackground style={globalStyles.background} resizeMode="cover">
-      <ThemeLayout>
+    <ThemeLayout>
+      <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
+        <TouchableOpacity onPress={info} style={Settings.settingInfo}>
+          <Entypo name="info" size={30} color={theme.textDarkGreen} />
+        </TouchableOpacity>
 
-        <View style={[globalStyles.container, { backgroundColor: theme.backgroundColor }]}>
+        <View style={Settings.settingItem}>
+          <Text style={[Settings.settingText, { color: theme.textDarkGreen }]}>Dark Mode</Text>
+          <Switch
+            value={isDarkMode}
+            onValueChange={toggleTheme}
+            trackColor={{ false: theme.bgPlaceholder, true: theme.bgDarkGreen }}
+            thumbColor={isDarkMode ? theme.bgContainer : theme.bgDarkGreen}
+          />
+        </View>
 
-          <TouchableOpacity onPress={info} style={Settings.settingInfo}>
-            <Entypo name="info" size={30} color={'#386641'}/>
+        <View style={Settings.settingsLogin}>
+          <Text style={[Settings.label, { color: theme.textDarkGreen }]}>Email</Text>
+          <TextInput
+            style={[
+              Settings.accountInput,
+              { backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack },
+            ]}
+            value={email}
+            onChangeText={setEmail}
+            placeholder="Enter your email"
+            placeholderTextColor={theme.bgPlaceholder}
+            autoCapitalize="none"
+          />
+
+          <Text style={[Settings.label, { color: theme.textDarkGreen }]}>Current Password</Text>
+          <TextInput
+            style={[
+              Settings.accountInput,
+              { backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack },
+            ]}
+            value={password}
+            placeholder="Enter your current password"
+            placeholderTextColor={theme.bgPlaceholder}
+            secureTextEntry
+            editable={false}
+          />
+
+          <Text style={[Settings.label, { color: theme.textDarkGreen }]}>New Password</Text>
+          <TextInput
+            style={[
+              Settings.accountInput,
+              { backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack },
+            ]}
+            value={newPassword}
+            onChangeText={setNewPassword}
+            placeholder="Enter a new password"
+            placeholderTextColor={theme.bgPlaceholder}
+            secureTextEntry
+          />
+
+          <TouchableOpacity
+            style={[Settings.saveButton, { backgroundColor: theme.bgSaveBtn }]}
+            onPress={handleSaveChanges}
+          >
+            <Text style={[Settings.saveButtonText, { color: theme.textDarkGreen }]}>
+              Save Changes
+            </Text>
           </TouchableOpacity>
 
-          <View style={Settings.settingItem}>
-            <Text style={[Settings.settingText, { color: theme.textColor }]}>Dark Mode</Text>
-            <Switch
-              value={isDarkMode}
-              onValueChange={toggleTheme}
-              trackColor={{ false: '#767577', true: '#386641' }}
-              thumbColor={isDarkMode ? '#f4f3f4' : '#386641'}
-            />
-
-          </View>
-
-
-          <View style={Settings.settingsLogin}>
-            <View style={CreateRecipe.recipeTextAreas}>
-              <Text style={[Settings.label, { color: theme.textColor }]}>Email</Text>
-              <TextInput
-                style={[Settings.accountInput, { backgroundColor: theme.inputBackground, color: theme.inputText }]}
-                value={email}
-                onChangeText={setEmail}
-                placeholder="Enter your email"
-                placeholderTextColor={theme.placeholderTextColor}
-                autoCapitalize="none"
-              />
-
-              <Text style={[Settings.label, { color: theme.textColor }]}>Current Password</Text>
-              <TextInput
-                style={[Settings.accountInput, { backgroundColor: theme.inputBackground, color: theme.inputText }]}
-                value={password}
-                placeholder="Enter your current password"
-                placeholderTextColor={theme.placeholderTextColor}
-                secureTextEntry
-                editable={false}
-              />
-
-              <Text style={[Settings.label, { color: theme.textColor }]}>New Password</Text>
-              <TextInput
-                style={[Settings.accountInput, { backgroundColor: theme.inputBackground, color: theme.inputText }]}
-                value={newPassword}
-                onChangeText={setNewPassword}
-                placeholder="Enter a new password"
-                placeholderTextColor={theme.placeholderTextColor}
-                secureTextEntry
-              />
-
-              <TouchableOpacity
-                style={[CreateRecipe.saveRecipeBtn, { backgroundColor: theme.buttonBackground }]}
-                onPress={handleSaveChanges}
-              >
-                <Text style={[Settings.saveButtonText, { color: theme.buttonText }]}>Save Changes</Text>
-              </TouchableOpacity>
-            </View>
-
-            <TouchableOpacity
-              style={[Settings.logoutButton, { backgroundColor: theme.buttonBackground }]}
-              onPress={handleLogout}
-            >
-              <Text style={[Settings.logoutButtonText, { color: theme.buttonText }]}>Logout</Text>
-            </TouchableOpacity>
-
-          </View>
-
+          <TouchableOpacity
+            style={[Settings.logoutButton, { backgroundColor: theme.bgDarkGreen }]}
+            onPress={handleLogout}
+          >
+            <Text style={Settings.logoutButtonText}>Logout</Text>
+          </TouchableOpacity>
         </View>
-      </ThemeLayout>
-    </ImageBackground>
+      </View>
+    </ThemeLayout>
   );
 };
-
 
 export default SettingsScreen;
