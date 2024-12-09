@@ -36,7 +36,30 @@ const MealDetailScreen = ({ route }) => {
       British: 'GB',
       Canadian: 'CA',
       Chinese: 'CN',
-      // Add other mappings...
+      Croatian: 'HR',
+      Dutch: 'NL',
+      Egyptian: 'EG',
+      Filipino: 'PH',
+      French: 'FR',
+      Greek: 'GR',
+      Indian: 'IN',
+      Irish: 'IE',
+      Italian: 'IT',
+      Jamaican: 'JM',
+      Japanese: 'JP',
+      Kenyan: 'KE',
+      Malaysian: 'MY',
+      Mexican: 'MX',
+      Moroccan: 'MA',
+      Polish: 'PL',
+      Portuguese: 'PT',
+      Russian: 'RU',
+      Spanish: 'ES',
+      Thai: 'TH',
+      Tunisian: 'TN',
+      Turkish: 'TR',
+      Ukrainian: 'UA',
+      Vietnamese: 'VN',
     };
     return areaCountryCodeMap[area] || null;
   };
@@ -70,6 +93,11 @@ const MealDetailScreen = ({ route }) => {
       Pasta: pastaImg,
       Dessert: dessertImg,
       Starter: starterImg,
+      Side: starterImg,
+      Appetizer: starterImg,
+      Breakfast: starterImg,
+      Goat: sheepImg,
+      Lamb: sheepImg,
       Miscellaneous: MisceImg,
     };
     return categoryImages[category] || null;
