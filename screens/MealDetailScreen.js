@@ -116,7 +116,7 @@ const MealDetailScreen = ({ route }) => {
     return ingredients;
   };
 
- 
+
 
   // Handle ingredient click
   const handleIngredientClick = (ingredient) => {
@@ -163,10 +163,10 @@ const MealDetailScreen = ({ route }) => {
                 Ingredients:
               </Text>
               <Text style={[globalStyles.helperText, { color: isDarkMode ? '#cccccc' : '#666666' }]}>
-  Tap on an ingredient to add it to your shopping list!
-</Text>
+                Tap on an ingredient to add it to your shopping list!
+              </Text>
 
-             
+
               {getIngredients().map((ingredient, index) => (
                 <TouchableOpacity key={index} onPress={() => handleIngredientClick(ingredient)}>
                   <Text style={[MealAndDrink.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
