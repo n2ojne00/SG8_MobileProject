@@ -8,7 +8,7 @@ import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import ListDetailScreen from './screens/ListDetailScreen';
+
 import { ShoppingListProvider } from './contexts/ShoppingListContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { RecipeProvider } from './contexts/RecipeContext';
@@ -26,7 +26,6 @@ import ShoppingListScreen from './screens/ShoppingListScreen';
 import PrintListScreen from './screens/PrintListScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import CreateRecipeScreen from './screens/CreateRecipeScreen';
-import ShoppingListDetailScreen from './screens/ShoppingListDetailScreen';
 import RecipeDetailScreen from './screens/RecipeDetailScreen';
 import RecipeListScreen from './screens/RecipeListScreen';
 
@@ -149,11 +148,7 @@ const ShoppingListStack = () => (
       component={ShoppingListScreen}
       options={{ title: false }}
     />
-    <Stack.Screen
-      name="ShoppingListDetailScreen"
-      component={ShoppingListDetailScreen}
-      options={{ title: false }}
-    />
+
   </Stack.Navigator>
 );
 
@@ -187,52 +182,51 @@ const TabNavigator = () => (
 
 const App = () => {
   return (
-<ShoppingListProvider>
-    <RecipeProvider>
-      <ThemeProvider>
+    <ShoppingListProvider>
+      <RecipeProvider>
+        <ThemeProvider>
 
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Login"
-            screenOptions={({ navigation }) => ({
-              headerStyle: {
-                height: 80,
-              },
-              headerTransparent: true,
-              headerTintColor: '#386641',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-                fontSize: 18,
-              },
-              headerLeft: () => (
-                navigation.canGoBack() ? (
-                  <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Ionicons name="arrow-back-outline" size={24} color="#386641" style={{ marginLeft: 15 }} />
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Login"
+              screenOptions={({ navigation }) => ({
+                headerStyle: {
+                  height: 80,
+                },
+                headerTransparent: true,
+                headerTintColor: '#386641',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  fontSize: 18,
+                },
+                headerLeft: () => (
+                  navigation.canGoBack() ? (
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                      <Ionicons name="arrow-back-outline" size={24} color="#386641" style={{ marginLeft: 15 }} />
+                    </TouchableOpacity>
+                  ) : null
+                ),
+                headerRight: () => (
+                  <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+                    <Ionicons name="settings-outline" size={24} color="#386641" style={{ marginRight: 15 }} />
                   </TouchableOpacity>
-                ) : null
-              ),
-              headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-                  <Ionicons name="settings-outline" size={24} color="#386641" style={{ marginRight: 15 }} />
-                </TouchableOpacity>
-              ),
-            })}>
+                ),
+              })}>
 
-            <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="LocalLogin" component={LocalLoginScreen} options={{ title: 'Local Login' }} />
-            <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Register' }} />
-            <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
-            <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
-            <Stack.Screen name="ListDetailScreen" component={ListDetailScreen} options={{ title: false }} />
-            <Stack.Screen name="PrintListScreen" component={PrintListScreen} options={{ title: false }} />
-            <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} options={{ title: false }} />
-            <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} options={{ title: false }} />
-            <Stack.Screen name="RecipeList" component={RecipeListScreen} options={{ title: false }} />
-            <Stack.Screen name="MealDetailScreen" component={MealDetailScreen} options={{ title: false }} />
-            <Stack.Screen name="CocktailDetail" component={CocktailDetailScreen} options={{ title: false }} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </ThemeProvider>
-    </RecipeProvider>
+              <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="LocalLogin" component={LocalLoginScreen} options={{ title: 'Local Login' }} />
+              <Stack.Screen name="Register" component={RegisterScreen} options={{ title: 'Register' }} />
+              <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
+              <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
+              <Stack.Screen name="PrintListScreen" component={PrintListScreen} options={{ title: false }} />
+              <Stack.Screen name="CreateRecipe" component={CreateRecipeScreen} options={{ title: false }} />
+              <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} options={{ title: false }} />
+              <Stack.Screen name="RecipeList" component={RecipeListScreen} options={{ title: false }} />
+              <Stack.Screen name="MealDetailScreen" component={MealDetailScreen} options={{ title: false }} />
+              <Stack.Screen name="CocktailDetail" component={CocktailDetailScreen} options={{ title: false }} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </ThemeProvider>
+      </RecipeProvider>
     </ShoppingListProvider>
 
   );
