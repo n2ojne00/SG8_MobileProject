@@ -101,6 +101,7 @@ const MealScreen = ({ route, navigation }) => {
             <TextInput
               style={[MealAndDrink.textInput,]}
               placeholder="Search for a meal..."
+              placeholderTextColor={theme.textAlmostBlack}
               value={search}
               onChangeText={(text) => {
                 setSearch(text);
@@ -121,8 +122,8 @@ const MealScreen = ({ route, navigation }) => {
               <TouchableOpacity
                 onPress={() => handleCategorySelect(item)}
                 style={[
-                  MealAndDrink.categoryButton,
-                  selectedCategory === item && MealAndDrink.selectedCategory, { borderColor: theme.borderOrange },
+                  MealAndDrink.categoryButton, { borderColor: theme.borderDarkGreen },
+                  selectedCategory === item && MealAndDrink.selectedCategory,
                 ]}
               >
                 <View style={MealAndDrink.categoryContainer}>
@@ -171,7 +172,7 @@ const MealScreen = ({ route, navigation }) => {
               </TouchableOpacity>
             )}
             ListEmptyComponent={
-              <Text style={MealAndDrink.emptyMessage}>No meals found.</Text>
+              <Text style={[MealAndDrink.emptyMessage, {color: theme.textDarkGreen}]}>Choose category</Text>
             }
           />
 

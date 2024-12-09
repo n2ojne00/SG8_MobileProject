@@ -112,7 +112,7 @@ const CocktailScreen = () => {
             <TextInput
               style={[MealAndDrink.textInput, { color: theme.textAlmostBlack }]}
               placeholder="Search for a cocktail..."
-              placeholderTextColor={theme.bgPlaceholder}
+              placeholderTextColor={theme.textAlmostBlack}
               value={search}
               onChangeText={(text) => {
                 setSearch(text);
@@ -134,7 +134,7 @@ const CocktailScreen = () => {
                 style={[
                   MealAndDrink.categoryButton,
                   selectedCategory === item && MealAndDrink.selectedCategory,
-                  { borderColor: theme.borderOrange },
+                  { borderColor: theme.borderDarkGreen },
                 ]}
               >
                 <View style={MealAndDrink.categoryContainer}>
@@ -183,8 +183,8 @@ const CocktailScreen = () => {
               </TouchableOpacity>
             )}
             ListEmptyComponent={
-              <Text style={[MealAndDrink.emptyMessage, { color: theme.textError }]}>
-                No cocktails found.
+              <Text style={[MealAndDrink.emptyMessage, {color: theme.textDarkGreen}]}>
+                Choose category
               </Text>
             }
           />

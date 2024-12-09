@@ -29,6 +29,7 @@ const ShoppingListScreen = ({ navigation }) => {
   const [listName, setListName] = useState('');
   const { isDarkMode } = useTheme();
   const { shoppingList, setShoppingList, addToShoppingList, removeFromShoppingList } = useShoppingList(); // Use setShoppingList here
+  const { theme } = useTheme(); // Access the current theme from context
 
   useEffect(() => {
     (async () => {
@@ -59,7 +60,7 @@ const ShoppingListScreen = ({ navigation }) => {
     if (shoppingList.length > 0) {
       setSavedLists([...savedLists, { name: listName, items: shoppingList }]);
       setListName('');
-      
+
       // Clear the current shopping list after saving
       setShoppingList([]); // Clear the shopping list state
     }
@@ -70,10 +71,10 @@ const ShoppingListScreen = ({ navigation }) => {
   };
 
   const renderMap = () => (
-    <View style={ShopList.mapContainer}>
-      <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>Your Location</Text>
+    <View style={[ShopList.mapContainer, { borderColor: theme.borderDarkGreen }]}>
+      <Text style={[MainStyles.sectionTitle, { color: theme.textDarkGreen }]}>Your Location</Text>
       {errorMsg ? (
-        <Text style={[ShopList.errorText, { color: isDarkMode ? '#ff6b6b' : '#dc3545' }]}>{errorMsg}</Text>
+        <Text style={[ShopList.errorText, { color: theme.textError }]}>{errorMsg}</Text>
       ) : location ? (
         <MapView
           style={ShopList.map}
@@ -99,8 +100,8 @@ const ShoppingListScreen = ({ navigation }) => {
   );
 
   const renderItem = ({ item }) => (
-    <View style={ShopList.itemContainer}>
-      <Text style={[ShopList.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
+    <View style={[ShopList.itemContainer, { borderColor: theme.borderDarkGreen }]}>
+      <Text style={[ShopList.itemText, { color: theme.textDarkGreen }]}>{item}</Text>
       <TouchableOpacity onPress={() => removeItem(item)}>
         <MaterialIcons name="highlight-remove" size={24} color="#f67b43" />
       </TouchableOpacity>
@@ -109,7 +110,7 @@ const ShoppingListScreen = ({ navigation }) => {
 
   const renderSavedListItem = ({ item, index }) => (
     <TouchableOpacity onPress={() => navigateToListDetail(item)}>
-      <Text style={[ShopList.savedListText, { color: isDarkMode ? '#80bdff' : '#386641' }]}>{item.name || `List ${index + 1}`}</Text>
+      <Text style={[ShopList.savedListText, { color: theme.textDarkGreen }]}>{item.name || `List ${index + 1}`}</Text>
     </TouchableOpacity>
   );
 
@@ -126,32 +127,32 @@ const ShoppingListScreen = ({ navigation }) => {
         >
           <ScrollView contentContainerStyle={ShopList.scrollContainer}>
             <View style={globalStyles.container}>
-              <View style={ShopList.shopListCreation}>
+              <View style={[ShopList.shopListCreation, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
                 <TextInput
-                  style={ShopList.inputShopListName}
+                  style={[ShopList.inputShopListName, , { color: theme.textDarkGreen }]}
                   placeholder="List Name"
-                  placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
+                  placeholderTextColor={theme.textAlmostBlack}
                   value={listName}
                   onChangeText={setListName}
                 />
                 <View style={ShopList.addItem}>
                   <TextInput
-                    style={ShopList.inputShopListItem}
+                    style={[ShopList.inputShopListItem, { borderColor: theme.borderDarkGreen }]}
                     placeholder="Add an item..."
-                    placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
+                    placeholderTextColor={theme.textAlmostBlack}
                     value={item}
                     onChangeText={setItem}
                   />
-                  <TouchableOpacity style={ShopList.addShopButton} onPress={addItem}>
-                    <Entypo name="add-to-list" size={25} color="black" />
+                  <TouchableOpacity style={[ShopList.addShopButton, { backgroundColor: theme.bgSaveBtn, borderColor: theme.borderDarkGreen }]} onPress={addItem}>
+                    <Entypo name="add-to-list" size={25} color={theme.textDarkGreen} />
                   </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={RecipeList.createButton} onPress={saveList}>
-                  <Text style={RecipeList.buttonTextRL}>Save List</Text>
+                <TouchableOpacity style={[RecipeList.createButton, { backgroundColor: theme.bgSaveBtn, borderColor: theme.borderDarkGreen }]} onPress={saveList}>
+                  <Text style={[RecipeList.buttonTextRL, { color: theme.textDarkGreen }]}>Save List</Text>
                 </TouchableOpacity>
               </View>
               {/* Current List */}
-              <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
+              <View style={[ShopList.currentListContainer, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
                 <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
                   Current Shopping List
                 </Text>
@@ -163,13 +164,13 @@ const ShoppingListScreen = ({ navigation }) => {
               </View>
 
               {/* Saved Lists */}
-              <View style={[ShopList.currentListContainer, { backgroundColor: isDarkMode ? '#1e1e1e' : '#f3fff5ac' }]}>
+              <View style={[ShopList.currentListContainer, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
                 <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
                   Saved Shopping Lists
                 </Text>
                 {savedLists.map((list, index) => (
-                  <View key={index.toString()} style={ShopList.listItem}>
-                    <AntDesign name="hearto" size={20} color="#f67b43" style={{marginRight: 15,}} />
+                  <View key={index.toString()} style={[ShopList.listItem, { borderColor: theme.borderDarkGreen }]}>
+                    <AntDesign name="hearto" size={20} color="#f67b43" style={{ marginRight: 15, }} />
                     {renderSavedListItem({ item: list })}
                   </View>
                 ))}

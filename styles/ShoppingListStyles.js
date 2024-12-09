@@ -7,7 +7,7 @@ export const ShopList = StyleSheet.create({
     shopListCreation: {
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#f3fff5ac',
+        borderRadius: 5,
     },
     addItem: {
         justifyContent: 'center',
@@ -17,9 +17,7 @@ export const ShopList = StyleSheet.create({
     addShopButton: {
         height: 50,
         width: 50,
-        backgroundColor: '#dbfaEB',
         borderWidth: 2,
-        borderColor: '#386641',
         marginLeft: 20,
         borderRadius: 10,
         justifyContent: 'center', 
@@ -36,7 +34,6 @@ export const ShopList = StyleSheet.create({
         width: '75%',
         paddingLeft: 15,
         borderBottomWidth: 2,
-        borderColor: '#6A994E'
     },
     currentListContainer: {
         justifyContent: 'center',
@@ -44,8 +41,6 @@ export const ShopList = StyleSheet.create({
         paddingBottom: 30,
         borderBottomWidth: 1,
         borderTopWidth: 1,
-        borderColor: '#386641',
-        backgroundColor: '#fcf6eb',
         borderRadius: 5,
         marginVertical: 5,
         elevation: 2,
@@ -56,7 +51,6 @@ export const ShopList = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         borderBottomWidth: 1,
-        borderColor: '#539861',
         width: '95%',
         marginHorizontal: 10,
     },
@@ -64,13 +58,11 @@ export const ShopList = StyleSheet.create({
         paddingVertical: 8,
         paddingLeft: 16,
         fontSize: 18,
-        color: '#386641',
     },
     listItem: {
         flexDirection: 'row',
         width: '93%',
         borderBottomWidth: 1,
-        borderColor: '#386641',
         padding: 5,
     },
     savedListText: {
@@ -78,19 +70,17 @@ export const ShopList = StyleSheet.create({
     },
 
     mapContainer: {
-        marginTop: 20,
+        marginVertical: 20,
         height: 350,
+        width: '100%',
         borderWidth: 1.9, 
-        borderColor: '#386641',
         borderRadius: 5,
-        margin: 20
     },
     map: {
         ...StyleSheet.absoluteFillObject,
     },
     errorText: {
         textAlign: 'center',
-        color: '#ff6b6b',
         fontSize: 16,
     },
 

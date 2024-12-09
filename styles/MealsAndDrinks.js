@@ -100,6 +100,13 @@ export const MealAndDrink = StyleSheet.create({
         borderBottomLeftRadius: 15,
     },
 
+    emptyMessage: {
+        marginTop: 20,
+        fontWeight: 'bold',
+        fontSize: 16,
+        textAlign: 'center',
+    },
+
     //RECIPE SCREENS ((MealDetailScreen.js & CocktailDetailScreen.js))
     innerContainerMealDS: {
         borderRadius: 10,
