@@ -10,7 +10,6 @@ titleLogin: {
   fontWeight: 'bold',
   marginBottom: 24,
   textAlign: 'center',
-
 },
 
   containerLogin: {

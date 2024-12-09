@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, Image, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import styles from "../styles/style";
+import ThemeLayout from "../contexts/ThemeLayout";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -14,7 +15,6 @@ import pastaImage from '../images/categories/pasta.jpg'
 import dessertImage from '../images/categories/dessert.jpg'
 import startersImage from '../images/categories/snacks.jpg'
 
-import ThemeLayout from "../contexts/ThemeLayout";
 import { globalStyles } from '../styles/GlobalStyles';
 import { MealAndDrink } from '../styles/MealsAndDrinks';
 
@@ -27,6 +27,7 @@ const MealScreen = ({ route, navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("Select Category");
   const { category } = route.params || {};
   const { isDarkMode } = useTheme();
+  const { theme } = useTheme(); // Access the current theme from context
 
 
   const categoryMapping = {
@@ -89,104 +90,94 @@ const MealScreen = ({ route, navigation }) => {
 
   return (
     <ImageBackground
-    style={globalStyles.background}
-    resizeMode="cover"
+      style={globalStyles.background}
+      resizeMode="cover"
     >
-    <ThemeLayout>
+      <ThemeLayout>
 
-    <View style={globalStyles.container}>
-      <View style={MealAndDrink.searchRow}>
-        <FontAwesome name="search" size={20} color="#6A994E" style={MealAndDrink.icon} />
-        <TextInput
-          style={[MealAndDrink.textInput,
-          {
-            backgroundColor: isDarkMode ? '#1f1f1f' : '#f5f5f5',
-            color: isDarkMode ? '#ffffff' : '#000000'
-          }]}
-          placeholder="Search for a meal..."
-          placeholderTextColor={isDarkMode ? '#cccccc' : '#888888'}
-          value={search}
-          onChangeText={(text) => {
-            setSearch(text);
-            setSelectedCategory("Select Category");
-          }}
-        />
-      </View>
+        <View style={globalStyles.container}>
+          <View style={[MealAndDrink.searchRow, { backgroundColor: theme.bgSearchRow, borderColor: theme.borderDarkGreen }]}>
+            <FontAwesome name="search" color={theme.searchIcon} size={20} style={MealAndDrink.icon} />
+            <TextInput
+              style={[MealAndDrink.textInput,]}
+              placeholder="Search for a meal..."
+              value={search}
+              onChangeText={(text) => {
+                setSearch(text);
+                setSelectedCategory("Select Category");
+              }}
+            />
+          </View>
 
 
-      {/* Horizontal FlatList for categories */}
-      <FlatList
-        style={MealAndDrink.categoryList}
-        data={categories}
-        keyExtractor={(item) => item}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => handleCategorySelect(item)}
-            style={[
-              MealAndDrink.categoryButton,
-              selectedCategory === item && MealAndDrink.selectedCategory,
-            ]}
-          >
-            <View style={MealAndDrink.categoryContainer}>
-              {/* Display image as background */}
-              {categoryImages[item] && (
-                <Image
-                  source={categoryImages[item]}
-                  style={MealAndDrink.categoryImage}
-                />
-              )}
-              {/* Overlay text */}
-              <View style={MealAndDrink.overlay}>
-                <Text
-                  style={[
-                    MealAndDrink.categoryText,
-                    selectedCategory === item && MealAndDrink.selectedCategoryText,
-                  ]}
-                >
-                  {item}
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
-
-
-
-      {/* FlatList for meals */}
-      <FlatList
-        style={MealAndDrink.foodList}
-        data={meals}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item.idMeal}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-
-            onPress={() => navigation.navigate('MealDetail', { idMeal: item.idMeal })}
-          >
-            <View style={MealAndDrink.mealSelect}>
-              <Image source={{ uri: item.strMealThumb }} style={MealAndDrink.mealImage} />
-              <Text
+          {/* Horizontal FlatList for categories */}
+          <FlatList
+            style={MealAndDrink.categoryList}
+            data={categories}
+            keyExtractor={(item) => item}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => handleCategorySelect(item)}
                 style={[
-                  MealAndDrink.mealTitle,
-                  { color: isDarkMode ? '#000000' : '#ffffff' },
+                  MealAndDrink.categoryButton,
+                  selectedCategory === item && MealAndDrink.selectedCategory, { borderColor: theme.borderOrange },
                 ]}
               >
-                {item.strMeal}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        ListEmptyComponent={
-          <Text style={MealAndDrink.emptyMessage}>No meals found.</Text>
-        }
-      />
+                <View style={MealAndDrink.categoryContainer}>
+                  {/* Display image as background */}
+                  {categoryImages[item] && (
+                    <Image
+                      source={categoryImages[item]}
+                      style={MealAndDrink.categoryImage}
+                    />
+                  )}
+                  {/* Overlay text */}
+                  <View style={[MealAndDrink.overlay, { backgroundColor: theme.bgCategOverlay }]}>
+                    <Text
+                      style={[
+                        MealAndDrink.categoryText, { color: theme.textBtn },
+                        selectedCategory === item && { color: theme.textBtn }
+                      ]}
+                    >
+                      {item}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
 
 
-    </View>
-    </ThemeLayout>
+
+          {/* FlatList for meals */}
+          <FlatList
+            style={MealAndDrink.foodList}
+            data={meals}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item) => item.idMeal}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+
+                onPress={() => navigation.navigate('MealDetail', { idMeal: item.idMeal })}
+              >
+                <View style={MealAndDrink.mealSelect}>
+                  <Image source={{ uri: item.strMealThumb }} style={MealAndDrink.mealImage} />
+                  <Text style={[MealAndDrink.mealTitle, { color: theme.textBtn, backgroundColor: theme.bgDarkGreen },]}>
+                    {item.strMeal}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            )}
+            ListEmptyComponent={
+              <Text style={MealAndDrink.emptyMessage}>No meals found.</Text>
+            }
+          />
+
+
+        </View>
+      </ThemeLayout>
     </ImageBackground>
   );
 };

@@ -7,9 +7,7 @@ export const MealAndDrink = StyleSheet.create({
     searchRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#fafff0f6',
         borderWidth: 3,
-        borderColor: '#6A994E',
         borderRadius: 8,
         paddingHorizontal: 15,
         marginTop: 10,
@@ -21,12 +19,12 @@ export const MealAndDrink = StyleSheet.create({
     },
     icon: {
         marginRight: 10,
+
     },
 
 
     // CATEGORY
     categoryButton: {
-        backgroundColor: '#386641',
         marginHorizontal: 5,
         borderRadius: 15,
         elevation: 10,
@@ -50,14 +48,12 @@ export const MealAndDrink = StyleSheet.create({
         resizeMode: 'cover',
     },
     overlay: {
-        backgroundColor: '#386641a5',
         width: '99%',
         borderRadius: 5,
     },
 
     categoryText: {
         fontSize: 20,
-        color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
         zIndex: 1,
@@ -67,13 +63,9 @@ export const MealAndDrink = StyleSheet.create({
 
     // SELECTED CATEGORY
     selectedCategory: {
-        borderColor: '#f67b43',
         borderWidth: 3,
     },
 
-    selectedCategoryText: {
-        color: '#FFC6AC',
-    },
 
     // FLATLIST
     foodList: {
@@ -103,7 +95,6 @@ export const MealAndDrink = StyleSheet.create({
         fontWeight: 'bold',
         padding: 10,
         color: 'white',
-        backgroundColor: '#386641', //386641a5
         width: '99%',
         borderBottomRightRadius: 15,
         borderBottomLeftRadius: 15,
@@ -111,7 +102,6 @@ export const MealAndDrink = StyleSheet.create({
 
     //RECIPE SCREENS ((MealDetailScreen.js & CocktailDetailScreen.js))
     innerContainerMealDS: {
-        backgroundColor: '#f3fff5e9',
         borderRadius: 10,
     },
 
@@ -127,7 +117,6 @@ export const MealAndDrink = StyleSheet.create({
     //Also found in PrintList.js
     titleDS: {
         borderBottomWidth: 2,
-        borderColor: '#6A994E',
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -136,7 +125,6 @@ export const MealAndDrink = StyleSheet.create({
     
     sectionTitleDS: {
         borderBottomWidth: 2,
-        borderColor: '#6A994E',
         fontSize: 18,
         fontWeight: 'bold',
         paddingVertical: 10,
@@ -145,8 +133,6 @@ export const MealAndDrink = StyleSheet.create({
     ingredientDS: {
         textAlign: 'center',
         borderBottomWidth: 1,
-        borderColor: '#ffc6ac',
-        backgroundColor: '#ffeee694',
         fontSize: 16,
         fontWeight: 'bold',
         lineHeight: 26,
@@ -173,60 +159,6 @@ export const MealAndDrink = StyleSheet.create({
         alignItems: 'center',
     },
 
-    //modal style SaveIngredients
-
-    modalView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.6)', // Dark semi-transparent background
-        padding: 20,
-    },
-    selectedIngredient: {
-        fontSize: 18,
-        color: '#444',
-        marginVertical: 10,
-        textAlign: 'center',
-        paddingHorizontal: 20,
-        fontStyle: 'italic',
-        maxWidth: 300,
-    },
-    savedIngredientsTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#333',
-        marginVertical: 15,
-    },
-    savedIngredient: {
-        fontSize: 16,
-        color: '#555',
-        marginBottom: 5,
-        textAlign: 'center',
-        fontStyle: 'italic',
-    },
-    button: {
-        backgroundColor: '#6C63FF', // Modern button color
-        borderRadius: 10,
-        paddingVertical: 12,
-        paddingHorizontal: 25,
-        marginVertical: 5,
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    closeButton: {
-        backgroundColor: '#FF6F61', // Red color for close
-    },
-
-    emptyMessage: {
-        textAlign: 'center',
-        marginTop: 20,
-        fontSize: 16,
-        color: 'gray',
-    },
-    
 
 
 

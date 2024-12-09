@@ -28,6 +28,7 @@ const MealDetailScreen = ({ route }) => {
   const [loading, setLoading] = useState(true);
   const { isDarkMode } = useTheme();
   const { addToShoppingList } = useShoppingList(); // Use shopping list context
+  const { theme } = useTheme(); // Access the current theme from context
 
   // Function to map area names to country codes
   const getCountryCodeFromArea = (area) => {
@@ -140,17 +141,17 @@ const MealDetailScreen = ({ route }) => {
       <ThemeLayout>
         <View style={globalStyles.container}>
           <ScrollView contentContainerStyle={MealAndDrink.scrollContentMealDS} showsVerticalScrollIndicator={false}>
-            <View style={MealAndDrink.innerContainerMealDS}>
+            <View style={[MealAndDrink.innerContainerMealDS, {backgroundColor: theme.bgInnerContainer}]}>
               <Image source={{ uri: meal.strMealThumb }} style={MealAndDrink.imageDS} />
-              <Text style={[MealAndDrink.titleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              <Text style={[MealAndDrink.titleDS, { color: theme.textDarkGreen, borderColor: theme.borderSearch}]}>
                 {meal.strMeal}
               </Text>
 
               <View style={[MealAndDrink.foodDetCat, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
-                <Text style={[MealAndDrink.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                <Text style={[MealAndDrink.foodDetCatTitle, { color: theme.textDarkGreen }]}>
                   Category: {categoryImage && <Image source={categoryImage} style={{ width: 35, height: 35 }} />}
                 </Text>
-                <Text style={[MealAndDrink.foodDetCatTitle, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                <Text style={[MealAndDrink.foodDetCatTitle, { color: theme.textDarkGreen }]}>
                   Area: {countryCode && (
                     <View style={{ marginVertical: 10 }}>
                       <CountryFlag isoCode={countryCode} size={35} />
@@ -159,26 +160,26 @@ const MealDetailScreen = ({ route }) => {
                 </Text>
               </View>
 
-              <Text style={[MealAndDrink.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              <Text style={[MealAndDrink.sectionTitleDS, { borderColor: theme.borderSearch, color: theme.textDarkGreen }]}>
                 Ingredients:
               </Text>
-              <Text style={[globalStyles.helperText, { color: isDarkMode ? '#cccccc' : '#666666' }]}>
+              <Text style={[globalStyles.helperText, { color: theme.textDarkGreen }]}>
                 Tap on an ingredient to add it to your shopping list!
               </Text>
 
 
               {getIngredients().map((ingredient, index) => (
                 <TouchableOpacity key={index} onPress={() => handleIngredientClick(ingredient)}>
-                  <Text style={[MealAndDrink.ingredientDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+                  <Text style={[MealAndDrink.ingredientDS, { color: theme.textDarkGreen, backgroundColor: theme.bgIngredientDS, borderColor: theme.borderLightPeach }]}>
                     {ingredient}
                   </Text>
                 </TouchableOpacity>
               ))}
 
-              <Text style={[MealAndDrink.sectionTitleDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              <Text style={[MealAndDrink.sectionTitleDS, { borderColor: theme.borderSearch, color: theme.textDarkGreen }]}>
                 Instructions:
               </Text>
-              <Text style={[MealAndDrink.instructionsDS, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
+              <Text style={[MealAndDrink.instructionsDS, { color: theme.textDarkGreen }]}>
                 {meal.strInstructions}
               </Text>
             </View>
