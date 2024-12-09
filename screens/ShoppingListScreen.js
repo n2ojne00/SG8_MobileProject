@@ -13,7 +13,7 @@ import {
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 import { useTheme } from '../contexts/ThemeContext';
-import { Entypo, MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { globalStyles } from '../styles/GlobalStyles';
 import { ShopList } from '../styles/ShoppingListStyles';
 import { MainStyles } from '../styles/MainScreenStyles';
@@ -102,14 +102,14 @@ const ShoppingListScreen = ({ navigation }) => {
     <View style={ShopList.itemContainer}>
       <Text style={[ShopList.itemText, { color: isDarkMode ? '#ffffff' : '#495057' }]}>{item}</Text>
       <TouchableOpacity onPress={() => removeItem(item)}>
-        <MaterialIcons name="highlight-remove" size={24} color="#fb4040" />
+        <MaterialIcons name="highlight-remove" size={24} color="#f67b43" />
       </TouchableOpacity>
     </View>
   );
 
   const renderSavedListItem = ({ item, index }) => (
-    <TouchableOpacity style={ShopList.savedListItem} onPress={() => navigateToListDetail(item)}>
-      <Text style={[ShopList.savedListText, { color: isDarkMode ? '#80bdff' : '#007bff' }]}>{item.name || `List ${index + 1}`}</Text>
+    <TouchableOpacity onPress={() => navigateToListDetail(item)}>
+      <Text style={[ShopList.savedListText, { color: isDarkMode ? '#80bdff' : '#386641' }]}>{item.name || `List ${index + 1}`}</Text>
     </TouchableOpacity>
   );
 
@@ -156,7 +156,7 @@ const ShoppingListScreen = ({ navigation }) => {
                   Current Shopping List
                 </Text>
                 {shoppingList.map((item, index) => (
-                  <View key={index.toString()} style={ShopList.listItem}>
+                  <View key={index.toString()} >
                     {renderItem({ item, index })}
                   </View>
                 ))}
@@ -169,6 +169,7 @@ const ShoppingListScreen = ({ navigation }) => {
                 </Text>
                 {savedLists.map((list, index) => (
                   <View key={index.toString()} style={ShopList.listItem}>
+                    <AntDesign name="hearto" size={20} color="#f67b43" style={{marginRight: 15,}} />
                     {renderSavedListItem({ item: list })}
                   </View>
                 ))}

@@ -17,7 +17,9 @@ export const ShopList = StyleSheet.create({
     addShopButton: {
         height: 50,
         width: 50,
-        backgroundColor: '#6A994E',
+        backgroundColor: '#dbfaEB',
+        borderWidth: 2,
+        borderColor: '#386641',
         marginLeft: 20,
         borderRadius: 10,
         justifyContent: 'center', 
@@ -64,12 +66,15 @@ export const ShopList = StyleSheet.create({
         fontSize: 18,
         color: '#386641',
     },
-    savedListItem: {
-        marginLeft: 20,
+    listItem: {
+        flexDirection: 'row',
+        width: '93%',
+        borderBottomWidth: 1,
+        borderColor: '#386641',
+        padding: 5,
     },
     savedListText: {
         fontSize: 20,
-        textDecorationLine: 'underline',
     },
 
     mapContainer: {
