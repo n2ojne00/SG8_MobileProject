@@ -37,8 +37,8 @@ const lightTheme = {
 const darkTheme = {
   colors: {
     // Background Colors
-    bgContainer: '#121212',
-    bgSaveBtn: '#1E1E1E',
+    bgContainer: '#ecc3c3',
+    bgSaveBtn: '#c91414',
     bgOfTheDayContainer: '#1F1F1F',
     bgRecipeTextArea: '#2C2C2C',
     bgDarkGreen: '#1C1C1C',
