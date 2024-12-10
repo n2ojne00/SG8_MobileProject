@@ -121,8 +121,9 @@ const MealDetailScreen = ({ route }) => {
 
   // Handle ingredient click
   const handleIngredientClick = (ingredient) => {
-    addToShoppingList(ingredient);
-    Alert.alert('Ingredient Added', `${ingredient} has been added to your shopping list.`);
+    const ingredientName = ingredient.replace(/^\d*\s?(oz|cl|ml|tbsp|tbs|tsp|cup|cups|kg|g|lb|lbs|teaspoon|tablespoon|pinch|dash|slice|pieces)?\s*/i, '').trim();
+    addToShoppingList(ingredientName);
+    Alert.alert('Ingredient Added', `${ingredientName} has been added to your shopping list.`);
   };
 
   if (loading) {

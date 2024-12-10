@@ -20,10 +20,11 @@ const PrintListScreen = ({ route, navigation }) => {
       <ThemeLayout>
         <View style={globalStyles.container}>
           <View style={[PrintList.innerContainerPrintList, { backgroundColor: theme.bgTransparentLightGreen }]}>
-            <View
-              style={[MainStyles.RecipeButton, { marginTop: 12, alignSelf: 'center', backgroundColor: theme.bgRecipeBtn }]}>
-              <FontAwesome5 name='shopping-basket' size={25} color={theme.textDarkGreen} />;
-            </View>
+          <View
+  style={[MainStyles.RecipeButton, { marginTop: 12, alignSelf: 'center', backgroundColor: theme.bgRecipeBtn }]}>
+  <FontAwesome5 name='shopping-basket' size={25} color={theme.textDarkGreen} />
+</View>
+    
 
             <Text style={[MealAndDrink.titleDS, { color: theme.textDarkGreen, borderColor: theme.borderSearch }]}>{list?.name || 'Shopping List'}</Text>
             <FlatList

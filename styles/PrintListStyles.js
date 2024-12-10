@@ -21,15 +21,18 @@ export const PrintList = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 15,
-    width: 200,
+    width: 245,
     height: 40,
     borderRadius: 30,
     borderWidth: 2,
     alignItems: 'center',
+    elevation:2,
     marginBottom: 40,
   },
   buttonTextRL: {
     fontSize: 16,
+    alignContent: 'center',
+    alignItems: 'center',
   },
 
 })
