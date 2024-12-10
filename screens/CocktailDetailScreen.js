@@ -51,25 +51,28 @@ const CocktailDetailScreen = ({ route }) => {
 
   // Extract ingredients and convert measurements
   const ingredients = [];
+  const shoppingListIngredients = [];
+  
   for (let i = 1; i <= 15; i++) {
     const ingredient = cocktail[`strIngredient${i}`];
     let measure = cocktail[`strMeasure${i}`];
-
+  
     if (ingredient) {
+      // If there's a measure, format it for the recipe
       if (measure && measure.includes("oz")) {
         const amountInOz = parseFloat(measure.replace("oz", "").trim());
         const amountInCl = Math.ceil(amountInOz * 2.95735); // Convert oz to cl
         measure = `${amountInCl} cl`;
       }
-      ingredients.push(`${measure ? measure : ''} ${ingredient}`);
+      // Add to the recipe display
+      ingredients.push(`${measure ? measure : ''} ${ingredient}`.trim());
+  
+      // Add only the ingredient name to the shopping list
+      shoppingListIngredients.push(ingredient.trim());
     }
   }
-
   const handleIngredientClick = (ingredient) => {
-    const ingredientName = ingredient
-      .replace(/^\d+(\s?\d+\/\d+)?\s?(oz|cl|ml|tbsp|tsp|shot|shots|cup|cups|dash|pinch|teaspoon|tablespoon)?\s?/i, '') // Remove numbers, fractions, and units
-      .replace(/^\d+\/\d+\s?/, '') // Remove standalone fractions like 1/2
-      .trim();
+    const ingredientName = ingredient.trim(); // Ensure it's cleaned up
     addToShoppingList(ingredientName);
     Alert.alert('Ingredient Added', `${ingredientName} has been added to your shopping list.`);
   };
@@ -106,14 +109,24 @@ const CocktailDetailScreen = ({ route }) => {
               <Text style={[globalStyles.helperText, { color: theme.textDarkGreen }]}>
                 Tap on an ingredient to add it to your shopping list!
               </Text>
-              {ingredients.map((ingredient, index) => (
-                <TouchableOpacity key={index} onPress={() => handleIngredientClick(ingredient)}>
-                  <Text
-                    style={[MealAndDrink.ingredientDS, { color: theme.textDarkGreen, backgroundColor: theme.bgIngredientDS, borderColor: theme.borderLightPeach, },]}>
-                    {ingredient}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+             
+
+{ingredients.map((ingredient, index) => (
+  <TouchableOpacity key={index} onPress={() => handleIngredientClick(shoppingListIngredients[index])}>
+    <Text
+      style={[
+        MealAndDrink.ingredientDS,
+        {
+          color: theme.textDarkGreen,
+          backgroundColor: theme.bgIngredientDS,
+          borderColor: theme.borderLightPeach,
+        },
+      ]}
+    >
+      {ingredient || ""}  {/* Ensure it's always a valid string */}
+    </Text>
+  </TouchableOpacity>
+))}
 
               {/* Instructions Section */}
               <Text style={[MealAndDrink.sectionTitleDS, { borderColor: theme.borderSearch, color: theme.textDarkGreen }]}>
