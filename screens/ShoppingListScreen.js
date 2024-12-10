@@ -125,7 +125,7 @@ const ShoppingListScreen = ({ navigation }) => {
           style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         >
-          <ScrollView contentContainerStyle={ShopList.scrollContainer}>
+          <ScrollView contentContainerStyle={ShopList.scrollContainer} keyboardShouldPersistTaps="handled">
             <View style={globalStyles.container}>
               <View style={[ShopList.shopListCreation, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
                 <TextInput
