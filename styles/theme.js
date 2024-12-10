@@ -40,39 +40,39 @@ const lightTheme = {
 const darkTheme = {
   colors: {
     // Background Colors
-    bgContainer: '#ecc3c3',
-    bgSaveBtn: '#c91414',
-    bgOfTheDayContainer: '#1F1F1F',
-    bgRecipeTextArea: '#2C2C2C',
-    bgDarkGreen: '#1C1C1C',
-    bgTransparentLightGreen: '#1F1F1F',
-    bgRecipeBtn: '#3C3C3C',
-    bgIngredientDS: '#3A3A3A',
-    bgModalOverlay: '#00000080',
-    bgPlaceholder: '#6C6C6C',
-    bgSearchRow: '#2A2A2A',
-    bgCategOverlay: '#3C3C3C',
-    bgInnerContainer: '#2F2F2F',
-    bgAccountInput: '#2C2C2C',
-    bgSettingDarkMode: '#2F2F2F',
+    bgContainer: '#0D1B2A', // Dark blue for the main container background
+    bgSaveBtn: '#1B263B', // Slightly lighter blue for buttons
+    bgOfTheDayContainer: '#1C2541', // A subtle navy blue for the "Of The Day" container
+    bgRecipeTextArea: '#2A3A5B', // Muted blue for text areas
+    bgDarkGreen: '#162A36', // Dark teal-like green for accents
+    bgTransparentLightGreen: '#1C254180', // Transparent overlay with navy tone
+    bgRecipeBtn: '#1F4068', // Deep blue for recipe buttons
+    bgIngredientDS: '#3B5262', // Muted gray-blue for ingredient lists
+    bgModalOverlay: '#0A1124CC', // Semi-transparent dark blue overlay
+    bgPlaceholder: '#52697B', // Medium gray-blue for placeholders
+    bgSearchRow: '#243B55', // Rich dark blue for search rows
+    bgCategOverlay: '#162A36CC', // Transparent dark green-blue
+    bgInnerContainer: '#192841', // Darker tone for inner containers
+    bgAccountInput: '#243B55', // Navy for input fields
+    bgSettingDarkMode: '#243B55', // Same navy tone for settings
 
     // Border Colors
-    borderSearch: '#6C6C6C',
-    borderDarkGreen: '#3F3F3F',
-    borderOrange: '#7F4F3C',
-    borderLightPeach: '#805A5A',
+    borderSearch: '#1F4068', // Deep blue for search borders
+    borderDarkGreen: '#162A36', // Dark green-blue for accents
+    borderOrange: '#FF7F50', // Coral orange for contrast
+    borderLightPeach: '#FFA07A', // Soft peach for accents
 
     // Text Colors
-    textBtn: '#FFFFFF',
-    textDarkGreen: '#E0E0E0',
-    textError: '#CF6679',
-    textAlmostBlack: '#FFFFFF',
+    textBtn: '#FFFFFF', // Pure white for buttons
+    textDarkGreen: '#A1C6D1', // Soft teal for dark text
+    textError: '#F28B82', // Soft red for errors
+    textAlmostBlack: '#DCE6F1', // Light blue-white for readable dark text
 
     // Tint Colors
-    bookTintColor: '#A8A8A8',
+    bookTintColor: '#B5C9DA', // Gentle tint for icons
 
-    //Search Icon
-    searchIcon: '#6A994E',
+    // Search Icon
+    searchIcon: '#A1C6D1', // Matching teal for the search icon
   },
 };
 
