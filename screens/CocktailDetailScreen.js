@@ -66,7 +66,10 @@ const CocktailDetailScreen = ({ route }) => {
   }
 
   const handleIngredientClick = (ingredient) => {
-    const ingredientName = ingredient.replace(/^\d+\s?(oz|cl|ml|tbsp|tsp)?\s?/i, '').trim();
+    const ingredientName = ingredient
+      .replace(/^\d+(\s?\d+\/\d+)?\s?(oz|cl|ml|tbsp|tsp|shot|shots|cup|cups|dash|pinch|teaspoon|tablespoon)?\s?/i, '') // Remove numbers, fractions, and units
+      .replace(/^\d+\/\d+\s?/, '') // Remove standalone fractions like 1/2
+      .trim();
     addToShoppingList(ingredientName);
     Alert.alert('Ingredient Added', `${ingredientName} has been added to your shopping list.`);
   };
