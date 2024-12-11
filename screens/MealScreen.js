@@ -95,7 +95,7 @@ const MealScreen = ({ route, navigation }) => {
     >
       <ThemeLayout>
 
-        <View style={globalStyles.container}>
+        <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
           <View style={[MealAndDrink.searchRow, { backgroundColor: theme.bgSearchRow, borderColor: theme.borderDarkGreen }]}>
             <FontAwesome name="search" color={theme.searchIcon} size={20} style={MealAndDrink.icon} />
             <TextInput
