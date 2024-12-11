@@ -3,9 +3,8 @@ import { StyleSheet } from 'react-native';
 export const MainStyles = StyleSheet.create({
 
     MainContainer: {
-        paddingHorizontal: 5,
+        paddingHorizontal: '2%',
         flex: 1,
-        backgroundColor: '#f2ffffae',
     },
     logo: {
         width: '100%',
@@ -25,7 +24,7 @@ export const MainStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '49%',
-        backgroundColor: '#f3fff5',
+        //backgroundColor: '#f3fff5',
         paddingVertical: 10,
         paddingHorizontal: 6,
         borderRadius: 15,
@@ -38,14 +37,15 @@ export const MainStyles = StyleSheet.create({
         paddingVertical: 15,
         paddingHorizontal: 7,
         borderRadius: 10,
-        height: 240,
+        minHeight: 240, // Set a minimum height
+        justifyContent: 'space-between', // Space out elements
+        alignItems: 'center', // Center elements horizontally
     },
     ofTheDayTitle: {
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
         color: '#386641',
-        padding: 5,
         width: '100%',
         borderBottomWidth: 2,
         borderColor: '#f67b43'
@@ -57,11 +57,13 @@ export const MainStyles = StyleSheet.create({
         color: '#ffffff',
         borderTopWidth: 2,
         borderColor: '#f67b43',
-        height: 55,
+        width: '100%',
+        height: 'auto', // Allow dynamic height
+
     },
     ofTheDayImage: {
         width: '100%',
-        height: 150,
+        height: 175,
         borderRadius: 10,
         marginBottom: 10,
         elevation: 3,
@@ -78,7 +80,7 @@ export const MainStyles = StyleSheet.create({
         position: 'relative',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f3fff5ac',
+        //backgroundColor: '#f3fff5ac',
         borderTopEndRadius: 100,
         borderTopStartRadius: 10,
         borderBottomStartRadius: 100,
@@ -87,7 +89,6 @@ export const MainStyles = StyleSheet.create({
     bookImage: {
         width: '100%',
         height: '100%',
-        tintColor: '#122215',
         position: 'absolute',
         resizeMode: 'stretch',
     },
@@ -101,10 +102,11 @@ export const MainStyles = StyleSheet.create({
 
     //Also in PrintListScreen.js, RecipeListScreen.js 
     RecipeButton: {
-        backgroundColor: '#6a994e8e',
+        //backgroundColor: '#6a994e8e',
         padding: 15,
         borderRadius: 60,
-        width: '32%',
+        width: '35%',
+        height: '73%',
         alignItems: 'center',
         marginBottom: 20,
     },
@@ -133,20 +135,15 @@ export const MainStyles = StyleSheet.create({
     },
     articleCarousel: {
         paddingVertical: 10,
-        backgroundColor: '#386641a9',
+        //backgroundColor: '#386641a9',
         elevation: 2,
     },
     articleContainer: {
         width: 200,
         marginRight: 15,
-        backgroundColor: '#f3fff5',
+        //backgroundColor: '#f3fff5',
         padding: 10,
         borderRadius: 8,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 6,
-        elevation: 3,
         marginLeft: 8,
     },
     articleImage: {
@@ -161,10 +158,10 @@ export const MainStyles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
-        color: '#021e01',
+        //color: '#021e01',
         borderBottomWidth: 2,
         borderTopWidth: 2,
-        borderColor: '#f67b43'
+        //borderColor: '#f67b43'
     },
     articleContent: {
         fontSize: 16,
@@ -176,7 +173,7 @@ export const MainStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#2525257e',
+        //backgroundColor: '#2525257e',
     },
     modalContent: {
         width: '90%',
@@ -184,11 +181,7 @@ export const MainStyles = StyleSheet.create({
         borderRadius: 10,
         padding: 20,
         alignItems: 'center',
-        elevation: 5, // Shadow for Android
-        shadowColor: '#000', // Shadow for iOS
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
+  
     },
     modalImage: {
         width: '100%',
@@ -202,36 +195,33 @@ export const MainStyles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
-        color: '#122115',
         width: '100%',
         borderBottomWidth: 2,
         borderTopWidth: 2,
-        borderColor: '#f67b43'
+   
     },
     modalDescription: {
-        fontSize: 17,
-        color: '#386641',
+        fontSize: 18,
         textAlign: 'center',
         marginBottom: 20,
     },
-      closeButton: {
+    closeButton: {
         width: '100%',
         padding: 12,
-        backgroundColor: '#f67b43',
         borderRadius: 8,
         alignItems: 'center',
         marginTop: 10,
-      },
-      closeButtonText: {
+    },
+    closeButtonText: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#fff',
-      },
-      modalScroll: {
+  
+    },
+    modalScroll: {
         maxHeight: 300,
         marginBottom: 10,
         borderBottomWidth: 1,
-        borderColor: '#ccc', 
-      },
-      
+        borderColor: '#ccc',
+    },
+
 })

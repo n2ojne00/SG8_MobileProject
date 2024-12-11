@@ -106,7 +106,7 @@ const CocktailDetailScreen = ({ route }) => {
                 Ingredients:
               </Text>
 
-              <Text style={[globalStyles.helperText, { color: theme.textDarkGreen }]}>
+              <Text style={[MealAndDrink.helperText, { color: theme.textDarkGreen }]}>
                 Tap on an ingredient to add it to your shopping list!
               </Text>
              
