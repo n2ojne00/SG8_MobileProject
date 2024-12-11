@@ -52,11 +52,11 @@ const CocktailDetailScreen = ({ route }) => {
   // Extract ingredients and convert measurements
   const ingredients = [];
   const shoppingListIngredients = [];
-  
+
   for (let i = 1; i <= 15; i++) {
     const ingredient = cocktail[`strIngredient${i}`];
     let measure = cocktail[`strMeasure${i}`];
-  
+
     if (ingredient) {
       // If there's a measure, format it for the recipe
       if (measure && measure.includes("oz")) {
@@ -66,7 +66,7 @@ const CocktailDetailScreen = ({ route }) => {
       }
       // Add to the recipe display
       ingredients.push(`${measure ? measure : ''} ${ingredient}`.trim());
-  
+
       // Add only the ingredient name to the shopping list
       shoppingListIngredients.push(ingredient.trim());
     }
@@ -80,7 +80,7 @@ const CocktailDetailScreen = ({ route }) => {
   return (
     <ImageBackground style={globalStyles.background} resizeMode="cover">
       <ThemeLayout>
-        <View style={globalStyles.container}>
+        <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
           <ScrollView contentContainerStyle={MealAndDrink.scrollContentMealDS} showsVerticalScrollIndicator={false}>
             <View style={[MealAndDrink.innerContainerMealDS, { backgroundColor: theme.bgInnerContainer }]}>
               {/* Cocktail Image */}
@@ -94,7 +94,7 @@ const CocktailDetailScreen = ({ route }) => {
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                   source={getAlcoholImage(cocktail.strAlcoholic)}
-                  style={{ width: 35, height: 35, marginVertical: 10, marginHorizontal: 20,}}
+                  style={{ width: 35, height: 35, marginVertical: 10, marginHorizontal: 20, }}
                 />
                 <Text style={{ marginLeft: 5, fontWeight: 'bold', fontSize: 18, color: theme.textDarkGreen }}>
                   {cocktail.strAlcoholic === 'Alcoholic' ? 'Alcoholic' : 'Non-Alcoholic'}
@@ -109,24 +109,24 @@ const CocktailDetailScreen = ({ route }) => {
               <Text style={[MealAndDrink.helperText, { color: theme.textDarkGreen }]}>
                 Tap on an ingredient to add it to your shopping list!
               </Text>
-             
 
-{ingredients.map((ingredient, index) => (
-  <TouchableOpacity key={index} onPress={() => handleIngredientClick(shoppingListIngredients[index])}>
-    <Text
-      style={[
-        MealAndDrink.ingredientDS,
-        {
-          color: theme.textDarkGreen,
-          backgroundColor: theme.bgIngredientDS,
-          borderColor: theme.borderLightPeach,
-        },
-      ]}
-    >
-      {ingredient || ""}  {/* Ensure it's always a valid string */}
-    </Text>
-  </TouchableOpacity>
-))}
+
+              {ingredients.map((ingredient, index) => (
+                <TouchableOpacity key={index} onPress={() => handleIngredientClick(shoppingListIngredients[index])}>
+                  <Text
+                    style={[
+                      MealAndDrink.ingredientDS,
+                      {
+                        color: theme.textDarkGreen,
+                        backgroundColor: theme.bgIngredientDS,
+                        borderColor: theme.borderLightPeach,
+                      },
+                    ]}
+                  >
+                    {ingredient || ""}  {/* Ensure it's always a valid string */}
+                  </Text>
+                </TouchableOpacity>
+              ))}
 
               {/* Instructions Section */}
               <Text style={[MealAndDrink.sectionTitleDS, { borderColor: theme.borderSearch, color: theme.textDarkGreen }]}>

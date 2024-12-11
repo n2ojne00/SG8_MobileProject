@@ -16,10 +16,10 @@ const RecipeDetailScreen = ({ route }) => {
             resizeMode="cover"
         >
             <ThemeLayout>
-                <View style={globalStyles.container}>
+                <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
                     <ScrollView
                         showsVerticalScrollIndicator={false}
-                        style={[RecipeDetails.scrollContentRecipeDS, {backgroundColor: theme.bgRecipeTextArea }]}>
+                        style={[RecipeDetails.scrollContentRecipeDS, { backgroundColor: theme.bgRecipeTextArea }]}>
                         {/* Display the user photo if available */}
                         {recipe.photo ? (
                             <Image source={{ uri: recipe.photo }} style={RecipeDetails.recipePhoto} />

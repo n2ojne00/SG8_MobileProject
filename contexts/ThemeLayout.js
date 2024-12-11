@@ -6,7 +6,7 @@ import { globalStyles } from '../styles/GlobalStyles';
 // Map theme names to image paths
 const backgroundImages = {
   light: require('../images/winter.jpg'), // Adjusted relative path
-  dark: require('../images/night.jpg'),  // Adjusted relative path
+  dark: require('../images/darkthemebg.jpg'),  // Adjusted relative path
 };
 
 const ThemeLayout = ({ children }) => {

@@ -18,7 +18,7 @@ const PrintListScreen = ({ route, navigation }) => {
   return (
     <ImageBackground style={globalStyles.background} resizeMode="cover">
       <ThemeLayout>
-        <View style={globalStyles.container}>
+        <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
           <View style={[PrintList.innerContainerPrintList, { backgroundColor: theme.bgTransparentLightGreen }]}>
             <View
               style={[MainStyles.RecipeButton, { marginTop: 12, alignSelf: 'center', backgroundColor: theme.bgRecipeBtn }]}>

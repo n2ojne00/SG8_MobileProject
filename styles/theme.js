@@ -1,7 +1,8 @@
 const lightTheme = {
   colors: {
+
     // Background Colors
-    bgContainer: '#f8fff2ae',
+    bgContainer: '#f2ffffae',
     bgSaveBtn: '#dbfaeb',
     bgOfTheDayContainer: '#f3fff5',
     bgRecipeTextArea: '#fcf6eb',
@@ -42,7 +43,7 @@ const lightTheme = {
 const darkTheme = {
   colors: {
     // Background Colors
-    bgContainer: '#0D1B2A', // Dark blue for the main container background
+    bgContainer: '#022b2bbe', // Dark blue for the main container background
     bgSaveBtn: '#1B263B', // Slightly lighter blue for buttons
     bgOfTheDayContainer: '#1C2541', // A subtle navy blue for the "Of The Day" container
     bgRecipeTextArea: '#2A3A5B', // Muted blue for text areas

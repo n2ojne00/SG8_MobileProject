@@ -61,7 +61,7 @@ const MainScreen = ({ navigation }) => {
     <ImageBackground style={globalStyles.background} resizeMode="cover">
       <ThemeLayout>
         <View style={[MainStyles.MainContainer, { backgroundColor: theme.bgContainer }]}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
 
             <Image source={require('../images/succlyLogo.png')} style={globalStyles.logo} />
 
@@ -136,8 +136,8 @@ const MainScreen = ({ navigation }) => {
 
             {/* Article Section */}
             <Text style={[MainStyles.sectionTitle, { color: theme.textDarkGreen, borderColor: theme.borderOrange }]}>Food Articles</Text>
-            
-            <ScrollView horizontal style={[MainStyles.articleCarousel, {backgroundColor: theme.bgDarkGreen}]}
+
+            <ScrollView horizontal style={[MainStyles.articleCarousel, { backgroundColor: theme.bgDarkGreen }]}
               showsHorizontalScrollIndicator={false}>
               {exampleArticles.map((article, index) => (
                 <TouchableOpacity
@@ -146,7 +146,7 @@ const MainScreen = ({ navigation }) => {
                   style={[MainStyles.articleContainer, { backgroundColor: theme.bgOfTheDayContainer }]}
                 >
                   <Image source={{ uri: article.imageUrl }} style={MainStyles.articleImage} />
-                  <Text style={[MainStyles.articleTitle, {color: theme.textAlmostBlack, borderColor: theme.borderOrange}]}>{article.title}</Text>
+                  <Text style={[MainStyles.articleTitle, { color: theme.textAlmostBlack, borderColor: theme.borderOrange }]}>{article.title}</Text>
 
                 </TouchableOpacity>
               ))}
@@ -159,18 +159,18 @@ const MainScreen = ({ navigation }) => {
                 animationType="slide"
                 transparent={true}
               >
-                <View style={[MainStyles.modalOverlay, {backgroundColor: theme.bgModalOverlay}]}>
-                  <View style={[MainStyles.modalContent, {backgroundColor: theme.bgOfTheDayContainer}]}>
+                <View style={[MainStyles.modalOverlay, { backgroundColor: theme.bgModalOverlay }]}>
+                  <View style={[MainStyles.modalContent, { backgroundColor: theme.bgOfTheDayContainer }]}>
                     <Image source={{ uri: selectedArticle.imageUrl }} style={MainStyles.modalImage} />
-                    <Text style={[MainStyles.modalTitle, {color: theme.textAlmostBlack, borderColor: theme.borderOrange}]}>{selectedArticle.title}</Text>
+                    <Text style={[MainStyles.modalTitle, { color: theme.textAlmostBlack, borderColor: theme.borderOrange }]}>{selectedArticle.title}</Text>
                     <ScrollView style={MainStyles.modalScroll}>
-                      <Text style={[MainStyles.modalDescription, {color: theme.textDarkGreen}]}>{selectedArticle.content}</Text>
+                      <Text style={[MainStyles.modalDescription, { color: theme.textDarkGreen }]}>{selectedArticle.content}</Text>
                     </ScrollView>
 
 
                     {/* Close Button */}
-                    <Pressable onPress={closeArticleModal} style={[MainStyles.closeButton, {backgroundColor: theme.bgDarkGreen}]}>
-                      <Text style={[MainStyles.closeButtonText, {color: theme.textBtn}]}>CLOSE</Text>
+                    <Pressable onPress={closeArticleModal} style={[MainStyles.closeButton, { backgroundColor: theme.bgDarkGreen }]}>
+                      <Text style={[MainStyles.closeButtonText, { color: theme.textBtn }]}>CLOSE</Text>
                     </Pressable>
                   </View>
                 </View>

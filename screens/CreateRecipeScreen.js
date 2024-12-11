@@ -76,7 +76,7 @@ const CreateRecipeScreen = () => {
     return (
         <ImageBackground style={globalStyles.background} resizeMode="cover">
             <ThemeLayout>
-                <View style={globalStyles.container}>
+                <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={CreateRecipe.recipeContent}>
                             <View style={[MainStyles.RecipeButton, { marginTop: '2%', backgroundColor: theme.bgRecipeBtn }]}>

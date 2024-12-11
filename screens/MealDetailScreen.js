@@ -156,7 +156,7 @@ const MealDetailScreen = ({ route }) => {
   return (
     <ImageBackground style={globalStyles.background} resizeMode="cover">
       <ThemeLayout>
-        <View style={globalStyles.container}>
+        <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
           <ScrollView contentContainerStyle={MealAndDrink.scrollContentMealDS} showsVerticalScrollIndicator={false}>
             <View style={[MealAndDrink.innerContainerMealDS, { backgroundColor: theme.bgInnerContainer }]}>
               {/* Meal Image */}

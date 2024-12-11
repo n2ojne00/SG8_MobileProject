@@ -100,7 +100,7 @@ const CocktailScreen = () => {
       resizeMode="cover"
     >
       <ThemeLayout>
-        <View style={globalStyles.container}>
+        <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
           {/* Search Row */}
           <View
             style={[
@@ -183,7 +183,7 @@ const CocktailScreen = () => {
               </TouchableOpacity>
             )}
             ListEmptyComponent={
-              <Text style={[MealAndDrink.emptyMessage, {color: theme.textDarkGreen}]}>
+              <Text style={[MealAndDrink.emptyMessage, { color: theme.textDarkGreen }]}>
                 Choose category
               </Text>
             }

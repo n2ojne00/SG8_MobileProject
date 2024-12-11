@@ -121,12 +121,14 @@ const ShoppingListScreen = ({ navigation }) => {
         style={globalStyles.background}
         resizeMode="cover"
       >
+       
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        >
-          <ScrollView contentContainerStyle={ShopList.scrollContainer} keyboardShouldPersistTaps="handled">
-            <View style={globalStyles.container}>
+        > 
+        <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
+          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={ShopList.scrollContainer} keyboardShouldPersistTaps="handled">
+            
               <View style={[ShopList.shopListCreation, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
                 <TextInput
                   style={[ShopList.inputShopListName, , { color: theme.textDarkGreen }]}
@@ -178,9 +180,11 @@ const ShoppingListScreen = ({ navigation }) => {
 
               {/* Map */}
               <View>{renderMap()}</View>
-            </View>
+
           </ScrollView>
+          </View>
         </KeyboardAvoidingView>
+        
       </ImageBackground>
     </ThemeLayout>
   );
