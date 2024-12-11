@@ -9,10 +9,12 @@ import { MainStyles } from '../styles/MainScreenStyles';
 import { RecipeList } from '../styles/RecipeListStyles';
 import { RecipeDetails } from '../styles/RecipeDetailStyles';
 import { useRecipes } from '../contexts/RecipeContext';  // Import the context
+import { useTheme } from '../contexts/ThemeContext';
 
 const RecipeListScreen = () => {
     const { recipes, removeRecipe } = useRecipes();  // Access recipes and removeRecipe from context
     const navigation = useNavigation();
+    const { theme } = useTheme();
 
     // Define handleDelete to use removeRecipe from context
     const handleDelete = async (index) => {
@@ -51,7 +53,7 @@ const RecipeListScreen = () => {
     return (
         <ImageBackground style={globalStyles.background} resizeMode="cover">
             <ThemeLayout>
-                <View style={globalStyles.container}>
+                <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
                     <View style={RecipeList.recipeContent}>
                         <FlatList
                             showsVerticalScrollIndicator={false}
