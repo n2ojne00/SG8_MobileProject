@@ -100,7 +100,7 @@ const CocktailScreen = () => {
       resizeMode="cover"
     >
       <ThemeLayout>
-        <View style={globalStyles.container}>
+        <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
           {/* Search Row */}
           <View
             style={[
