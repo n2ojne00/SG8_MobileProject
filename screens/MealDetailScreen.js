@@ -181,7 +181,7 @@ const MealDetailScreen = ({ route }) => {
               <Text style={[MealAndDrink.sectionTitleDS, { borderColor: theme.borderSearch, color: theme.textDarkGreen }]}>
                 Ingredients:
               </Text>
-              <Text style={[globalStyles.helperText, { color: theme.textDarkGreen }]}>
+              <Text style={[MealAndDrink.helperText, { color: theme.textDarkGreen }]}>
                 Tap on an ingredient to add it to your shopping list!
               </Text>
               {getIngredients().map((ingredient, index) => (

@@ -15,15 +15,9 @@ export const globalStyles = StyleSheet.create({
     width: '100%',
     height: 250,
     marginVertical: 10,
+    
   },
-helperText: {
-    fontSize: 14, // Subtle and small but readable
-    fontWeight: '400', // Light weight for non-intrusive appearance
-    textAlign: 'center', // Center-align for balanced layout
-    marginVertical: 10, // Space above and below the text
-    paddingHorizontal: 16, // Ensure it doesn't touch edges on smaller screens
-    lineHeight: 20, // Good line spacing for readability
-},
+
 
   // Themelayout.js
   ThemeLayoutBackground: {

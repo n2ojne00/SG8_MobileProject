@@ -34,6 +34,8 @@ const lightTheme = {
 
     //Search Icon
     searchIcon: '#6A994E',
+    //Pin Icon
+    pinIcon: '#f67b43',
   },
 };
 
@@ -69,10 +71,12 @@ const darkTheme = {
     textAlmostBlack: '#DCE6F1', // Light blue-white for readable dark text
 
     // Tint Colors
-    bookTintColor: '#B5C9DA', // Gentle tint for icons
+    bookTintColor: '#185285',
 
     // Search Icon
     searchIcon: '#A1C6D1', // Matching teal for the search icon
+    //Pin Icon
+    pinIcon: '#FF7F50',
   },
 };
 
