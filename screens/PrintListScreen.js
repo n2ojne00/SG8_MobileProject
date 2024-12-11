@@ -20,11 +20,11 @@ const PrintListScreen = ({ route, navigation }) => {
       <ThemeLayout>
         <View style={globalStyles.container}>
           <View style={[PrintList.innerContainerPrintList, { backgroundColor: theme.bgTransparentLightGreen }]}>
-          <View
-  style={[MainStyles.RecipeButton, { marginTop: 12, alignSelf: 'center', backgroundColor: theme.bgRecipeBtn }]}>
-  <FontAwesome5 name='shopping-basket' size={25} color={theme.textDarkGreen} />
-</View>
-    
+            <View
+              style={[MainStyles.RecipeButton, { marginTop: 12, alignSelf: 'center', backgroundColor: theme.bgRecipeBtn }]}>
+              <FontAwesome5 name='shopping-basket' size={25} color={theme.textDarkGreen} />
+            </View>
+
 
             <Text style={[MealAndDrink.titleDS, { color: theme.textDarkGreen, borderColor: theme.borderSearch }]}>{list?.name || 'Shopping List'}</Text>
             <FlatList
@@ -49,7 +49,7 @@ const PrintListScreen = ({ route, navigation }) => {
             }]}
               onPress={() => navigation.goBack()} >
               <Ionicons name="arrow-back-outline" size={15} color={theme.textDarkGreen} style={{ marginHorizontal: 15 }} />
-              <Text style={[PrintList.buttonTextRL, {color: theme.textDarkGreen}]}>Back to shopping list</Text>
+              <Text style={[PrintList.buttonTextRL, { color: theme.textDarkGreen }]}>Back to shopping list</Text>
             </Pressable>
           </View>
         </View>

@@ -24,7 +24,7 @@ const LoginScreen = ({ navigation }) => {
             style={[LoginStyles.buttonLogin, { backgroundColor: theme.bgSaveBtn }]}
             onPress={() => navigation.navigate('LocalLogin')}
           >
-            <Text style={[LoginStyles.buttonTextLogin, { color: theme.textBtn }]}>Login</Text>
+            <Text style={[LoginStyles.buttonTextLogin, { color: theme.textAlmostBlack }]}>Login</Text>
           </TouchableOpacity>
 
           {/* Register Button */}
@@ -32,12 +32,12 @@ const LoginScreen = ({ navigation }) => {
             style={[LoginStyles.buttonLogin, { backgroundColor: theme.bgSaveBtn }]}
             onPress={() => navigation.navigate('Register')}
           >
-            <Text style={[LoginStyles.buttonTextLogin, { color: theme.textBtn }]}>Create Account</Text>
+            <Text style={[LoginStyles.buttonTextLogin, { color: theme.textAlmostBlack }]}>Create Account</Text>
           </TouchableOpacity>
 
           {/* Enter Without Login Button */}
           <TouchableOpacity
-            style={[LoginStyles.buttonLogin, { backgroundColor: '#ffc3a8ff' }]} // Static color for this button
+            style={[LoginStyles.buttonLogin, { backgroundColor: theme.bgDarkGreen }]} // Static color for this button
             onPress={() => navigation.navigate('MainApp')}
           >
             <Text style={[LoginStyles.buttonTextLogin, { color: theme.textBtn }]}>Enter Without Login</Text>
