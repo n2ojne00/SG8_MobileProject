@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ShoppingListProvider } from './contexts/ShoppingListContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { RecipeProvider } from './contexts/RecipeContext';
+import { useTheme } from './contexts/ThemeContext';
 
 // Import Screens
 import LoginScreen from './screens/LoginScreen';
@@ -152,33 +153,41 @@ const ShoppingListStack = () => (
   </Stack.Navigator>
 );
 
-const TabNavigator = () => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ color, size }) => {
-        let iconName;
-        if (route.name === 'Main') {
-          iconName = 'home';
-        } else if (route.name === 'Meals') {
-          iconName = 'hamburger';
-        } else if (route.name === 'Cocktails') {
-          iconName = 'cocktail';
-        } else if (route.name === 'Shopping List') {
-          iconName = 'shopping-basket';
-        }
-        return <FontAwesome5 name={iconName} size={25} color={color} />;
-      },
-      tabBarActiveTintColor: '#f67b43',
-      tabBarActiveBackgroundColor: '#fbd3c038',
-      tabBarInactiveTintColor: '#386641',
-    })}
-  >
-    <Tab.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
-    <Tab.Screen name="Meals" component={MealStack} options={{ headerShown: false }} />
-    <Tab.Screen name="Cocktails" component={CocktailStack} options={{ headerShown: false }} />
-    <Tab.Screen name="Shopping List" component={ShoppingListStack} options={{ headerShown: false }} />
-  </Tab.Navigator>
-);
+const TabNavigator = () => {
+  const { theme } = useTheme(); // Access the current theme and mode
+
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+          if (route.name === 'Main') {
+            iconName = 'home';
+          } else if (route.name === 'Meals') {
+            iconName = 'hamburger';
+          } else if (route.name === 'Cocktails') {
+            iconName = 'cocktail';
+          } else if (route.name === 'Shopping List') {
+            iconName = 'shopping-basket';
+          }
+          return <FontAwesome5 name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: theme.borderOrange, // Bright orange for active tabs
+        tabBarInactiveTintColor: '#DADADA', // Neutral beige
+        tabBarStyle: {
+          backgroundColor: theme.bgContainer, // Main container background color
+          borderTopColor: theme.borderSearch, // Search border color as tab bar border
+        },
+        tabBarActiveBackgroundColor: theme.bgSaveBtn, // Active tab background
+      })}
+    >
+      <Tab.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Meals" component={MealStack} options={{ headerShown: false }} />
+      <Tab.Screen name="Cocktails" component={CocktailStack} options={{ headerShown: false }} />
+      <Tab.Screen name="Shopping List" component={ShoppingListStack} options={{ headerShown: false }} />
+    </Tab.Navigator>
+  );
+};
 
 const App = () => {
   return (
