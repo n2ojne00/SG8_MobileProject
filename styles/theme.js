@@ -17,6 +17,7 @@ const lightTheme = {
     bgInnerContainer: '#f3fff5e9',
     bgAccountInput: '#ecffeff5',
     bgSettingDarkMode: '#f5f5f544',
+    bgTabNavigator: '#ffffff',
 
     // Border Colors
     borderSearch: '#6A994E',
@@ -58,6 +59,7 @@ const darkTheme = {
     bgInnerContainer: '#192841', // Darker tone for inner containers
     bgAccountInput: '#243B55', // Navy for input fields
     bgSettingDarkMode: '#243B55', // Same navy tone for settings
+    bgTabNavigator: '#243B55',
 
     // Border Colors
     borderSearch: '#1F4068', // Deep blue for search borders

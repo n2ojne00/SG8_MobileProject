@@ -173,9 +173,9 @@ const TabNavigator = () => {
           return <FontAwesome5 name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: theme.borderOrange, // Bright orange for active tabs
-        tabBarInactiveTintColor: '#DADADA', // Neutral beige
+        tabBarInactiveTintColor: theme.pinIcon, // Neutral beige
         tabBarStyle: {
-          backgroundColor: theme.bgContainer, // Main container background color
+          backgroundColor: theme.bgTabNavigator, // Main container background color
           borderTopColor: theme.borderSearch, // Search border color as tab bar border
         },
         tabBarActiveBackgroundColor: theme.bgSaveBtn, // Active tab background
