@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import styles from "../styles/style";
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ThemeLayout from "../contexts/ThemeLayout";
+import ThemeLayout from '../contexts/ThemeLayout';
 import { LoginStyles } from '../styles/LoginScreenStyles';
 import { Settings } from '../styles/SettingsStyles';
-import { globalStyles } from '../styles/GlobalStyles';
 import { useTheme } from '../contexts/ThemeContext';
+import { globalStyles } from '../styles/GlobalStyles';
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -15,73 +14,77 @@ const RegisterScreen = ({ navigation }) => {
   const { theme } = useTheme(); // Access theme from context
 
   const handleRegister = async () => {
-    if (!email || !password || !confirmPassword) {
-      Alert.alert('Error', 'All fields are required.');
-      return;
+    if (email && password && confirmPassword) {
+      if (password === confirmPassword) {
+        const account = { email, password };
+        await AsyncStorage.setItem('localAccount', JSON.stringify(account));
+        Alert.alert('Registration Successful', 'You can now log in with your new account.');
+        navigation.navigate('LocalLogin'); // Navigate to login screen
+      } else {
+        Alert.alert('Error', 'Passwords do not match.');
+      }
+    } else {
+      Alert.alert('Error', 'Please fill in all fields.');
     }
-
-    if (password !== confirmPassword) {
-      Alert.alert('Error', 'Passwords do not match.');
-      return;
-    }
-
-    // Check if the account already exists
-    const existingAccount = await AsyncStorage.getItem('localAccount');
-    const account = existingAccount ? JSON.parse(existingAccount) : null;
-
-    if (account?.email === email) {
-      Alert.alert('Error', 'Account with this email already exists.');
-      return;
-    }
-
-    // Save the new account
-    const newAccount = { email, password };
-    await AsyncStorage.setItem('localAccount', JSON.stringify(newAccount));
-
-    Alert.alert('Success', 'Account created successfully!');
-    navigation.navigate('LocalLogin'); // Navigate back to login screen
   };
 
   return (
     <ThemeLayout>
-      <View style={globalStyles.container}>
-        <View style={LoginStyles.containerLogin}>
-    
-          <Text style={LoginStyles.titleLogin}>Create an Account</Text>
+      <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
+          <View style={LoginStyles.containerLogin}>
+            <Text style={[LoginStyles.titleLogin, { color: theme.textAlmostBlack }]}>
+              Register a New Account
+            </Text>
 
-          <Text style={Settings.label}>Email</Text>
-          <TextInput
-            style={Settings.accountInput}
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <Text style={Settings.label}>Password</Text>
+            <Text style={[Settings.label, { color: theme.textAlmostBlack }]}>Email</Text>
             <TextInput
-              style={Settings.accountInput}
+              style={[
+                Settings.accountInput,
+                { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput },
+              ]}
+              placeholder="Email"
+              placeholderTextColor={theme.textAlmostBlack}
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+
+            <Text style={[Settings.label, { color: theme.textAlmostBlack }]}>Password</Text>
+            <TextInput
+              style={[
+                Settings.accountInput,
+                { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput },
+              ]}
               placeholder="Password"
+              placeholderTextColor={theme.textAlmostBlack}
               value={password}
               onChangeText={setPassword}
               secureTextEntry
             />
-          <Text style={Settings.label}>Confirm Password</Text>
+
+            <Text style={[Settings.label, { color: theme.textAlmostBlack }]}>Confirm Password</Text>
             <TextInput
-              style={Settings.accountInput}
+              style={[
+                Settings.accountInput,
+                { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput },
+              ]}
               placeholder="Confirm Password"
+              placeholderTextColor={theme.textAlmostBlack}
               value={confirmPassword}
               onChangeText={setConfirmPassword}
               secureTextEntry
             />
 
-          <TouchableOpacity
-            style={LoginStyles.buttonLogin}
-            onPress={handleRegister}
+            <TouchableOpacity
+              style={[LoginStyles.buttonLogin, { backgroundColor: theme.bgDarkGreen }]}
+              onPress={handleRegister}
             >
-            <Text style={LoginStyles.buttonTextLogin}>Register</Text>
-          </TouchableOpacity>
-        </View>
+              <Text style={[LoginStyles.buttonTextLogin, { color: theme.textBtn }]}>
+                Register
+              </Text>
+            </TouchableOpacity>
+          </View>
       </View>
     </ThemeLayout>
   );
