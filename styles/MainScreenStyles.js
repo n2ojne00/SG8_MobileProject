@@ -11,6 +11,21 @@ export const MainStyles = StyleSheet.create({
         height: 250,
         marginVertical: 10,
     },
+    WelcomeAnimation: {
+        fontSize: 20,
+        justifyContent: 'center',
+        textAlign: 'center',
+        width: 350,
+        height: 70,
+        borderWidth: 4,
+        borderStyle: 'dashed',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        borderBottomRightRadius: 40,
+        paddingVertical: 10, // Vertical padding for spacing
+        paddingHorizontal: 15, // Horizontal padding for spacing
+        fontWeight: 'bold', // Bold text for emphasis
+    },
 
     //Food/Drink of the DAY  (MainScreen)
     foodDrinkContainer: {
@@ -181,7 +196,7 @@ export const MainStyles = StyleSheet.create({
         borderRadius: 10,
         padding: 20,
         alignItems: 'center',
-  
+
     },
     modalImage: {
         width: '100%',
@@ -198,7 +213,7 @@ export const MainStyles = StyleSheet.create({
         width: '100%',
         borderBottomWidth: 2,
         borderTopWidth: 2,
-   
+
     },
     modalDescription: {
         fontSize: 18,
@@ -215,7 +230,7 @@ export const MainStyles = StyleSheet.create({
     closeButtonText: {
         fontSize: 16,
         fontWeight: 'bold',
-  
+
     },
     modalScroll: {
         maxHeight: 300,

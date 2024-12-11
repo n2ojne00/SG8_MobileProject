@@ -15,6 +15,7 @@ import { MealAndDrink } from '../styles/MealsAndDrinks';
 import { useTheme } from '../contexts/ThemeContext';
 import ThemeLayout from "../contexts/ThemeLayout";
 import { useShoppingList } from '../contexts/ShoppingListContext';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const CocktailDetailScreen = ({ route }) => {
   const { idDrink } = route.params;
@@ -91,7 +92,7 @@ const CocktailDetailScreen = ({ route }) => {
                 {cocktail.strDrink}
               </Text>
 
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center'}}>
                 <Image
                   source={getAlcoholImage(cocktail.strAlcoholic)}
                   style={{ width: 35, height: 35, marginVertical: 10, marginHorizontal: 20, }}
@@ -113,16 +114,7 @@ const CocktailDetailScreen = ({ route }) => {
 
               {ingredients.map((ingredient, index) => (
                 <TouchableOpacity key={index} onPress={() => handleIngredientClick(shoppingListIngredients[index])}>
-                  <Text
-                    style={[
-                      MealAndDrink.ingredientDS,
-                      {
-                        color: theme.textDarkGreen,
-                        backgroundColor: theme.bgIngredientDS,
-                        borderColor: theme.borderLightPeach,
-                      },
-                    ]}
-                  >
+                  <Text style={[MealAndDrink.ingredientDS, { color: theme.textDarkGreen, backgroundColor: theme.bgIngredientDS }]}>
                     {ingredient || ""}  {/* Ensure it's always a valid string */}
                   </Text>
                 </TouchableOpacity>

@@ -154,25 +154,23 @@ export const MealAndDrink = StyleSheet.create({
         paddingVertical: 5,
     },
     foodDetCat: {
-        marginHorizontal: 15,
+        marginTop: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+
     },
     foodDetCatTitle: {
         height: 50,
-        alignContent: 'center',
         fontSize: 14,
         fontWeight: 'bold',
-        marginVertical: 8,
-        flexDirection: 'row',
-        alignItems: 'center',
+        marginRight: 10,
     },
     
     helperText: {
-        fontSize: 14, // Subtle and small but readable
-        fontWeight: '400', // Light weight for non-intrusive appearance
-        textAlign: 'center', // Center-align for balanced layout
-        marginVertical: 10, // Space above and below the text
-        paddingHorizontal: 16, // Ensure it doesn't touch edges on smaller screens
-        lineHeight: 20, // Good line spacing for readability
+        fontSize: 14, 
+        textAlign: 'center', 
+        marginVertical: 10,  
+        lineHeight: 20,
     },
 
 

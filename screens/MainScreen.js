@@ -1,6 +1,6 @@
 // screens/MainScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, Modal, Button, ImageBackground, Pressable, } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, Modal, Button, ImageBackground, Pressable, Animated, } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 import ThemeLayout from "../contexts/ThemeLayout";
 import { MainStyles } from '../styles/MainScreenStyles';
@@ -56,6 +56,30 @@ const MainScreen = ({ navigation }) => {
     setSelectedArticle(null);
   };
 
+  {/**Welcome Animation */ }
+  const [slideAnim] = useState(new Animated.Value(-500));
+
+  useEffect(() => {
+    // Slide the "Welcome" text in from the left
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 1300,
+      useNativeDriver: true,
+    }).start();
+
+    // After 3 seconds, slide the "Welcome" text out
+    const timer = setTimeout(() => {
+      Animated.timing(slideAnim, {
+        toValue: -500,
+        duration: 1500,
+        useNativeDriver: true,
+      }).start();
+    }, 3000);
+
+
+    return () => clearTimeout(timer);
+  }, [slideAnim]);
+
 
   return (
     <ImageBackground style={globalStyles.background} resizeMode="cover">
@@ -64,6 +88,22 @@ const MainScreen = ({ navigation }) => {
           <ScrollView showsVerticalScrollIndicator={false}>
 
             <Image source={require('../images/succlyLogo.png')} style={globalStyles.logo} />
+
+            {/* Animated View that slides in from the left */}
+            <Animated.View
+              style={{
+                transform: [{ translateX: slideAnim }], // Animation moves horizontally
+                position: 'absolute',
+                top: 100,
+                left: 10,
+              }}
+            >
+
+              <Text style={[MainStyles.WelcomeAnimation, { color: theme.textDarkGreen, backgroundColor: theme.bgRecipeTextArea, borderColor: theme.borderDarkGreen }]}
+              >Welcome! {"\n"} Find the Best Recipes in town!</Text>
+
+            </Animated.View>
+
 
             {/* Food and Drink of the Day Section */}
             <View style={MainStyles.foodDrinkContainer}>
