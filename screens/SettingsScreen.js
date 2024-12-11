@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Switch, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Switch, TouchableOpacity, Modal, Button } from 'react-native'; // Import Button here
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../contexts/ThemeContext';
 import ThemeLayout from '../contexts/ThemeLayout';
 import { Settings } from '../styles/SettingsStyles';
 import Entypo from '@expo/vector-icons/Entypo';
 import { globalStyles } from '../styles/GlobalStyles';
+import { MainStyles } from '../styles/MainScreenStyles';
+import { Pressable } from 'react-native';
 
 const SettingsScreen = ({ navigation }) => {
   const { isDarkMode, toggleTheme, theme } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
 
   useEffect(() => {
     const loadAccountInfo = async () => {
@@ -51,64 +54,85 @@ const SettingsScreen = ({ navigation }) => {
     });
   };
 
-  const info = async () => {
-    Alert.alert('Team 8', 'Topias Tyni, Lauri Itkonen, Joni Neuvonen, Netta Ojala, Elias Konttaniemi');
+  const info = () => {
+    setModalVisible(true);  // Show the modal
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);  // Hide the modal
   };
 
   return (
     <ThemeLayout>
       <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
-        <TouchableOpacity onPress={info} style={Settings.settingInfo}>
-          <Entypo name="info" size={30} color={theme.textDarkGreen} />
-        </TouchableOpacity>
-
-        <View style={Settings.settingItem}>
+        <View style={[Settings.settingItem, { backgroundColor: theme.bgSettingDarkMode }]}>
           <Text style={[Settings.settingText, { color: theme.textDarkGreen }]}>Dark Mode</Text>
           <Switch
             value={isDarkMode}
             onValueChange={toggleTheme}
             trackColor={{ false: theme.bgPlaceholder, true: theme.bgDarkGreen }}
-            thumbColor={isDarkMode ? theme.bgContainer : theme.bgDarkGreen}
+            thumbColor={isDarkMode ? theme.searchIcon : theme.bgDarkGreen}
           />
         </View>
+
+        {/* Info Button */}
+        <TouchableOpacity onPress={info} style={[Settings.settingInfo, {borderColor: theme.borderSearch }]}>
+          <Entypo name="info" size={30} color={theme.textDarkGreen} />
+        </TouchableOpacity>
+
+        {/* Info Modal */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={closeModal}
+        >
+          <View style={[MainStyles.modalOverlay, { backgroundColor: theme.bgModalOverlay }]}>
+            <View style={[MainStyles.modalContent, { backgroundColor: theme.bgOfTheDayContainer }]}>
+              <Text style={[Settings.modalTitle, { color: theme.textAlmostBlack, borderColor: theme.borderOrange }]}>Team 8</Text>
+              <Text style={[MainStyles.modalDescription, { color: theme.textDarkGreen, lineHeight: 30 }]}>
+                Lauri Itkonen {"\n"}
+                Elias Konttaniemi {"\n"}
+                Joni Neuvonen {"\n"}
+                Netta Ojala {"\n"}
+                Topias Tyni
+              </Text>
+              <Pressable onPress={closeModal} style={[MainStyles.closeButton, { backgroundColor: theme.bgDarkGreen }]}>
+                <Text style={[MainStyles.closeButtonText, { color: theme.textBtn }]}>CLOSE</Text>
+              </Pressable>
+
+            </View>
+          </View>
+        </Modal>
 
         <View style={Settings.settingsLogin}>
           <Text style={[Settings.label, { color: theme.textDarkGreen }]}>Email</Text>
           <TextInput
-            style={[
-              Settings.accountInput,
-              { backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack },
-            ]}
+            style={[Settings.accountInput, { backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack }]}
             value={email}
             onChangeText={setEmail}
             placeholder="Enter your email"
-            placeholderTextColor={theme.bgPlaceholder}
+            placeholderTextColor={theme.textAlmostBlack}
             autoCapitalize="none"
           />
 
           <Text style={[Settings.label, { color: theme.textDarkGreen }]}>Current Password</Text>
           <TextInput
-            style={[
-              Settings.accountInput,
-              { backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack },
-            ]}
+            style={[Settings.accountInput, { backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack }]}
             value={password}
             placeholder="Enter your current password"
-            placeholderTextColor={theme.bgPlaceholder}
+            placeholderTextColor={theme.textAlmostBlack}
             secureTextEntry
             editable={false}
           />
 
           <Text style={[Settings.label, { color: theme.textDarkGreen }]}>New Password</Text>
           <TextInput
-            style={[
-              Settings.accountInput,
-              { backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack },
-            ]}
+            style={[Settings.accountInput, { backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack }]}
             value={newPassword}
             onChangeText={setNewPassword}
             placeholder="Enter a new password"
-            placeholderTextColor={theme.bgPlaceholder}
+            placeholderTextColor={theme.textAlmostBlack}
             secureTextEntry
           />
 
@@ -116,9 +140,7 @@ const SettingsScreen = ({ navigation }) => {
             style={[Settings.saveButton, { backgroundColor: theme.bgSaveBtn }]}
             onPress={handleSaveChanges}
           >
-            <Text style={[Settings.saveButtonText, { color: theme.textDarkGreen }]}>
-              Save Changes
-            </Text>
+            <Text style={[Settings.saveButtonText, { color: theme.textDarkGreen }]}>Save Changes</Text>
           </TouchableOpacity>
 
           <TouchableOpacity

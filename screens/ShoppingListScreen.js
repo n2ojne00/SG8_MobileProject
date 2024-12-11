@@ -116,11 +116,7 @@ const ShoppingListScreen = ({ navigation }) => {
 
   return (
     <ThemeLayout>
-      <ImageBackground
-        source={require('../images/winter.jpg')}
-        style={globalStyles.background}
-        resizeMode="cover"
-      >
+      <ImageBackground style={globalStyles.background} resizeMode="cover">
        
         <KeyboardAvoidingView
           style={{ flex: 1 }}

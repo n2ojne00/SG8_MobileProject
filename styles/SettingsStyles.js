@@ -67,14 +67,24 @@ export const Settings = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+
   settingInfo: {
     alignSelf: 'center',
-    borderWidth: 1,
+    borderWidth: 6,
     borderStyle: 'dotted',
-    borderRadius: 30,
-    borderColor: '#386641',
-    padding: 10,
+    borderRadius: 40,
+    padding: 20,
     marginVertical: 10,
   },
+  modalTitle: {
+    paddingVertical: 15,
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    width: '90%',
+    borderBottomWidth: 2,
+  },
+ 
  
 })
