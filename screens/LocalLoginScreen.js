@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ThemeLayout from '../contexts/ThemeLayout';
 import { LoginStyles } from '../styles/LoginScreenStyles';
 import { Settings } from '../styles/SettingsStyles';
+import { useTheme } from '../contexts/ThemeContext';
+import { globalStyles } from '../styles/GlobalStyles';
 
 const LocalLoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { theme } = useTheme(); // Access theme from context
 
   const handleLogin = async () => {
     if (email && password) {
@@ -27,33 +30,40 @@ const LocalLoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ThemeLayout>
-    <View style={LoginStyles.containerLogin}>
-      <Text style={LoginStyles.titleLogin}>Login with Local Account</Text>
+    <ImageBackground style={globalStyles.background} resizeMode="cover">
+      <ThemeLayout>
+      <View style={globalStyles.container}>
+        <View style={LoginStyles.containerLogin}>
+          <Text style={[LoginStyles.titleLogin, {color: theme.textAlmostBlack}]}>Login with Local Account</Text>
 
-      <Text style={Settings.label}>Email</Text>
-      <TextInput
-        style={Settings.accountInput}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <Text style={Settings.label}>Password</Text>
-      <TextInput
-        style={Settings.accountInput}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+          <Text style={[Settings.label, {color: theme.textAlmostBlack}]}>Email</Text>
+          <TextInput
+            style={[Settings.accountInput, {borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput}]}
+            placeholder="Email"
+            placeholderTextColor={theme.textAlmostBlack}
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+          <Text style={[Settings.label, {color: theme.textAlmostBlack}]}>Password</Text>
+          <TextInput
+            style={[Settings.accountInput, {borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput}]}
+            placeholder="Password"
+            placeholderTextColor={theme.textAlmostBlack}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
 
-      <TouchableOpacity style={LoginStyles.buttonLogin} onPress={handleLogin}>
-        <Text style={LoginStyles.buttonTextLogin}>Login</Text>
-      </TouchableOpacity>
-    </View>
-    </ThemeLayout>
+          <TouchableOpacity style={[LoginStyles.buttonLogin, {backgroundColor: theme.bgDarkGreen}]} onPress={handleLogin}>
+            <Text style={[LoginStyles.buttonTextLogin, {color: theme.textBtn}]}>Login</Text>
+          </TouchableOpacity>
+        </View>
+        </View>
+      </ThemeLayout>
+    </ImageBackground>
+
   );
 };
 

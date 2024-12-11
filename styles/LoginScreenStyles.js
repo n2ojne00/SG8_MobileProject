@@ -22,7 +22,6 @@ titleLogin: {
   buttonLogin: {
     justifyContent: 'center',
     marginTop: 20,
-
     width: 300,
     height: 55,
     borderRadius: 30,
@@ -30,7 +29,6 @@ titleLogin: {
     elevation: 2
   },
   buttonTextLogin: {
-
     fontWeight: 'bold',
     fontSize: 18,
   },

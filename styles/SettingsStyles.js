@@ -34,9 +34,9 @@ export const Settings = StyleSheet.create({
     padding: 12,
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: '#386641',
+    //borderColor: '#386641',
     borderRadius: 5,
-    backgroundColor: '#ecffeff5',
+    //backgroundColor: '#ecffeff5',
   },
   saveButton: {
     padding: 15,
