@@ -46,7 +46,7 @@ const darkTheme = {
     bgRecipeTextArea: '#2A3A5B', // Muted blue for text areas
     bgDarkGreen: '#162A36', // Dark teal-like green for accents
     bgTransparentLightGreen: '#1C254180', // Transparent overlay with navy tone
-    bgRecipeBtn: '#1F4068', // Deep blue for recipe buttons
+    bgRecipeBtn: '#1f4068a1', // Deep blue for recipe buttons
     bgIngredientDS: '#3B5262', // Muted gray-blue for ingredient lists
     bgModalOverlay: '#0A1124CC', // Semi-transparent dark blue overlay
     bgPlaceholder: '#52697B', // Medium gray-blue for placeholders

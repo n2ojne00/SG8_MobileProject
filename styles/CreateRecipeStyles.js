@@ -18,8 +18,8 @@ export const CreateRecipe = StyleSheet.create({
         height: 55,
         width: '80%',
         borderWidth: 2,
-        borderColor: '#386641',
-        backgroundColor: '#fcf6eb',
+        //borderColor: '#386641',
+        //backgroundColor: '#fcf6eb',
         borderRadius: 30,
         alignItems: 'center',
         marginBottom: 10,
@@ -29,9 +29,9 @@ export const CreateRecipe = StyleSheet.create({
         paddingVertical: 15,
         borderWidth: 2,
         borderRadius: 10,
-        borderColor: '#386641',
+        //borderColor: '#386641',
         alignItems: 'center',
-        backgroundColor: '#fcf6eb'
+        //backgroundColor: '#fcf6eb'
     },
 
     recipeInput: {
@@ -42,7 +42,7 @@ export const CreateRecipe = StyleSheet.create({
     ingredientsinput: {
         width: '85%',
         height: 150,
-        borderColor: '#386641',
+        //borderColor: '#386641',
         borderWidth: 2,
         marginBottom: 5,
         paddingHorizontal: 10,
@@ -53,7 +53,7 @@ export const CreateRecipe = StyleSheet.create({
     guideinput: {
         width: '85%',
         height: 200,
-        borderColor: '#386641',
+        //borderColor: '#386641',
         borderWidth: 2,
         paddingHorizontal: 8,
         textAlignVertical: 'top',
@@ -65,12 +65,12 @@ export const CreateRecipe = StyleSheet.create({
     saveRecipeBtn: {
         justifyContent: 'center',
         marginTop: 20,
-        backgroundColor: '#dbfaEB',
+        //backgroundColor: '#dbfaEB',
         width: 120,
         height: 40,
         borderRadius: 30,
         borderWidth: 2,
-        borderColor: '#386641',
+        //borderColor: '#386641',
         alignItems: 'center',
     },
 
@@ -92,6 +92,8 @@ export const CreateRecipe = StyleSheet.create({
         borderRadius: 10,
     },
     photoButton: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
         backgroundColor: '#386641',
         padding: 10,
         borderRadius: 5,
