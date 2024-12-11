@@ -32,7 +32,7 @@ const LocalLoginScreen = ({ navigation }) => {
   return (
     <ImageBackground style={globalStyles.background} resizeMode="cover">
       <ThemeLayout>
-      <View style={globalStyles.container}>
+      <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
         <View style={LoginStyles.containerLogin}>
           <Text style={[LoginStyles.titleLogin, {color: theme.textAlmostBlack}]}>Login with Local Account</Text>
 
