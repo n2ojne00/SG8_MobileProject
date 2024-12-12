@@ -117,25 +117,29 @@ const ShoppingListScreen = ({ navigation }) => {
   return (
     <ThemeLayout>
       <ImageBackground style={globalStyles.background} resizeMode="cover">
-       
+
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        > 
-        <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
-          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={ShopList.scrollContainer} keyboardShouldPersistTaps="handled">
-            
+        >
+          <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
+
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={ShopList.scrollContainer} keyboardShouldPersistTaps="handled">
+
               <View style={[ShopList.shopListCreation, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
+
                 <TextInput
                   style={[ShopList.inputShopListName, , { color: theme.textDarkGreen }]}
                   placeholder="List Name"
-                  placeholderTextColor={ theme.textDarkGreen}
+                  placeholderTextColor={theme.textDarkGreen}
                   value={listName}
                   onChangeText={setListName}
                 />
+
                 <View style={ShopList.addItem}>
+
                   <TextInput
-                    style={[ShopList.inputShopListItem, { borderColor: theme.borderDarkGreen, color: theme.textDarkGreen}]}
+                    style={[ShopList.inputShopListItem, { borderColor: theme.borderDarkGreen, color: theme.textDarkGreen }]}
                     placeholder="Add an item..."
                     placeholderTextColor={theme.textDarkGreen}
                     value={item}
@@ -144,14 +148,18 @@ const ShoppingListScreen = ({ navigation }) => {
                   <TouchableOpacity style={[ShopList.addShopButton, { backgroundColor: theme.bgSaveBtn, borderColor: theme.borderDarkGreen }]} onPress={addItem}>
                     <Entypo name="add-to-list" size={25} color={theme.textDarkGreen} />
                   </TouchableOpacity>
+
                 </View>
+
                 <TouchableOpacity style={[RecipeList.createButton, { backgroundColor: theme.bgSaveBtn, borderColor: theme.borderDarkGreen }]} onPress={saveList}>
                   <Text style={[RecipeList.buttonTextRL, { color: theme.textDarkGreen }]}>Save List</Text>
                 </TouchableOpacity>
+
               </View>
+
               {/* Current List */}
               <View style={[ShopList.currentListContainer, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
-              <Text style={[MainStyles.sectionTitle, { color:  theme.textDarkGreen, borderColor: theme.borderOrange }]}>
+                <Text style={[MainStyles.sectionTitle, { color: theme.textDarkGreen, borderColor: theme.borderOrange }]}>
                   Current Lists
                 </Text>
                 {shoppingList.map((item, index) => (
@@ -163,11 +171,11 @@ const ShoppingListScreen = ({ navigation }) => {
 
               {/* Saved Lists */}
               <View style={[ShopList.currentListContainer, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
-                <Text style={[MainStyles.sectionTitle, { color:  theme.textDarkGreen, borderColor: theme.borderOrange }]}>
+                <Text style={[MainStyles.sectionTitle, { color: theme.textDarkGreen, borderColor: theme.borderOrange }]}>
                   Saved Lists
                 </Text>
                 {savedLists.map((list, index) => (
-                 <View key={index.toString()} style={[ShopList.listItem, { borderColor: theme.borderDarkGreen }]}>
+                  <View key={index.toString()} style={[ShopList.listItem, { borderColor: theme.borderDarkGreen }]}>
                     <AntDesign name="hearto" size={20} color="#f67b43" style={{ marginRight: 15, }} />
                     {renderSavedListItem({ item: list })}
                   </View>
@@ -175,12 +183,18 @@ const ShoppingListScreen = ({ navigation }) => {
               </View>
 
               {/* Map */}
-              <View>{renderMap()}</View>
 
-          </ScrollView>
+              <View style={[ShopList.currentListContainer, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
+                <Text style={[MainStyles.sectionTitle, { color: theme.textDarkGreen, borderColor: theme.borderOrange }]}>
+                  Check stores nearby
+                </Text>
+                {renderMap()}
+              </View>
+
+            </ScrollView>
           </View>
         </KeyboardAvoidingView>
-        
+
       </ImageBackground>
     </ThemeLayout>
   );
