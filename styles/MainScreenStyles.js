@@ -117,11 +117,9 @@ export const MainStyles = StyleSheet.create({
 
     //Also in PrintListScreen.js, RecipeListScreen.js 
     RecipeButton: {
-        //backgroundColor: '#6a994e8e',
         padding: 15,
         borderRadius: 60,
         width: '35%',
-        height: '73%',
         alignItems: 'center',
         marginBottom: 20,
     },
@@ -142,21 +140,17 @@ export const MainStyles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
-        color: '#386641',
         padding: 5,
         width: '100%',
         borderBottomWidth: 2,
-        borderColor: '#f67b43'
     },
     articleCarousel: {
         paddingVertical: 10,
-        //backgroundColor: '#386641a9',
         elevation: 2,
     },
     articleContainer: {
         width: 200,
         marginRight: 15,
-        //backgroundColor: '#f3fff5',
         padding: 10,
         borderRadius: 8,
         marginLeft: 8,
@@ -173,14 +167,13 @@ export const MainStyles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
-        //color: '#021e01',
         borderBottomWidth: 2,
         borderTopWidth: 2,
-        //borderColor: '#f67b43'
+
     },
     articleContent: {
         fontSize: 16,
-        color: '#386641',
+
     },
 
     //Article Modal (MainScreen)

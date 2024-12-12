@@ -9,7 +9,7 @@ const lightTheme = {
     bgDarkGreen: '#386641',
     bgTransparentLightGreen: '#f3fff5ac',
     bgRecipeBtn: '#6a994e8e',
-    bgIngredientDS: '#ffeee694',
+    bgIngredientDS: '#fff5f065',
     bgModalOverlay: '#2525257e',
     bgPlaceholder: '#cccccc',
     bgSearchRow: '#fafff0f6',

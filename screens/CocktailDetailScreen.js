@@ -114,7 +114,7 @@ const CocktailDetailScreen = ({ route }) => {
 
               {ingredients.map((ingredient, index) => (
                 <TouchableOpacity key={index} onPress={() => handleIngredientClick(shoppingListIngredients[index])}>
-                  <Text style={[MealAndDrink.ingredientDS, { color: theme.textDarkGreen, backgroundColor: theme.bgIngredientDS }]}>
+                  <Text style={[MealAndDrink.ingredientDS, { color: theme.textDarkGreen, backgroundColor: theme.bgIngredientDS, borderColor: theme.borderLightPeach }]}>
                     {ingredient || ""}  {/* Ensure it's always a valid string */}
                   </Text>
                 </TouchableOpacity>

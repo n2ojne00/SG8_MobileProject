@@ -129,15 +129,15 @@ const ShoppingListScreen = ({ navigation }) => {
                 <TextInput
                   style={[ShopList.inputShopListName, , { color: theme.textDarkGreen }]}
                   placeholder="List Name"
-                  placeholderTextColor={theme.textAlmostBlack}
+                  placeholderTextColor={ theme.textDarkGreen}
                   value={listName}
                   onChangeText={setListName}
                 />
                 <View style={ShopList.addItem}>
                   <TextInput
-                    style={[ShopList.inputShopListItem, { borderColor: theme.borderDarkGreen }]}
+                    style={[ShopList.inputShopListItem, { borderColor: theme.borderDarkGreen, color: theme.textDarkGreen}]}
                     placeholder="Add an item..."
-                    placeholderTextColor={theme.textAlmostBlack}
+                    placeholderTextColor={theme.textDarkGreen}
                     value={item}
                     onChangeText={setItem}
                   />
@@ -151,8 +151,8 @@ const ShoppingListScreen = ({ navigation }) => {
               </View>
               {/* Current List */}
               <View style={[ShopList.currentListContainer, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
-                <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
-                  Current Shopping List
+              <Text style={[MainStyles.sectionTitle, { color:  theme.textDarkGreen, borderColor: theme.borderOrange }]}>
+                  Current Lists
                 </Text>
                 {shoppingList.map((item, index) => (
                   <View key={index.toString()} >
@@ -163,11 +163,11 @@ const ShoppingListScreen = ({ navigation }) => {
 
               {/* Saved Lists */}
               <View style={[ShopList.currentListContainer, { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgOfTheDayContainer }]}>
-                <Text style={[MainStyles.sectionTitle, { color: isDarkMode ? '#ffffff' : '#343a40' }]}>
-                  Saved Shopping Lists
+                <Text style={[MainStyles.sectionTitle, { color:  theme.textDarkGreen, borderColor: theme.borderOrange }]}>
+                  Saved Lists
                 </Text>
                 {savedLists.map((list, index) => (
-                  <View key={index.toString()} style={[ShopList.listItem, { borderColor: theme.borderDarkGreen }]}>
+                 <View key={index.toString()} style={[ShopList.listItem, { borderColor: theme.borderDarkGreen }]}>
                     <AntDesign name="hearto" size={20} color="#f67b43" style={{ marginRight: 15, }} />
                     {renderSavedListItem({ item: list })}
                   </View>
