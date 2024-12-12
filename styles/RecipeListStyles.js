@@ -1,99 +1,90 @@
 import { StyleSheet } from 'react-native';
 
 export const RecipeList = StyleSheet.create({
-//YOUR RECIPES (RecipeListScreen)
-recipeContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    recipeContent: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
-  },
-  recipeContainer: {
-    justifyContent: 'center',
-    height: 55,
-    width: 330,
-    borderBottomWidth: 3,
-    borderTopWidth: 1,
-    borderColor: '#386641',
-    backgroundColor: '#fcf6eb',
-    borderRadius: 5,
-    marginVertical: 5,
-    elevation: 2,
+    recipeContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginVertical: 8,
+        padding: 10,
+        borderRadius: 8,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        elevation: 3,
+        height: 120,
+        width: '95%',
+        alignSelf: 'center',
+    },
 
-  },
-  recipeListName: {
-    justifyContent: 'center',
-    color: '#386641',
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginLeft: '10%',
-  },
-  emptyText: {
-    fontSize: 18,
-    color: '#386641',
-    textAlign: 'center',
-    marginVertical: 20,
-  },
+    recipeImageContainer: {
+        flex: 2, 
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
+    recipeImageThumbnail: {
+        width: '100%',
+        height: 100,
+        borderRadius: 8,
+    },
 
-  recipeContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginVertical: 8,
-    padding: 10,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
-    width: '90%',
-    alignSelf: 'center',
-},
-recipeDetailsContainer: {
-    flexDirection: 'row',
-    flex: 1,
-},
-recipeTextWrapper: {
-    marginLeft: 10,
-    justifyContent: 'center',
-    flex: 1,
-},
-recipeListName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-},
-recipeDate: {
-    fontSize: 12,
-    color: '#888',
-},
-deleteButton: {
-    padding: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-},
+    recipeTextContainer: {
+        flex: 2,
+        width: '100%',
+        justifyContent: 'center',
+        marginLeft: 10,
+    },
 
-  //Also in PrintListScreen.js
-  createButton: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 15,
-    backgroundColor: '#dbfaEB',
-    width: 200,
-    height: 40,
-    borderRadius: 30,
-    borderWidth: 2,
-    borderColor: '#386641',
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  buttonTextRL: {
-    color: '#386641',
-    fontSize: 16,
-    fontWeight: '600',
-  },
+    recipeListName: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
 
+    recipeDate: {
+        fontSize: 12,
+    },
 
-})
+    deleteButtonContainer: {
+        flex: 0.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    deleteButton: {
+        padding: 5,
+        borderRadius: 5,
+    },
+
+    emptyText: {
+        fontSize: 18,
+        color: '#386641',
+        textAlign: 'center',
+        marginVertical: 20,
+    },
+
+    createButton: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 15,
+        width: 200,
+        height: 40,
+        borderRadius: 30,
+        borderWidth: 2,
+        alignItems: 'center',
+        marginBottom: 40,
+    },
+
+    buttonTextRL: {
+        fontSize: 16,
+        fontWeight: '600',
+        marginLeft: 5,
+    },
+
+});
