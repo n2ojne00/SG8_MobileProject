@@ -76,7 +76,7 @@ const SettingsScreen = ({ navigation }) => {
         </View>
 
         {/* Info Button */}
-        <TouchableOpacity onPress={info} style={[Settings.settingInfo, {borderColor: theme.borderSearch }]}>
+        <TouchableOpacity onPress={info} style={[Settings.settingInfo, { borderColor: theme.borderSearch }]}>
           <Entypo name="info" size={30} color={theme.textDarkGreen} />
         </TouchableOpacity>
 

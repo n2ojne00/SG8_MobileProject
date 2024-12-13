@@ -92,7 +92,7 @@ const CocktailDetailScreen = ({ route }) => {
                 {cocktail.strDrink}
               </Text>
 
-              <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                   source={getAlcoholImage(cocktail.strAlcoholic)}
                   style={{ width: 35, height: 35, marginVertical: 10, marginHorizontal: 20, }}

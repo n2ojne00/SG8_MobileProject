@@ -31,60 +31,60 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <ThemeLayout>
       <View style={[globalStyles.container, { backgroundColor: theme.bgContainer }]}>
-          <View style={LoginStyles.containerLogin}>
-            <Text style={[LoginStyles.titleLogin, { color: theme.textAlmostBlack }]}>
-              Register a New Account
+        <View style={LoginStyles.containerLogin}>
+          <Text style={[LoginStyles.titleLogin, { color: theme.textAlmostBlack }]}>
+            Register a New Account
+          </Text>
+
+          <Text style={[Settings.label, { color: theme.textAlmostBlack }]}>Email</Text>
+          <TextInput
+            style={[
+              Settings.accountInput,
+              { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack },
+            ]}
+            placeholder="Email"
+            placeholderTextColor={theme.textAlmostBlack}
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+
+          <Text style={[Settings.label, { color: theme.textAlmostBlack }]}>Password</Text>
+          <TextInput
+            style={[
+              Settings.accountInput,
+              { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack },
+            ]}
+            placeholder="Password"
+            placeholderTextColor={theme.textAlmostBlack}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+
+          <Text style={[Settings.label, { color: theme.textAlmostBlack }]}>Confirm Password</Text>
+          <TextInput
+            style={[
+              Settings.accountInput,
+              { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput, color: theme.textAlmostBlack },
+            ]}
+            placeholder="Confirm Password"
+            placeholderTextColor={theme.textAlmostBlack}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry
+          />
+
+          <TouchableOpacity
+            style={[LoginStyles.buttonLogin, { backgroundColor: theme.bgDarkGreen }]}
+            onPress={handleRegister}
+          >
+            <Text style={[LoginStyles.buttonTextLogin, { color: theme.textBtn }]}>
+              Register
             </Text>
-
-            <Text style={[Settings.label, { color: theme.textAlmostBlack }]}>Email</Text>
-            <TextInput
-              style={[
-                Settings.accountInput,
-                { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput },
-              ]}
-              placeholder="Email"
-              placeholderTextColor={theme.textAlmostBlack}
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-
-            <Text style={[Settings.label, { color: theme.textAlmostBlack }]}>Password</Text>
-            <TextInput
-              style={[
-                Settings.accountInput,
-                { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput },
-              ]}
-              placeholder="Password"
-              placeholderTextColor={theme.textAlmostBlack}
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-
-            <Text style={[Settings.label, { color: theme.textAlmostBlack }]}>Confirm Password</Text>
-            <TextInput
-              style={[
-                Settings.accountInput,
-                { borderColor: theme.borderDarkGreen, backgroundColor: theme.bgAccountInput },
-              ]}
-              placeholder="Confirm Password"
-              placeholderTextColor={theme.textAlmostBlack}
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              secureTextEntry
-            />
-
-            <TouchableOpacity
-              style={[LoginStyles.buttonLogin, { backgroundColor: theme.bgDarkGreen }]}
-              onPress={handleRegister}
-            >
-              <Text style={[LoginStyles.buttonTextLogin, { color: theme.textBtn }]}>
-                Register
-              </Text>
-            </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </ThemeLayout>
   );

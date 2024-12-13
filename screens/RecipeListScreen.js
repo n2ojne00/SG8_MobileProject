@@ -17,7 +17,7 @@ const RecipeListScreen = () => {
 
     const handleDelete = async (index) => {
         try {
-            await removeRecipe(index); 
+            await removeRecipe(index);
         } catch (error) {
             console.error("Error deleting recipe:", error);
             alert("Failed to delete recipe.");
