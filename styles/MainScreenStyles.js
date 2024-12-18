@@ -12,7 +12,7 @@ export const MainStyles = StyleSheet.create({
         marginVertical: 10,
     },
     WelcomeAnimation: {
-        fontSize: 20,
+        fontSize: 17,
         justifyContent: 'center',
         textAlign: 'center',
         width: 350,
