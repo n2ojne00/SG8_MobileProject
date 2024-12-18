@@ -25,6 +25,7 @@ export const MealAndDrink = StyleSheet.create({
 
     // CATEGORY
     categoryButton: {
+        height: '95%',
         marginHorizontal: 5,
         borderRadius: 15,
         elevation: 10,
